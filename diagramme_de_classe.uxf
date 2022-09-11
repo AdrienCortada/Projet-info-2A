@@ -1,0 +1,63 @@
+<diagram program="umletino" version="15.0.0"><zoom_level>6</zoom_level><element><id>UMLClass</id><coordinates><x>440</x><y>430</y><w>126</w><h>42</h></coordinates><panel_attributes>_Export_
+--
++chemin : str
+--
+export(chemin : str):</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>290</x><y>508</y><w>126</w><h>42</h></coordinates><panel_attributes>_Export_to_json_
+--
+chemin : str
+--
+export(chemin : str) : json_file</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>508</y><w>126</w><h>42</h></coordinates><panel_attributes>_Export_to_xml_
+--
+chemin : str
+--
+export(chemin : str) : xml_file</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>590</x><y>508</y><w>126</w><h>42</h></coordinates><panel_attributes>_Export_to_CSV_
+--
+chemin : str
+--
+export(chemin : str) : csv_file</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>448</y><w>108</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>160;10;10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>494</x><y>466</y><w>18</w><h>54</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;70</additional_attributes></element><element><id>Relation</id><coordinates><x>560</x><y>448</y><w>102</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;150;10;150;100</additional_attributes></element><element><id>UMLClass</id><coordinates><x>440</x><y>310</y><w>132</w><h>66</h></coordinates><panel_attributes>_génération_de_donnée_
+--
+dict : json
+Nb : int
+mq : str
+--
+générer_jeu_donnée(dict : json,
+ Nb : int, mq : str) : json_file
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>620</x><y>316</y><w>126</w><h>42</h></coordinates><panel_attributes>_Import_json_
+--
+chemin : str
+--
+import_dict(chemin : str) : None</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>278</x><y>394</y><w>456</w><h>186</h></coordinates><panel_attributes>Export
+--
+bg=red</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>278</x><y>316</y><w>126</w><h>42</h></coordinates><panel_attributes>_Print_dict_
+--
+--
+print_dict() : json_file</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>494</x><y>370</y><w>18</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;10;100</additional_attributes></element><element><id>Relation</id><coordinates><x>566</x><y>334</y><w>66</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;10;90;10</additional_attributes></element><element><id>Relation</id><coordinates><x>398</x><y>334</y><w>54</w><h>18</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>70;10;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>278</x><y>202</y><w>126</w><h>60</h></coordinates><panel_attributes>_Add_type_
+--
+type : str
+tx_remplissage: 
+--
+Add_type(type : str, 
+tx_remplissage : float) :None</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>134</x><y>202</y><w>126</w><h>60</h></coordinates><panel_attributes>_Delete_type_
+--
+type : str
+--
+Delete_type(type : str) : none</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>62</x><y>268</y><w>126</w><h>66</h></coordinates><panel_attributes>_Add_modality_
+--
+modality : str
+key : str
+type : str
+--
+Add_modality(modality : str, key :str, 
+type : str) : None</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>182</x><y>298</y><w>108</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>160;50;40;50;40;10;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>338</x><y>256</y><w>18</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;100;10;10</additional_attributes></element><element><id>Relation</id><coordinates><x>194</x><y>256</y><w>144</w><h>72</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>220;100;220;60;10;60;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>278</x><y>136</y><w>126</w><h>42</h></coordinates><panel_attributes>_Delete_Modality_
+--
+key : str
+--
+delete_modality(key :str) : None
+</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>344</x><y>172</y><w>90</w><h>156</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>30;240;30;200;130;200;130;30;10;30;10;10</additional_attributes></element><element><id>UMLClass</id><coordinates><x>62</x><y>340</y><w>126</w><h>42</h></coordinates><panel_attributes>_Clear_dict_
+--
+--
+Clear_dict() : None</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>182</x><y>340</y><w>108</w><h>42</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;-</panel_attributes><additional_attributes>160;10;40;10;40;50;10;50</additional_attributes></element><element><id>UMLPackage</id><coordinates><x>50</x><y>100</y><w>378</w><h>288</h></coordinates><panel_attributes>json_dict_builder
+--
+bg=blue</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLPackage</id><coordinates><x>608</x><y>268</y><w>180</w><h>120</h></coordinates><panel_attributes>Import
+--
+bg=green</panel_attributes><additional_attributes></additional_attributes></element></diagram>

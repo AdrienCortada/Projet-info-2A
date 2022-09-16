@@ -1,6 +1,8 @@
 # Projet-info-2A
 
-Pour le rendu du 7 octobre : 
+Pour le rendu du 7 octobre :
+
+Rapport (14 pages) : Lau (start)
 
 Diagramme de cas d'utilisation : Lau
 	

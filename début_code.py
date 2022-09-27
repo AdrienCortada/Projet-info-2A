@@ -102,7 +102,7 @@ async def générer_jeu_donnée(Nb, mq):
             if 100*random.random() < tx_r :
                 mod_list = dict[type].values()
                 mod_list = list(mod_list)
-                mod_list.remove(str(tx_r))
+                mod_list.remove(tx_r)
                 m = len(mod_list)
                 nb = random.randint(0, m-1)
                 mod = mod_list[nb]

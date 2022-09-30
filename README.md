@@ -15,7 +15,7 @@ Diagramme Activité sur une activité "pertinente" - a voir selon vos cas d'util
 	
 Diagramme de gantt ou Kanban du projet : Abdoul
 	
- Diagramme de package : Nathan
+Diagramme de package : Nathan
 	
 Diagramme de base de données physique : + tard
 

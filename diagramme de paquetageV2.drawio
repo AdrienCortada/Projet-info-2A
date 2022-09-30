@@ -1,6 +1,6 @@
 <mxfile host="65bd71144e">
     <diagram id="E1i2zS8wf8FMNYC6Cl-M" name="Page-1">
-        <mxGraphModel dx="833" dy="503" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+        <mxGraphModel dx="1851" dy="1118" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
             <root>
                 <mxCell id="0"/>
                 <mxCell id="1" parent="0"/>
@@ -11,7 +11,7 @@
                     <mxGeometry y="80" width="80" as="geometry"/>
                 </mxCell>
                 <mxCell id="16" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=80;tabHeight=20;tabPosition=left;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="60" y="610" width="480" height="300" as="geometry"/>
+                    <mxGeometry x="60" y="610" width="350" height="240" as="geometry"/>
                 </mxCell>
                 <mxCell id="17" value="Classe&#10;" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="1" vertex="1">
                     <mxGeometry x="60" y="620" width="80" height="26" as="geometry"/>
@@ -22,23 +22,17 @@
                 <mxCell id="23" value="DAO" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="1" vertex="1">
                     <mxGeometry x="410" y="80" width="80" height="26" as="geometry"/>
                 </mxCell>
-                <mxCell id="26" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center ; text-decoration: underline&quot;&gt;&lt;b&gt;Json_dict_builder&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center ; text-decoration: underline&quot;&gt;&lt;b&gt;&lt;br&gt;&lt;/b&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Delete Type&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Delete Modality&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Add type&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Add Modality&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Print_dict&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;&lt;br&gt;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;&lt;br&gt;&lt;br&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="80" y="670" width="160" height="120" as="geometry"/>
-                </mxCell>
-                <mxCell id="40" value="&lt;p style=&quot;margin: 0px ; margin-top: 4px ; text-align: center ; text-decoration: underline&quot;&gt;&lt;b&gt;Export&lt;/b&gt;&lt;/p&gt;&lt;hr&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Export&amp;nbsp;&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Export_to_json&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Export_to_xml&lt;/p&gt;&lt;p style=&quot;margin: 0px ; margin-left: 8px&quot;&gt;Export_to_CSV&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;fontSize=12;fontFamily=Helvetica;html=1;" parent="1" vertex="1">
-                    <mxGeometry x="330" y="670" width="160" height="120" as="geometry"/>
-                </mxCell>
-                <mxCell id="45" value="Import&#10;" style="swimlane;fontStyle=0;childLayout=stackLayout;horizontal=1;startSize=26;fillColor=none;horizontalStack=0;resizeParent=1;resizeParentMax=0;resizeLast=0;collapsible=1;marginBottom=0;" parent="1" vertex="1">
-                    <mxGeometry x="90" y="820" width="160" height="52" as="geometry"/>
-                </mxCell>
-                <mxCell id="46" value="Import" style="text;strokeColor=none;fillColor=none;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="45" vertex="1">
-                    <mxGeometry y="26" width="160" height="26" as="geometry"/>
-                </mxCell>
                 <mxCell id="50" value="&amp;lt;&amp;lt; Import &amp;gt;&amp;gt;" style="html=1;verticalAlign=bottom;endArrow=open;dashed=1;endSize=8;entryX=0.5;entryY=1;entryDx=0;entryDy=0;entryPerimeter=0;exitX=0;exitY=0;exitDx=280;exitDy=20;exitPerimeter=0;" parent="1" source="16" target="4" edge="1">
                     <mxGeometry relative="1" as="geometry">
                         <mxPoint x="110" y="560" as="sourcePoint"/>
                         <mxPoint x="270" y="630" as="targetPoint"/>
                     </mxGeometry>
+                </mxCell>
+                <mxCell id="51" value="" style="shape=folder;fontStyle=1;spacingTop=10;tabWidth=70;tabHeight=20;tabPosition=left;html=1;" parent="1" vertex="1">
+                    <mxGeometry x="290" y="370" width="220" height="150" as="geometry"/>
+                </mxCell>
+                <mxCell id="53" value="Service" style="text;align=center;fontStyle=1;verticalAlign=middle;spacingLeft=3;spacingRight=3;strokeColor=none;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="1" vertex="1">
+                    <mxGeometry x="280" y="370" width="80" height="26" as="geometry"/>
                 </mxCell>
             </root>
         </mxGraphModel>

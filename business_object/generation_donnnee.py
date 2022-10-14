@@ -32,4 +32,4 @@ class Generation_donnee:
 
 if __name__ == "__main__":
     import doctest
-    doctest.testmod(verbose=TRUE)
+    doctest.testmod()

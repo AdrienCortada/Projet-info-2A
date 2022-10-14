@@ -8,15 +8,26 @@ class Type:
         self.nom = nom
 
     def add_type(self):
-        id = len(Type.dict_type) + 1
-        d = {str(id) : {"remplissage" : self.tx_remplissage, "nom": self.nom }}
-        Type.dict_type.update(d)
+        if self.tx_remplissage <= 100 and self.tx_remplissage >= 0:
+            id = len(Type.dict_type) + 1
+            d = {self.nom : {"remplissage" : self.tx_remplissage, "id" : id}}
+            Type.dict_type.update(d)
+            print(Type.dict_type)
+        else : 
+            return "Please select a value between 0 and 100 for tx_remplissage "
 
-    
-test = Type(85, "test")
-test2 = Type(89, "test2")
+    def delete_type(self):
+        if self.nom in Type.dict_type:
+            del Type.dict_type[self.nom]
+            print(Type.dict_type)
+        else:
+            return "The type you selected hasn't been added yet please check your spelling"
 
-test.add_type()
-test2.add_type()
+test = Type(100, "test")
+test2 = Type(0, "test2")
+test3 = Type(50, "test3")
+Type.add_type(test)
+Type.add_type(test2)
+Type.add_type(test3)
 
-print(Type.dict_type)
+Type.delete_type(test)

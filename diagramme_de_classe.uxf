@@ -20,7 +20,7 @@ dict : json
 Nb : int
 mq : str
 --
-générer_jeu_donnée(dict : json,
+generer_jeu_donnee(dict : json,
 Nb : int, mq : str) : json_file
 </panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>760</x><y>312</y><w>168</w><h>56</h></coordinates><panel_attributes>IMPORT JSON
 --

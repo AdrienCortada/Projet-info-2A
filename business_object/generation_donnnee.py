@@ -11,18 +11,25 @@ class Generation_donnee:
         self.types = types
         
     def generer_jeu_donnee(self):
-        dict_ = """{}"""
+        jeu_donnee = """{}"""
         for n in range(Nb):
             indivivu_n = {}
             for k in self.types:
                 tx_r = int(self.types[k]["remplissage"])
                 if 100*random.random() < tx_r :
-                    mod_list = self.types[k].values()
-                
-                
-            
-            
-    def print_data(self):
-    
-    def clear_data(self):
-        
+                    mod_list = list(self.Mod[k].values())
+                    mod_list.remove(tx_r)
+                    m = len(mod_list)
+                    nb = random.randint(0, m-1)
+                    mod = mod_list[nb]
+                    indivivu_n[k] = mod
+                else :
+                    indivivu_n[k] = str(mq)
+                donnee = {n : indivivu_n}
+                jeu_donnee.update(donnee)
+        jeu_donnee = json.dumps(jeu_donnee)
+        return jeu_donnee             
+
+if __name__ == "__main__":
+    import doctest
+    doctest.testmod()

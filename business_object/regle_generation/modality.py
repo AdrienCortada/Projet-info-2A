@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from type import Type
 
 class Modality:
@@ -27,3 +28,8 @@ class Modality:
                 del Modality.dict_modality[str(k)]
         
 
+=======
+class Modality:
+    def __init__(self):
+        pass
+>>>>>>> 5b0aec536e4d10402fb5fd027f9308c51efc4886

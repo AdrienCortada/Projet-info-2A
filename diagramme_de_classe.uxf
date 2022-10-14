@@ -109,7 +109,7 @@ Nb : int
 mq : str
 id_meta_type : int 
 --
-générer_jeu_donnée(dict : json,
+generer_jeu_donnee(dict : json,
 Nb : int, mq : str) : json_file
 Print_data() : json_file
 Clear_data() : none

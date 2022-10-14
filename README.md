@@ -3,24 +3,18 @@
 Lien vers le rapport : 
 https://fr.overleaf.com/2923467794gxmkhbfwrvrt 
 
-Pour le rendu du 7 octobre :
-
-Rapport (14 pages) : Lau (start)
-
-Diagramme de cas d'utilisation : Lau
-	
-Diagramme de classes : Adrien (fait)
-	
-Diagramme Activité sur une activité "pertinente" - a voir selon vos cas d'utilisation : Isaac
-	
-Diagramme de gantt ou Kanban du projet : Abdoul
-	
-Diagramme de package : Nathan
-	
-Diagramme de base de données physique : + tard
-
-
 Retour du tuteurs:
+
+14/10
+- cas d'utilisation : limiter le nombre de granularités (ajouter/supprimer à regrouper)
+- diagramme de classes : 
+    - meta types : plutot une liste de types que d'id_types
+    - manque attribut dictionnaire dans les classes
+    - moins de fonctions : add/delete ça suffit
+- rapport : id_meta_type à détailler un peu plus
+- diag de package : une flèche dans le mauvais sens
+
+
 
 [dimanche 22:42] BRUNETTI Antoine
 Bonjour j'ai fait une revue un peu tardive de vos diagrammes :

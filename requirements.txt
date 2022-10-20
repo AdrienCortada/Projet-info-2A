@@ -3,3 +3,4 @@ psycopg2_binary
 dataclasses
 python-dotenv
 fastapi[all]
+pandas

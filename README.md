@@ -3,6 +3,10 @@
 Lien vers le rapport : 
 https://fr.overleaf.com/2923467794gxmkhbfwrvrt 
 
+Remarques Laurène (20/10)
+- J'ai ajouté un fichier requirement.txt comme dans les TP pour lister les modules utilisés
+- regrouper les diagrammes (et les trier) dans un dossier UML ?
+ 
 Retour du tuteurs:
 
 14/10

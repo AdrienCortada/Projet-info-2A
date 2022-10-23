@@ -1,9 +1,28 @@
-<<<<<<< HEAD
-test = {"1" : {"proba" : 10} ,"2" : {"proba" : 20} ,"3" : {"proba" : 30} }
+from typ import Type
 
-print(test["1"])
-=======
 class Meta_type:
-    def __init__(self):
-        pass
->>>>>>> 5b0aec536e4d10402fb5fd027f9308c51efc4886
+
+    dict_meta_type = {}
+
+    def __init__(self, nom : str, list_type : list[Type]):
+        self.nom = nom
+        self.list_type = self.list_type
+    
+    def add_meta_type(self):
+        n = len(self.list_type)
+        res = 0
+        for k in range(0, n):
+            if self.list_type[k] in Type.dict_type:
+                res = res + 1
+        if res == n :
+            dic = {self.nom : self.list_type}
+            Meta_type.dict_meta_type.update(dic)
+        else : 
+            return "All type selected are nom define please check the spelling"
+            
+            
+    def delete_meta_type(self):
+        if self.nom in Meta_type.dict_meta_type : 
+            del Meta_type.dict_meta_type[self.nom]
+        else : 
+            return "Please check youre spelling" 

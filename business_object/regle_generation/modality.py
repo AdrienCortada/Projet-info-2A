@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 from type import Type
 
 class Modality:
@@ -25,11 +24,6 @@ class Modality:
         n = len(Modality.dict_modality)
         for k in range(0 , n):
             if Modality.dict_modality[str(k)]["value"] == self.value and Modality.dict_modality[str(k)]["type"] == self.nom_type:
-                del Modality.dict_modality[str(k)]
+                self.proba_apparition = 0
         
 
-=======
-class Modality:
-    def __init__(self):
-        pass
->>>>>>> 5b0aec536e4d10402fb5fd027f9308c51efc4886

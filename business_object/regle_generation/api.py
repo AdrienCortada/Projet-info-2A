@@ -3,9 +3,9 @@ from fastapi import FastAPI
 import uvicorn
 import random
 import pandas as pd
-from typ import Type
-from modality import Modality
-from meta_type import Meta_type
+from business_object.regle_generation.typ import Type
+from business_object.regle_generation.modality import Modality
+from business_object.regle_generation.meta_type import Meta_type
 from business_object.generation_donnnee import Generation_donnee
 app = FastAPI()
 

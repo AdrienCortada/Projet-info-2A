@@ -1,0 +1,40 @@
+DROP TABLE IF EXISTS modalite CASCADE ;
+DROP TABLE IF EXISTS type CASCADE ;
+DROP TABLE IF EXISTS metatype CASCADE ;
+
+CREATE TABLE type(
+    id_type integer PRIMARY KEY,
+    nom_type text,
+    taux_remplissage float
+);
+CREATE TABLE modalite (
+    id_modalite integer PRIMARY KEY,
+    id_type integer REFERENCES type(id_type),
+    value text,
+    proba float
+);
+
+CREATE TABLE metatype(
+    id_metatype integer PRIMARY KEY,
+    id_type integer REFERENCES type(id_type),
+    nom_metatype text
+);
+
+CREATE TABLE donnee(
+    id_donnee integer PRIMARY KEY,
+    id_type integer REFERENCES type(id_type),
+    value_donnee text,
+    order integer,
+    id_metatype integer REFERENCES metatype(id_metatype)
+);
+
+INSERT INTO type(id_type, nom_type, taux_remplissage) VALUES
+(1, 'sexe', 1),
+(2, 'prénom', 1);
+
+INSERT INTO modalite(id_modalite, id_type, value)
+(1, 1, 'femme'),
+(2, 1, 'homme'),
+(3, 2, 'Laurène'),
+(4, 2, 'Isaac'),
+(5, 2, 'Adrien');

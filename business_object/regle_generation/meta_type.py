@@ -1,12 +1,12 @@
-from business_object.regle_generation.typ import Type
+from typ import Type
 
 class Meta_type:
 
     dict_meta_type = {}
 
-    def __init__(self, nom : str, list_type : list[Type]):
+    def __init__(self, nom : str, list_type : list):
         self.nom = nom
-        self.list_type = self.list_type
+        self.list_type = list_type
     
     def add_meta_type(self):
         n = len(self.list_type)
@@ -17,8 +17,9 @@ class Meta_type:
         if res == n :
             dic = {self.nom : self.list_type}
             Meta_type.dict_meta_type.update(dic)
+            return Meta_type.dict_meta_type
         else : 
-            return "All type selected are nom define please check the spelling"
+            return "All type selected are not define please check the spelling"
             
             
     def delete_meta_type(self):

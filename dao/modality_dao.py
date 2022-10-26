@@ -71,3 +71,6 @@ class ModalityDao:
                     " where id = %(id)s",
                     {"id":modality.id_modality}
                 )
+
+if __name__ == "__main__" : 
+    

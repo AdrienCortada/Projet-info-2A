@@ -1,0 +1,20 @@
+#################################################### TypeDao ###########################################"
+
+######## create(Type)
+
+INSERT INTO Type(id_type, nom_type, taux_remplissage)
+VALUES (%(id_type)s, %(nom_type)s, %(taux))
+
+{
+    "id_type" : Type.id_type,
+    "nom_type" : Type.nom_type,
+    "taux" : Type.tx_remplissage
+    }
+
+####### find_by_id(id)
+
+SELECT * 
+FROM Type
+WHERE id_type = %(id)s
+
+

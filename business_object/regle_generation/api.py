@@ -32,7 +32,7 @@ async def add_meta_type(nom : str, list_type : list):
     mt = Meta_type(nom, list_type)
     return mt.add_meta_type()
 
-@app.put("generation_de_donnee/")
+@app.put("/generation_de_donnee/")
 async def generation_donnee(Nb : int, meta_type ):
     gd = Generation_donnee(Nb, meta_type)
     return gd.generer_jeu_donnee()

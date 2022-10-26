@@ -1,6 +1,6 @@
 from business_object.regle_generation.modality import Modality
 from dao.db_connection import DBConnection
-#from factory.utilisateur_factory import UtilisateurFactory ??
+from factory.modality_factory import ModalityFactory
 
 class ModalityDao:
     """
@@ -9,49 +9,54 @@ class ModalityDao:
     """
 
     def find_all_modality(self):
-        users=[]
+        mods=[]
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "SELECT * from modality"
                 )
                 res = cursor.fetchall()
-                for row in res: #### à poursuivre
-                    user = UtilisateurFactory.get_utilisateur_from_sql_query(row)
-                    users.append(user)
-        return users
+                for row in res: 
+                    mod = ModalityFactory.get_modality_from_sql_query(row)
+                    mods.append(mod)
+        return mods
 
-    def save_user(self,user:Utilisateur):
+    def save_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "insert into utilisateur(nom,prenom) VALUES (%(nom)s,%(prenom)s)"
-                , {"nom" : user.nom,"prenom":user.prenom})
+                    "INSERT INTO modality(id_modality, id_type, value, proba) VALUES "+
+                    "(%(id_modality)s, %(id_type)s, %(value)s, %(proba))"
+                    , {"id_modality" : modality.id_modality, "id_type" : modality.id_type,
+                       "value" : modality.value}
+                )
 
-    def find_user(self,user:Utilisateur):
+
+    def find_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "select * from utilisateur where nom=%(nom)s and prenom=%(prenom)s limit 1"
-                    , {"nom" : user.nom,"prenom":user.prenom})
+                    "select * from modality where value = %(nom)s "
+                    , {"nom" : modality.value})
                 res = cursor.fetchone()
-                user = UtilisateurFactory.get_utilisateur_from_sql_query(res)
-                return user
-    def update_user(self,user:Utilisateur):
+                modality = ModalityFactory.get_modality_from_sql_query(res)
+                return modality
+    
+    def update_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "UPDATE utilisateur "+
-                    "SET nom = %(nom)s , prenom = %(prenom)s " +
+                    "UPDATE modality "+
+                    "SET type = %(type)s , value = %(value)s, proba = %(proba) " +
                     " where id = %(id)s",
-                    {"nom" : user.nom,"prenom":user.prenom,"id":user.id}
+                    {"type" : modality.id_type,"value": modality.value,"id":modality.id_modality}
                 )
                 
-    def delete_user(self,user:Utilisateur):
+    def delete_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "DELETE FROM utilisateur "+
+                    "DELETE FROM modality "+
                     " where id = %(id)s",
-                    {"id":user.id}
+                    {"id":modality.id_modality}
                 )

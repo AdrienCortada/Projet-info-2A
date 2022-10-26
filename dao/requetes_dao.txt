@@ -1,4 +1,4 @@
-#################################################### TypeDao ###########################################"
+#################################################### TypeDao ###########################################
 
 ######## create(Type)
 
@@ -17,4 +17,65 @@ SELECT *
 FROM Type
 WHERE id_type = %(id)s
 
+{
+    "id_type" : id
+}
 
+###### find_all()
+
+SELECT * 
+FROM Type
+
+##### update(id, Type)
+Trouver le type à updater par find_by_id(id) et le remplacer le nouveau type
+
+##### delete(id)
+
+DELETE FROM Type 
+WHERE id_type = %(id)s
+
+{
+    "id" : id
+}
+
+
+#################################################### ModaliteDao ###########################################
+
+######## create(Modalite)
+
+INSERT INTO Modalite(id_modalite, id_type, value, proba)
+VALUES (%(id_modalite)s, %(id_type)s, %(value)s, %(proba))
+
+{
+    "id_modalite" : Modalite.id_modalite
+    "id_type" : Modalite.id_type,
+    "value" : Modalite.value,
+    "proba" : Modalite.proba
+    }
+
+####### find_by_id(id)
+
+SELECT * 
+FROM Modalite
+WHERE id_modalite = %(id)s
+
+{
+    "id_modalite" : id
+}
+
+###### find_all()
+
+SELECT * 
+FROM Modalite
+
+##### update(id, Modalite)
+Trouver la modalité à updater par find_by_id(id) et le remplacer par la nouvelle modalité
+
+##### delete(id)
+
+DELETE FROM Modalite 
+WHERE id_modalite = %(id)s
+
+{
+    "id" : id
+}

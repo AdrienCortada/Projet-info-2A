@@ -53,4 +53,25 @@ Je ne vois pas trop ce qu'est "mq" mais sinon dans l'idée il y a un dict (j'ima
 
 
 
-
+curl -X 'PUT' \
+  'http://127.0.0.1:8000/add_type/?nom=age&tx_remplissage=100' \
+  -H 'accept: application/json'
+curl -X 'PUT' \
+  'http://127.0.0.1:8000/add_type/?nom=sexe&tx_remplissage=90' \
+  -H 'accept: application/json'
+curl -X 'PUT' \
+  'http://127.0.0.1:8000/add_modality/?nom_type=age&proba_apparition=50&value=22' \
+  -H 'accept: application/json'
+curl -X 'PUT' \
+  'http://127.0.0.1:8000/add_modality/?nom_type=sexe&proba_apparition=50&value=M' \
+  -H 'accept: application/json'
+curl -X 'PUT' \
+  'http://127.0.0.1:8000/add_modality/?nom_type=sexe&proba_apparition=50&value=F' \
+  -H 'accept: application/json'
+curl -X 'PUT' \
+  'http://127.0.0.1:8000/add_meta_type/?nom=individu' \
+  -H 'accept: application/json' \
+  -H 'Content-Type: application/json' \
+  -d '[
+  "age","sexe"
+]'

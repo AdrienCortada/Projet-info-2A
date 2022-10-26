@@ -20,6 +20,17 @@ class ModalityDao:
                     mod = ModalityFactory.get_modality_from_sql_query(row)
                     mods.append(mod)
         return mods
+    
+    def find_modality_by_id(self, id : int):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                   "SELECT * FROM modality WHERE id_modality = %(id)s"
+                   , { "id_modalite" : id}
+                )
+                res = cursor.fetchone()
+                modality = ModalityFactory.get_modality_from_sql_query(res)
+                return modality
 
     def save_modality(self,modality:Modality):
         with DBConnection().connection as connection:
@@ -31,16 +42,16 @@ class ModalityDao:
                        "value" : modality.value}
                 )
 
-
-    def find_modality(self,modality:Modality):
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor :
-                cursor.execute(
-                    "select * from modality where value = %(nom)s "
-                    , {"nom" : modality.value})
-                res = cursor.fetchone()
-                modality = ModalityFactory.get_modality_from_sql_query(res)
-                return modality
+#pas sûre de ça : fait quoi exactement ? 
+#    def find_modality(self, modality:Modality):
+#        with DBConnection().connection as connection:
+#            with connection.cursor() as cursor :
+#                cursor.execute(
+#                    "select * from modality where value = %(nom)s "
+#                    , {"nom" : modality.value})
+#                res = cursor.fetchone()
+#                modality = ModalityFactory.get_modality_from_sql_query(res)
+#                return modality
     
     def update_modality(self,modality:Modality):
         with DBConnection().connection as connection:

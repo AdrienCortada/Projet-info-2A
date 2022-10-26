@@ -1,12 +1,12 @@
 import json
-from business_object.regle_generation.meta_type import Meta_type
-from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.typ import Type
+from business_object.regle_generation.modality import Modality
+from business_object.regle_generation.meta_type import Meta_type
 import random
 class Generation_donnee:
     jeu_donnee = {}
-    
-    def __init__(self,Nb : int, meta_type : Meta_type):
+
+    def __init__(self,Nb : int, meta_type ):
         self.Nb = Nb
         self.meta_type = meta_type
        
@@ -15,12 +15,14 @@ class Generation_donnee:
         donnee = {}
         for n in range(Nb):
             indivivu_n = {}
-            for k in self.meta_type.dict_meta_type:
+            for k in Meta_type.dict_meta_type[self.meta_type]:
                 type_individu_n = Type.dict_type
                 tx_r = int(type_individu_n[k]["remplissage"])
                 if 100*random.random() < tx_r :
-                    mod_list = list(Modality.dict_modality[k].values())
-                    mod_list.remove(tx_r)
+                    mod_list = []
+                    for i in Modality.dict_modality:
+                        if Modality.dict_modality[i]["type"] == k:
+                            mod_list.append([Modality.dict_modality[i]["value"],Modality.dict_modality[i]["proba d'apparition"]])
                     m = len(mod_list)
                     nb = random.randint(0, m-1)
                     mod = mod_list[nb]

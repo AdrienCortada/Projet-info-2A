@@ -13,11 +13,11 @@ class Generation_donnee:
         donnee = {}
         for n in range(Nb):
             indivivu_n = {}
-            for k in self.meta_type:
-                type_individu_n = Type()
+            for k in self.meta_type.dict_meta_type:
+                type_individu_n = Type.dict_type
                 tx_r = int(type_individu_n[k]["remplissage"])
                 if 100*random.random() < tx_r :
-                    mod_list = list(self.Mod[k].values())
+                    mod_list = list(Modality.dict_modality[k].values())
                     mod_list.remove(tx_r)
                     m = len(mod_list)
                     nb = random.randint(0, m-1)

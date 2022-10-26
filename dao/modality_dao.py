@@ -26,7 +26,7 @@ class ModalityDao:
             with connection.cursor() as cursor :
                 cursor.execute(
                    "SELECT * FROM modality WHERE id_modality = %(id)s"
-                   , { "id_modalite" : id}
+                   , { "id" : id}
                 )
                 res = cursor.fetchone()
                 modality = ModalityFactory.get_modality_from_sql_query(res)
@@ -37,21 +37,20 @@ class ModalityDao:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "INSERT INTO modality(id_modality, id_type, value, proba) VALUES "+
-                    "(%(id_modality)s, %(id_type)s, %(value)s, %(proba))"
+                    "(%(id_modality)s, %(id_type)s, %(value)s, %(proba)s)"
                     , {"id_modality" : modality.id_modality, "id_type" : modality.id_type,
-                       "value" : modality.value}
+                       "value" : modality.value, "proba" : modality.proba }
                 )
 
-#pas sûre de ça : fait quoi exactement ? 
-#    def find_modality(self, modality:Modality):
-#        with DBConnection().connection as connection:
-#            with connection.cursor() as cursor :
-#                cursor.execute(
-#                    "select * from modality where value = %(nom)s "
-#                    , {"nom" : modality.value})
-#                res = cursor.fetchone()
-#                modality = ModalityFactory.get_modality_from_sql_query(res)
-#                return modality
+    def find_modality(self, modality:Modality):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "select * from modality where id_modality = %(id)s "
+                    , {"id" : modality.id_modality})
+                res = cursor.fetchone()
+                modality = ModalityFactory.get_modality_from_sql_query(res)
+                return modality
     
     def update_modality(self,modality:Modality):
         with DBConnection().connection as connection:

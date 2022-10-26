@@ -8,15 +8,15 @@ class ModalityDao:
         relatifs a la récupération de données en bdd
     """
 
-    def find_all_users(self):
+    def find_all_modality(self):
         users=[]
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * from utilisateur"
+                    "SELECT * from modality"
                 )
                 res = cursor.fetchall()
-                for row in res:
+                for row in res: #### à poursuivre
                     user = UtilisateurFactory.get_utilisateur_from_sql_query(row)
                     users.append(user)
         return users

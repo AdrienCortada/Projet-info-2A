@@ -9,10 +9,10 @@ from business_object.regle_generation.typ import Type
 from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.meta_type import Meta_type
 from business_object.generation_donnnee import Generation_donnee
-
+from business_object.export.export import Export
 from business_object.export.export_to_xml import export_to_xml
 from business_object.export.export_to_csv import export_to_csv
-from business_object.export.export_to_json import Export_to_json
+
 app = FastAPI()
 
 @app.put("/add_type/")
@@ -52,12 +52,7 @@ async def export_to_xml(chemin : str , name : str):
     x = export_to_xml(chemin, name)
     return x.export(Generation_donnee.jeu_donnee)
 
-@app.get("/export_donnees_to_xml/")
-async def export_to_csv(chemin : str , name : str):
-    c = export_to_xml(chemin, name)
-    return c.export(Generation_donnee.jeu_donnee)
-
-@app.get("/export_donnees_to_xml/")
+@app.get("/export_donnees_to_csv/")
 async def export_to_csv(chemin : str , name : str):
     c = export_to_xml(chemin, name)
     return c.export(Generation_donnee.jeu_donnee)

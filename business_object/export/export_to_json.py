@@ -1,6 +1,5 @@
 import json
 from business_object.export.export import Export
-from generation_donnnee import Generation_donnee
 import json
 
 class Export_to_json(Export):

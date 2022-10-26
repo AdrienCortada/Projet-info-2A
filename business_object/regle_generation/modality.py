@@ -1,15 +1,14 @@
-from typ import Type
+from business_object.regle_generation.typ import Type
 
 class Modality:
 
     dict_modality = {}
 
 
-    def __init__(self, nom_modality : str, nom_type : str, proba_apparition : float, value):
-        self.nom_modality = nom_modality
+    def __init__(self, nom_type : str, proba_apparition : float, value):
         self.proba_apparition = proba_apparition
         self.value = value
-        self.type = nom_type
+        self.nom_type = nom_type
 
     def add_modality(self):
         if self.type in Type.dict_type :

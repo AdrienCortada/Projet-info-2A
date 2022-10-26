@@ -1,7 +1,7 @@
 import json
 from business_object.regle_generation.meta_type import Meta_type
 from business_object.regle_generation.modality import Modality
-from business_object.regle_generation.type import Type
+from business_object.regle_generation.typ import Type
 import random
 class Generation_donnee:
     def __init__(self,Nb : int, meta_type : Meta_type, Mod : Modality, types : Type):

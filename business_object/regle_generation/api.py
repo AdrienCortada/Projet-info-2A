@@ -8,7 +8,7 @@ from modality import Modality
 
 app = FastAPI()
 
-@app.get("/add_type/")
+@app.put("/add_type/")
 async def add_type(nom : str, tx_remplissage : float):
     t = Type(tx_remplissage, nom)
     return t.add_type()
@@ -17,7 +17,7 @@ async def add_type(nom : str, tx_remplissage : float):
 async def delete_type(nom : str):
     return Type.delete_type(nom)
 
-@app.get("/add_modality/")
+@app.put("/add_modality/")
 async def add_modality(nom_type, proba_apparition, value):
     m = Modality(nom_type, proba_apparition, value)
     return m.add_modality()

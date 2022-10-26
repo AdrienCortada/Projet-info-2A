@@ -4,6 +4,8 @@ from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.typ import Type
 import random
 class Generation_donnee:
+    jeu_donnee = {}
+    
     def __init__(self,Nb : int, meta_type : Meta_type):
         self.Nb = Nb
         self.meta_type = meta_type

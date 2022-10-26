@@ -1,4 +1,4 @@
-from typ import Type
+from business_object.regle_generation.typ import Type
 
 class Modality:
 

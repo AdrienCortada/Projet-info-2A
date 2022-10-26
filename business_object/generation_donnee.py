@@ -27,7 +27,7 @@ class Generation_donnee:
                     weight = 0
                     for i in range(0, m):
                         weight = mod_list[i][1]+weight
-                    mod_list[0][1] = (mod_list[i][1]/weight)*100
+                    mod_list[0][1] = (mod_list[0][1]/weight)*100
                     for i in range(1, m):
                         mod_list[i][1] = (mod_list[i][1]/weight)*100 + mod_list[i-1][1]
                     randfloat = random.uniform(0,100)

@@ -4,7 +4,8 @@ from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.meta_type import Meta_type
 import random
 class Generation_donnee:
-    jeu_donnee = {}
+
+    jeu_donnee = dict()
 
     def __init__(self,Nb : int, meta_type ):
         self.Nb = Nb
@@ -38,8 +39,7 @@ class Generation_donnee:
                                 mod = mod_list[i][0]
                     indivivu_n[k] = mod
                 else :
-                    indivivu_n[k] = str(mq)
-                Generation_donnee.jeu_donnee = {n : indivivu_n}
-                Generation_donnee.jeu_donnee.update(Generation_donnee.jeu_donnee)
-            Generation_donnee.jeu_donnee = json.dumps(Generation_donnee.jeu_donnee)
+                    indivivu_n[k] = "mq"
+                Generation_donnee.jeu_donnee.update({n : indivivu_n})
+                Generation_donnee.jeu_donnee = json.dumps(Generation_donnee.jeu_donnee) 
         return Generation_donnee.jeu_donnee           

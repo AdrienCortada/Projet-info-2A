@@ -1,4 +1,4 @@
-from export import Export
+from business_object.export.export import Export
 import json 
 import csv 
 import pandas as pd 
@@ -15,12 +15,6 @@ class export_to_csv(Export):
         
 
         
-
-
-
-
-
-
 
 if __name__ == "__main__":
     exportation = export_to_csv(r"C:\Users\natha\OneDrive\Documents\ENSAI 2A\UE3 Informatique pour la data science\Projet Informatique","test.csv")

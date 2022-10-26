@@ -11,11 +11,11 @@ class Modality:
         self.nom_type = nom_type
 
     def add_modality(self):
-        if self.type in Type.dict_type :
-            id_modality = len(Type.dict_modality) + 1
-            d = {id_modality : {"nom_modality": nom_modality, "type" : self.nom_type , "value" : self.value, "proba d'apparition" : self.proba_apparition}}
+        if self.nom_type in Type.dict_type :
+            id_modality = len(Modality.dict_modality) + 1
+            d = {id_modality : {"type" : self.nom_type , "value" : self.value, "proba d'apparition" : self.proba_apparition}}
             Modality.dict_modality.update(d)
-            return dict_modality 
+            return Modality.dict_modality 
         else : 
             return "The modality has no type associated please check your spelling"
         

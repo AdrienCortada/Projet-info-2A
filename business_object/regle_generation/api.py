@@ -20,11 +20,11 @@ async def delete_type(nom : str):
 @app.get("/add_modality/")
 async def add_modality(nom_type, proba_apparition, value):
     m = Modality(nom_type, proba_apparition, value)
-    return m.Modality.add_modality()
+    return m.add_modality()
 
 @app.delete("/delete_modality")
 async def delete_modality(nom_type : str, value):
-    return Modality.delete_modality(nom, value)
+    return Modality.delete_modality(nom_type, value)
 
     
 

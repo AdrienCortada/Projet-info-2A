@@ -22,8 +22,8 @@ class Meta_type:
             return "All type selected are not define please check the spelling"
             
             
-    def delete_meta_type(self):
-        if self.nom in Meta_type.dict_meta_type : 
-            del Meta_type.dict_meta_type[self.nom]
+    def delete_meta_type(nom_meta_type):
+        if nom in Meta_type.dict_meta_type : 
+            del Meta_type.dict_meta_type[nom_meta_type]
         else : 
             return "Please check youre spelling" 

@@ -40,5 +40,6 @@ class Generation_donnee:
                     indivivu_n[k] = mod
                 else :
                     indivivu_n[k] = "mq"
-                Generation_donnee.jeu_donnee.update({n : indivivu_n}) 
+                Generation_donnee.jeu_donnee.update({n : indivivu_n})
+                Generation_donnee.jeu_donnee = json.dumps(Generation_donnee.jeu_donnee) 
         return Generation_donnee.jeu_donnee           

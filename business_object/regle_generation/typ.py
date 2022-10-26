@@ -20,14 +20,14 @@ class Type:
                         id = res +1
             d = {self.nom : {"remplissage" : self.tx_remplissage, "id" : id}}
             Type.dict_type.update(d)
-            print(Type.dict_type)
+            return Type.dict_type
         else : 
             return "Please select a value between 0 and 100 for tx_remplissage "
 
-    def delete_type(self):
-        if self.nom in Type.dict_type:
-            del Type.dict_type[self.nom]
-            print(Type.dict_type)
+    def delete_type(nom : str):
+        if nom in Type.dict_type:
+            del Type.dict_type[nom]
+            return Type.dict_type
         else:
             return "The type you selected hasn't been added yet please check your spelling"
 

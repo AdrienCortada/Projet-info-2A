@@ -5,7 +5,7 @@ import random
 import pandas as pd
 from typ import Type
 from modality import Modality
-
+from meta_type import Meta_type
 app = FastAPI()
 
 @app.put("/add_type/")
@@ -18,7 +18,7 @@ async def delete_type(nom : str):
     return Type.delete_type(nom)
 
 @app.put("/add_modality/")
-async def add_modality(nom_type, proba_apparition, value):
+async def add_modality(nom_type : str, proba_apparition : float, value):
     m = Modality(nom_type, proba_apparition, value)
     return m.add_modality()
 
@@ -26,7 +26,11 @@ async def add_modality(nom_type, proba_apparition, value):
 async def delete_modality(nom_type : str, value):
     return Modality.delete_modality(nom_type, value)
 
+@app.put("/add_meta_type/")
+async def add_meta_type(nom : str, list_type : list):
+    mt = Meta_type(nom, list_type)
+    return mt.add_meta_type()
     
 
 if __name__ == "__main__":
-    uvicorn.run(app, host = "127.0.0.2", port = 8000)
+    uvicorn.run(app, host = "127.0.0.1", port = 8000)

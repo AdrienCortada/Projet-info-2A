@@ -37,10 +37,11 @@ class ModalityDao(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "INSERT INTO modality(id_modality, id_type, value, proba) VALUES "+
-                    "(%(id_modality)s, %(id_type)s, %(value)s, %(proba)s)"
-                    , {"id_modality" : modality.id_modality, "id_type" : modality.id_type,
-                       "value" : modality.value, "proba" : modality.proba_apparition }
+                    "INSERT INTO modality(nom_type, value, proba_apparition) VALUES "+
+                    "(%(nom_type)s, %(value)s, %(proba)s)"
+                    , {"nom_type" : modality.nom_type,
+                       "value" : modality.value, 
+                       "proba" : modality.proba_apparition }
                 )
 
     def find_modality(self, modality:Modality):
@@ -77,13 +78,11 @@ if __name__ == "__main__":
     #modality = ModalityDao().find_all_modality()
     #print(len(modality) == 5)
     #Test find_modality_by_id
-    #mod1 = ModalityDao().find_modality_by_id(1)
+    #mod1 = ModalityDao().find_modality_by_id(3)
     #print(mod1.nom_type, mod1.proba_apparition, mod1.value)
     #Test save_modality
-    mod2 = Modality(nom_type = 2,
-                    proba_apparition="NULL",
+    mod2 = Modality(nom_type = 'prénom',
+                    proba_apparition=0,
                     value = "Nathan")
-    mod2.add_modality()
-    print(mod2.id_modality)
-    #ModalityDao().save_modality(mod2)
+    ModalityDao().save_modality(mod2)
     

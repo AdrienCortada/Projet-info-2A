@@ -56,7 +56,7 @@ class ModalityDao(metaclass=Singleton):
                 modality = ModalityFactory.get_modality_from_sql_query(res)
                 return modality
     
-    #à revoir : (qui modifie-t-on ? modalité dans la base de donnée ? )
+    #est-ce que c'est bien ça qu'on veut ? modif une modalité dans la base de donnée ? 
     def update_modality_by_id(self, id : int, new_type : str, new_value : str, new_proba_apparition : float):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:

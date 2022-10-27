@@ -71,4 +71,11 @@ class ModalityDao:
                     {"id":modality.id_modality}
                 )
 
+if __name__ == "__main__":
+        #GIVEN
+        modality_dao = ModalityDao()
+        #WHEN
+        mods = modality_dao.find_all_modality()
+        #THEN
+        self.assertEqual(5, len(mods))
     

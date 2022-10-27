@@ -30,3 +30,10 @@ class DBConnection(metaclass=Singleton):
         :return: the opened connection.
         """
         return self.__connection
+
+if __name__ == "__main__":
+    conn = DBConnection()
+    with conn.cursor() as cursor:
+                cursor.execute("SELECT 1 as test")
+                res = cursor.fetchone()
+    self.assertEqual(1,res["test"])

@@ -47,15 +47,19 @@ async def generation_donnee(Nb : int, meta_type ):
     gd = Generation_donnee(Nb, meta_type)
     return gd.generer_jeu_donnee()
 
+@app.get("/export/")
+async def export():
+    return None
+
 @app.get("/export_donnees_to_xml/")
 async def export_to_xml(chemin : str , name : str):
     x = export_to_xml(chemin, name)
-    return x.export(Generation_donnee.jeu_donnee)
+    return x.export()
 
 @app.get("/export_donnees_to_csv/")
 async def export_to_csv(chemin : str , name : str):
     c = export_to_xml(chemin, name)
-    return c.export(Generation_donnee.jeu_donnee)
+    return c.export()
 
 
 if __name__ == "__main__":

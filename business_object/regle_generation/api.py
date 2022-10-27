@@ -9,6 +9,7 @@ from business_object.regle_generation.typ import Type
 from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.meta_type import Meta_type
 from business_object.generation_donnee import Generation_donnee
+from business_object.impor.import_json import IMPORTJSON
 from business_object.export.export import Export
 from business_object.export.export_to_xml import export_to_xml
 from business_object.export.export_to_csv import export_to_csv
@@ -41,6 +42,11 @@ async def add_meta_type(nom : str, list_type : list):
 @app.delete("/delete_meta_type/")
 async def delete_meta_type(nom_meta_type : str):
     return Meta_type.delete_meta_type(nom_meta_type)
+
+@app.put("/import_json/")
+async def import_json(chemin : str):
+    imp = IMPORTJSON(chemin)
+    return imp.import_dict()
 
 @app.put("/generation_de_donnee/")
 async def generation_donnee(Nb : int, meta_type ):

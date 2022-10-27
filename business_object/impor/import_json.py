@@ -59,7 +59,7 @@ Par exemple, le fichier json peut se présenter comme suit\n
                     m = Modality(k , metadonnees.iloc[number_row][1][i], modality[i])
                     m.add_modality()
 
-        return Modality.dict_modality
+        return [Type.dict_type, Modality.dict_modality]
 
 if __name__ == "__main__" :
     imp = IMPORTJSON("C:/Users/adrie/OneDrive - GENES/Documents/ENSAI 2A/Projet info 2/Projet-info-2A/json_test.json")

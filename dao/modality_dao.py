@@ -1,8 +1,9 @@
 from business_object.regle_generation.modality import Modality
 from dao.db_connection import DBConnection
 from factory.modality_factory import ModalityFactory
+from utils.singleton import Singleton
 
-class ModalityDao:
+class ModalityDao(metaclass=Singleton):
     """
         classe ayant pour role de gérer les comportements
         relatifs a la récupération de données en bdd

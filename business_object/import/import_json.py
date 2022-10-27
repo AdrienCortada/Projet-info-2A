@@ -1,4 +1,6 @@
 import pandas as pd
+from business_object.regle_generation.typ import Type
+from business_object.regle_generation.modality import Modality
 
 class IMPORTJSON :
     def __init__(self, chemin_str) :
@@ -35,8 +37,18 @@ Par exemple, le fichier json peut se présenter comme suit\n
 }
             """
             raise Exception(texte) # préciser la forme du fichier attendue en cas d'erreur
-        return metadonnees
+        number_row = -1
+        for k in metadonnees.index.values:
+            number_row = number_row + 1 
+            t = Type(metadonnees.iloc[number_row][1], k)
+            t.add_type()
+            modality = metadonnees.iloc[number_row][0]
+            n = len(modality)
+            for i in range(0,n):
+                m = Modality(k , 12, modality[i])
+                m.add_modality()
+        return [Type.dict_type,Modality.dict_modality]
 
 if __name__ == "__main__" :
-    imp = IMPORTJSON("C:/Users\HP/Documents/GitHub/Projet-info-2A/json_test.json")
+    imp = IMPORTJSON("C:/Users/adrie/OneDrive - GENES/Documents/ENSAI 2A/Projet info 2/Projet-info-2A/json_test.json")
     print(imp.import_dict())

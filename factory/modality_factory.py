@@ -9,8 +9,8 @@ class ModalityFactory():
     @staticmethod
     def get_modality_from_sql_query(res):
         mod = Modality(
-            nom_type = res['nom_type'],
-            proba_apparition = res['proba_apparition'],
+            nom_type = res['id_type'],
+            proba_apparition = res['proba'],
             value= res['value'] )
         mod.id = int(res['id_modality'])
         return mod

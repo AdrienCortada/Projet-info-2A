@@ -56,14 +56,17 @@ class ModalityDao(metaclass=Singleton):
                 modality = ModalityFactory.get_modality_from_sql_query(res)
                 return modality
     
+    #à revoir : (qui modifie-t-on ? modalité dans la base de donnée ? )
     def update_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "UPDATE modality "+
-                    "SET type = %(type)s , value = %(value)s, proba = %(proba) " +
+                    "SET nom_type = %(type)s , value = %(value)s, proba_apparition = %(proba)s " +
                     " where id = %(id)s",
-                    {"type" : modality.id_type,"value": modality.value,"id":modality.id_modality}
+                    {"type" : modality.nom_type,
+                     "value": modality.value,
+                     "id":modality.id_modality}
                 )
                 
     def delete_modality(self,modality:Modality):
@@ -71,8 +74,9 @@ class ModalityDao(metaclass=Singleton):
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE FROM modality "+
-                    " where id = %(id)s",
-                    {"id":modality.id_modality}
+                    "WHERE nom_type = %(nom)s AND value = %(value)s "
+                    , {"nom" : modality.nom_type,
+                       "value" : modality.value}
                 )
 
 if __name__ == "__main__":
@@ -88,7 +92,9 @@ if __name__ == "__main__":
                     value = "Nathan")
     #ModalityDao().save_modality(mod2)
     #Test find_modality
-    mod3 = ModalityDao().find_modality(mod2)
-    print(mod3.nom_type, mod3.proba_apparition, mod3.value)
+    #mod3 = ModalityDao().find_modality(mod2)
+    #print(mod3.nom_type, mod3.proba_apparition, mod3.value)
+    #Test delete_modality
+    ModalityDao().delete_modality(mod2)
     
     

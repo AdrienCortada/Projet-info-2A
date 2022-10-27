@@ -14,24 +14,30 @@ class IMPORTJSON :
         except :
             texte = """Veuillez entrer un fichier JSON sous un format correct.\n
 Le nom de chaque variable doit être mis comme clé, et la valeur de cette clé doit être un dictionnaire contenant les clés 'type' et 'remplissage' dans cet ordre.\n
-la valeur de type contient les différentes modalités de la variable séparées par "|" et celle de remplissage contient le taux de remplissage de la variable.
+la valeur de type contient les différentes modalités de la variable séparées par "|" et celle de remplissage contient le taux de remplissage de la variable.\n
+Puis pour chaque modalité est associée une proba d'apparition. La pobra d'apparition est une liste (la première proba d'apparition correspond à la première modalité). \n
+Si la liste des probas d'apparition commence par "same" alors toutes les proba d'apparition de toutes les modalités seront les mêmes.\n
 La première clé de chaque variable doit être le 'type' et doit être une chaine de caractères\n
 Par exemple, le fichier json peut se présenter comme suit\n
 {
     "sexe": {
-        "type": "SEXE",
+        "type": "M|F",
+        "proba d'apparition" : [50,50],
         "remplissage": 100
     },
     "age": {
-        "type": "18|19|20",
+        "type": "18|19|20|21|22|23|24|25|26|27|28|29|30",
+        "proba d'apparition" : ["same"],
         "remplissage": 100
     },
     "prenom": {
-        "type": "NAME",
+        "type": "Abdoul|Isaac|Nathan|Laurène|Adrien",
+        "proba d'apparition" : ["same"],
         "remplissage": 88.4
     },
     "nom": {
-        "type": "NAME|'dupont'",
+        "type": "Toure|Sandja|Villacampa|Cortada|Dupont",
+        "proba d'apparition" : ["same"],
         "remplissage": 85
     }
 }

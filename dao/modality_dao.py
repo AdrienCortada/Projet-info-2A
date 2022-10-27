@@ -57,18 +57,30 @@ class ModalityDao(metaclass=Singleton):
                 return modality
     
     #à revoir : (qui modifie-t-on ? modalité dans la base de donnée ? )
-    def update_modality(self,modality:Modality):
+    def update_modality_by_id(self, id : int, new_type : str, new_value : str, new_proba_apparition : float):
         with DBConnection().connection as connection:
-            with connection.cursor() as cursor :
+            with connection.cursor() as cursor:
                 cursor.execute(
-                    "UPDATE modality "+
-                    "SET nom_type = %(type)s , value = %(value)s, proba_apparition = %(proba)s " +
-                    " where id = %(id)s",
-                    {"type" : modality.nom_type,
-                     "value": modality.value,
-                     "id":modality.id_modality}
+                    "UPDATE modality " +
+                    "SET nom_type = %(type)s, value = %(value)s, proba_apparition = %(proba)s " +
+                    "WHERE id_modality = %(id)s",
+                    {"type" : new_type,
+                     "value" : new_value,
+                     "proba" : new_proba_apparition,
+                     "id" : id}
                 )
-                
+    #def update_modality(self,modality:Modality):
+    #    with DBConnection().connection as connection:
+    #        with connection.cursor() as cursor :
+    #            cursor.execute(
+    #                "UPDATE modality "+
+    #                "SET nom_type = %(type)s , value = %(value)s, proba_apparition = %(proba)s " +
+    #                " where id = %(id)s",
+    #                {"type" : modality.nom_type,
+    #                 "value": modality.value,
+    #                 "id":modality.id_modality}
+    #            )
+            
     def delete_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
@@ -89,9 +101,9 @@ if __name__ == "__main__":
     #print(mod1.nom_type, mod1.proba_apparition, mod1.value)
 
     #Test save_modality
-    mod2 = Modality(nom_type = 'prénom',
-                    proba_apparition=0,
-                    value = "Nathan")
+    #mod2 = Modality(nom_type = 'prénom',
+    #                proba_apparition=0,
+    #                value = "Nathan")
     #ModalityDao().save_modality(mod2)
 
     #Test find_modality
@@ -99,9 +111,9 @@ if __name__ == "__main__":
     #print(mod3.nom_type, mod3.proba_apparition, mod3.value)
 
     #Test update_modality
-    #TODO 
+    ModalityDao().update_modality_by_id(id=5, new_type = 'prénom', new_value = 'Nathan', new_proba_apparition = 0) 
 
     #Test delete_modality
-    ModalityDao().delete_modality(mod2)
+    #ModalityDao().delete_modality(mod2)
     
     

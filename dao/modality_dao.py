@@ -83,17 +83,24 @@ if __name__ == "__main__":
     #Test find_all_modality
     #modality = ModalityDao().find_all_modality()
     #print(len(modality) == 5)
+
     #Test find_modality_by_id
     #mod1 = ModalityDao().find_modality_by_id(3)
     #print(mod1.nom_type, mod1.proba_apparition, mod1.value)
+
     #Test save_modality
     mod2 = Modality(nom_type = 'prénom',
                     proba_apparition=0,
                     value = "Nathan")
     #ModalityDao().save_modality(mod2)
+
     #Test find_modality
     #mod3 = ModalityDao().find_modality(mod2)
     #print(mod3.nom_type, mod3.proba_apparition, mod3.value)
+
+    #Test update_modality
+    #TODO 
+
     #Test delete_modality
     ModalityDao().delete_modality(mod2)
     

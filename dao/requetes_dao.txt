@@ -18,7 +18,16 @@ FROM Type
 WHERE id_type = %(id)s
 
 {
-    "id_type" : id
+    "id" : id
+}
+
+###### find_type(Type)
+SELECT * 
+FROM Type
+WHERE id_type = %(id)
+
+{
+    'id' : Type.id
 }
 
 ###### find_all()
@@ -27,7 +36,13 @@ SELECT *
 FROM Type
 
 ##### update(id, Type)
-Trouver le type à updater par find_by_id(id) et le remplacer le nouveau type
+UPDATE Type
+SET id_type = Type.id_type, nom_type= Type.nom_type, taux_remplissage=Type.tx_remplissage
+WHERE id_type = %(id)s
+
+{
+    "id" : id
+}
 
 ##### delete(id)
 
@@ -60,8 +75,18 @@ FROM Modalite
 WHERE id_modalite = %(id)s
 
 {
-    "id_modalite" : id
+    "id" : id
 }
+
+###### find_modalite(Modalite)
+SELECT * 
+FROM Modalite
+WHERE id_modalite = %(id)
+
+{
+    'id' : Modalite.id
+}
+
 
 ###### find_all()
 
@@ -69,7 +94,14 @@ SELECT *
 FROM Modalite
 
 ##### update(id, Modalite)
-Trouver la modalité à updater par find_by_id(id) et le remplacer par la nouvelle modalité
+UPDATE Modalite
+SET id_modalite = Modalite.id_modalite, id_type= Modalite.id_type, value=Modalite.value, proba = Modalite.proba
+WHERE id_modalite = %(id)s
+
+{
+    "id" : id
+}
+
 
 ##### delete(id)
 
@@ -79,3 +111,5 @@ WHERE id_modalite = %(id)s
 {
     "id" : id
 }
+
+

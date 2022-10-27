@@ -18,7 +18,7 @@ class ModalityDao(metaclass=Singleton):
                 )
                 res = cursor.fetchall()
                 for row in res: 
-                    mod = ModalityFactory.get_modality_from_sql_query(row)
+                    mod = ModalityFactory().get_modality_from_sql_query(row)
                     mods.append(mod)
         return mods
     

@@ -48,8 +48,10 @@ class ModalityDao(metaclass=Singleton):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "select * from modality where id_modality = %(id)s "
-                    , {"id" : modality.id_modality})
+                    "select * from modality where nom_type = %(nom)s AND value = %(value)s "
+                    , {"nom" : modality.nom_type,
+                       "value" : modality.value}
+                    )
                 res = cursor.fetchone()
                 modality = ModalityFactory.get_modality_from_sql_query(res)
                 return modality
@@ -84,5 +86,9 @@ if __name__ == "__main__":
     mod2 = Modality(nom_type = 'prénom',
                     proba_apparition=0,
                     value = "Nathan")
-    ModalityDao().save_modality(mod2)
+    #ModalityDao().save_modality(mod2)
+    #Test find_modality
+    mod3 = ModalityDao().find_modality(mod2)
+    print(mod3.nom_type, mod3.proba_apparition, mod3.value)
+    
     

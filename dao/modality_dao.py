@@ -1,9 +1,8 @@
 from business_object.regle_generation.modality import Modality
 from dao.db_connection import DBConnection
-from utils.singleton import Singleton
 from factory.modality_factory import ModalityFactory
 
-class ModalityDao(metaclass=Singleton):
+class ModalityDao:
     """
         classe ayant pour role de gérer les comportements
         relatifs a la récupération de données en bdd
@@ -18,7 +17,7 @@ class ModalityDao(metaclass=Singleton):
                 )
                 res = cursor.fetchall()
                 for row in res: 
-                    mod = ModalityFactory().get_modality_from_sql_query(row)
+                    mod = ModalityFactory.get_modality_from_sql_query(row)
                     mods.append(mod)
         return mods
     
@@ -30,7 +29,7 @@ class ModalityDao(metaclass=Singleton):
                    , { "id" : id}
                 )
                 res = cursor.fetchone()
-                modality = ModalityFactory().get_modality_from_sql_query(res)
+                modality = ModalityFactory.get_modality_from_sql_query(res)
                 return modality
 
     def save_modality(self,modality:Modality):
@@ -50,7 +49,7 @@ class ModalityDao(metaclass=Singleton):
                     "select * from modality where id_modality = %(id)s "
                     , {"id" : modality.id_modality})
                 res = cursor.fetchone()
-                modality = ModalityFactory().get_modality_from_sql_query(res)
+                modality = ModalityFactory.get_modality_from_sql_query(res)
                 return modality
     
     def update_modality(self,modality:Modality):
@@ -72,7 +71,4 @@ class ModalityDao(metaclass=Singleton):
                     {"id":modality.id_modality}
                 )
 
-if __name__ == "__main__":
-    #modality_dao = ModalityDao()
-    #mods = modality_dao.find_all_modality()
-    #print(5 == len(mods))
+    

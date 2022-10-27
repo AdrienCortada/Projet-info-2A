@@ -1,18 +1,22 @@
 {
     "sexe": {
-        "type": "SEXE",
+        "type": "M|F",
+        "proba d'apparition" : [50,50],
         "remplissage": 100
     },
     "age": {
-        "type": "18|19|20",
+        "type": "18|19|20|21|22|23|24|25|26|27|28|29|30",
+        "proba d'apparition" : ["same"],
         "remplissage": 100
     },
     "prenom": {
-        "type": "NAME",
+        "type": "Abdoul|Isaac|Nathan|Laurène|Adrien",
+        "proba d'apparition" : ["same"],
         "remplissage": 88.4
     },
     "nom": {
-        "type": "NAME|'dupont'",
+        "type": "Toure|Sandja|Villacampa|Cortada|Dupont",
+        "proba d'apparition" : ["same"],
         "remplissage": 85
     }
 }

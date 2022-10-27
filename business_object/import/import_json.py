@@ -40,14 +40,20 @@ Par exemple, le fichier json peut se présenter comme suit\n
         number_row = -1
         for k in metadonnees.index.values:
             number_row = number_row + 1 
-            t = Type(metadonnees.iloc[number_row][1], k)
+            t = Type(metadonnees.iloc[number_row][2], k)
             t.add_type()
             modality = metadonnees.iloc[number_row][0]
             n = len(modality)
-            for i in range(0,n):
-                m = Modality(k , 12, modality[i])
-                m.add_modality()
-        return [Type.dict_type,Modality.dict_modality]
+            if metadonnees.iloc[number_row][1][0] == "same":
+                for i in range (0,n):
+                    m = Modality(k , 1, modality[i])
+                    m.add_modality()
+            else :
+                for i in range (0,n):
+                    m = Modality(k , metadonnees.iloc[number_row][1][i], modality[i])
+                    m.add_modality()
+
+        return Modality.dict_modality
 
 if __name__ == "__main__" :
     imp = IMPORTJSON("C:/Users/adrie/OneDrive - GENES/Documents/ENSAI 2A/Projet info 2/Projet-info-2A/json_test.json")

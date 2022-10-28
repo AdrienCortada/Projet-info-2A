@@ -1,5 +1,6 @@
 from business_object.regle_generation.modality import Modality
 from dao.db_connection import DBConnection
+from utils.singleton import Singleton
 from factory.modality_factory import ModalityFactory
 from utils.singleton import Singleton
 
@@ -30,7 +31,7 @@ class ModalityDao(metaclass=Singleton):
                    , { "id" : id}
                 )
                 res = cursor.fetchone()
-                modality = ModalityFactory.get_modality_from_sql_query(res)
+                modality = ModalityFactory().get_modality_from_sql_query(res)
                 return modality
 
     def save_modality(self,modality:Modality):
@@ -53,7 +54,7 @@ class ModalityDao(metaclass=Singleton):
                        "value" : modality.value}
                     )
                 res = cursor.fetchone()
-                modality = ModalityFactory.get_modality_from_sql_query(res)
+                modality = ModalityFactory().get_modality_from_sql_query(res)
                 return modality
     
     #est-ce que c'est bien ça qu'on veut ? modif une modalité dans la base de donnée ? 
@@ -92,6 +93,7 @@ class ModalityDao(metaclass=Singleton):
                 )
 
 if __name__ == "__main__":
+<<<<<<< Updated upstream
     #Test find_all_modality
     #modality = ModalityDao().find_all_modality()
     #print(len(modality) == 5)
@@ -117,3 +119,8 @@ if __name__ == "__main__":
     #ModalityDao().delete_modality(mod2)
     
     
+=======
+    #modality_dao = ModalityDao()
+    #mods = modality_dao.find_all_modality()
+    #print(5 == len(mods))
+>>>>>>> Stashed changes

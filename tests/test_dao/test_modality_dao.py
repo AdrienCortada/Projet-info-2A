@@ -10,4 +10,4 @@ class TestModalityDao(TestCase):
         #WHEN
         mods = modality_dao.find_all_modality()
         #THEN
-        self.assertEqual(first, second)
+        self.assertEqual(5, len(mods))

@@ -14,12 +14,12 @@ class export_to_csv(Export):
                Nom du fichier sur lequel le jeu de données va être sauvegardé
         '''
         super().__init__(chemin, name)
-    def export(self,json_dict:dict) -> None:
+    def export(self,json_obj) -> None:
         """Exporte le jeu de données généré sous format csv
 
         Parameters
         ----------
-        json_dict : dict  
+        json_obj : Json
                 Le jeu de données généré        
 
 
@@ -29,21 +29,4 @@ class export_to_csv(Export):
         file = data_json.to_csv(chemin_f)
         
 
-table = {
-    "sexe": {
-        "type": "SEXE",
-        "remplissage": 100
-    },
-    "age": {
-        "type": "18|19|20",
-        "remplissage": 100
-    },
-    "prenom": {
-        "type": "NAME",
-        "remplissage": 88.4
-    },
-    "nom": {
-        "type": "NAME|'dupont'",
-        "remplissage": 85
-    }
-}
+

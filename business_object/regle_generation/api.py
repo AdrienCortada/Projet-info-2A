@@ -83,10 +83,6 @@ async def export_csv(chemin : str , name : str):
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export1(dic)
 
-@app.put("/Dict_to_xml/")
-async def dict_to_xml(tag: str):
-    res = Dict_to_xml(tag)
-    return res.dict_to_xml(Generation_donnee.jeu_donnee)
 
 
 if __name__ == "__main__":

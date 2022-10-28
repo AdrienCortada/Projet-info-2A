@@ -66,16 +66,16 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "DELETE FROM modality "+
+                    "DELETE FROM Type "+
                     " where id = %(id)s",
-                    {"id":modality.id_modality}
+                    {"id":type.id_modality}
                 )
 
     def delete_type_by_id(self,id_type:int):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "DELETE FROM modality "+
+                    "DELETE FROM Type "+
                     " where id = %(id)s",
-                    {"id":modality.id_type}
+                    {"id":id_type}
                 )

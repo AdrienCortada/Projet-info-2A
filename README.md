@@ -151,3 +151,6 @@ curl -X 'PUT'
     "terminal.integrated.tabs.location": "left"
 
 }
+
+
+### D:/Projet_Informatique_2A/Projet-info-2A/json_test.json

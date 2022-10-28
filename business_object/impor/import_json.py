@@ -22,23 +22,49 @@ Par exemple, le fichier json peut se présenter comme suit\n
 {
     "sexe": {
         "type": "M|F",
-        "proba d'apparition" : [50,50],
-        "remplissage": 100
+        "remplissage": 100,
+        "proba d'apparition": ["same"]
     },
     "age": {
-        "type": "18|19|20|21|22|23|24|25|26|27|28|29|30",
-        "proba d'apparition" : ["same"],
-        "remplissage": 100
+        "type": "uniform|borne1|borne2",
+        "remplissage": 100,
+        "proba d'apparition": [1,0,100]
     },
     "prenom": {
-        "type": "Abdoul|Isaac|Nathan|Laurène|Adrien",
-        "proba d'apparition" : ["same"],
-        "remplissage": 88.4
+        "type": "Adrien|Abdoul|Laurène|Isaac|Nathan",
+        "remplissage": 88.4,
+        "proba d'apparition": ["same"]
+
     },
     "nom": {
-        "type": "Toure|Sandja|Villacampa|Cortada|Dupont",
-        "proba d'apparition" : ["same"],
-        "remplissage": 85
+        "type": "Cortada|Toure|Villacampa|Sandja",
+        "remplissage": 85,
+        "proba d'apparition": [20,20,20,20]
+    },
+
+    "taille": {
+        "type": "normal|mean|variance",
+        "remplissage": 100,
+        "proba d'apparition": [1,177,5]
+    },
+
+    "nb_chevaux": {
+        "type": "binomiale|individu|proba",
+        "remplissage": 100,
+        "proba d'apparition": [1,177,5]
+    },
+
+    "marque": {
+        "type": "mercedes|tesla|citroein|peugeot|audi|ferrari|ford",
+        "remplissage": 86,
+        "proba d'apparition": ["same"]
+    }
+    ,
+
+    "vitesse_max": {
+        "type": "exponential|lambda",
+        "remplissage": 86,
+        "proba d'apparition": [1,8]
     }
 }
             """
@@ -46,17 +72,17 @@ Par exemple, le fichier json peut se présenter comme suit\n
         number_row = -1
         for k in metadonnees.index.values:
             number_row = number_row + 1 
-            t = Type(metadonnees.iloc[number_row][2], k)
+            t = Type(metadonnees.iloc[number_row][1], k)
             t.add_type()
             modality = metadonnees.iloc[number_row][0]
             n = len(modality)
-            if metadonnees.iloc[number_row][1][0] == "same":
+            if metadonnees.iloc[number_row][2][0] == "same":
                 for i in range (0,n):
                     m = Modality(k , 1, modality[i])
                     m.add_modality()
             else :
                 for i in range (0,n):
-                    m = Modality(k , metadonnees.iloc[number_row][1][i], modality[i])
+                    m = Modality(k , metadonnees.iloc[number_row][2][i], modality[i])
                     m.add_modality()
 
         return [Type.dict_type, Modality.dict_modality]

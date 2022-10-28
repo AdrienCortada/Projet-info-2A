@@ -47,19 +47,8 @@ class Meta_type:
             
             
     def delete_meta_type(nom_meta_type):
-        '''Fonction qui a pour but d'enlever un metatype au dictionnaire contenant les metatypes
-
-        Parameters
-        ----------
-        nom_meta_type : str
-            nom du metatype que l'on veut supprimer
-        
-        Example
-        ----------
-        '''
-        if nom_meta_type in Meta_type.dict_meta_type : 
+        if nom in Meta_type.dict_meta_type : 
             del Meta_type.dict_meta_type[nom_meta_type]
-            return Meta_type.dict_meta_type
         else : 
             return "Please check youre spelling" 
 

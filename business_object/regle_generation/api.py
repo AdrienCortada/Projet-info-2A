@@ -8,11 +8,13 @@ import xml
 from business_object.regle_generation.typ import Type
 from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.meta_type import Meta_type
+from business_object.impor.import_json import IMPORTJSON
 from business_object.generation_donnee import Generation_donnee
 from business_object.impor.import_json import IMPORTJSON
 from business_object.export.export import Export
 from business_object.export.export_to_xml import export_to_xml
 from business_object.export.export_to_csv import export_to_csv
+from main import Dict_to_xml
 
 
 app = FastAPI()
@@ -34,6 +36,11 @@ async def add_modality(nom_type : str, proba_apparition : float, value):
 @app.delete("/delete_modality")
 async def delete_modality(nom_type : str, value):
     return Modality.delete_modality(nom_type, value)
+
+@app.put("/import_json/")
+async def import_json(chemin : "str"):
+    imp = IMPORTJSON(chemin)
+    return imp.import_dict()
 
 @app.put("/add_meta_type/")
 async def add_meta_type(nom : str, list_type : list):
@@ -75,6 +82,11 @@ async def export_csv(chemin : str , name : str):
     c = export_to_csv(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export1(dic)
+
+@app.put("/Dict_to_xml/")
+async def dict_to_xml(tag: str):
+    res = Dict_to_xml(tag)
+    return res.dict_to_xml(Generation_donnee.jeu_donnee)
 
 
 if __name__ == "__main__":

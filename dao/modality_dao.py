@@ -93,7 +93,6 @@ class ModalityDao(metaclass=Singleton):
                 )
 
 if __name__ == "__main__":
-<<<<<<< Updated upstream
     #Test find_all_modality
     #modality = ModalityDao().find_all_modality()
     #print(len(modality) == 5)
@@ -118,9 +117,4 @@ if __name__ == "__main__":
     #Test delete_modality
     #ModalityDao().delete_modality(mod2)
     
-    
-=======
-    #modality_dao = ModalityDao()
-    #mods = modality_dao.find_all_modality()
-    #print(5 == len(mods))
->>>>>>> Stashed changes
+

@@ -14,12 +14,12 @@ class export_to_xml(Export):
                Nom du fichier sur lequel le jeu de données va être sauvegardé
         '''
         super().__init__(chemin, name)
-    def export(self,json_dict) -> None:
+    def export(self,json_obj) -> None:
         """Exporte le jeu de données généré sous format xml
 
         Parameters
         ----------
-        json_dict : dict  
+        json_obj : Json 
                 Le jeu de données généré         
 
 

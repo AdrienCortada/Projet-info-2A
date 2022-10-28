@@ -13,19 +13,19 @@ class export_to_json(Export):
                Nom du fichier sur lequel le jeu de données va être sauvegardé
         '''
         super().__init__(chemin, name)
-    def export(self,json_dict:dict) -> None:
+    def export(self,json_obj) -> None:
         '''
         Exporte le jeu de données généré sous format json 
 
         Parameters
         ----------
-        json_dict : dict  
+        json_obj : Json  
                 Le jeu de données généré         
 
 
         '''
         with open("{}/{}.json".format(self.chemin,self.name), "w") as out_file:
-            json.dump(json_dict, out_file)
+            json.dump(json_obj, out_file)
         
 
         

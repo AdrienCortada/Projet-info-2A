@@ -23,7 +23,8 @@ class Meta_type:
             
             
     def delete_meta_type(nom_meta_type):
-        if nom in Meta_type.dict_meta_type : 
+        if nom_meta_type in Meta_type.dict_meta_type : 
             del Meta_type.dict_meta_type[nom_meta_type]
+            return Meta_type.dict_meta_type
         else : 
             return "Please check youre spelling" 

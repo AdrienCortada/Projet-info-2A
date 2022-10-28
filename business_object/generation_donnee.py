@@ -6,7 +6,7 @@ import random
 import numpy as np
 class Generation_donnee:
 
-    jeu_donnee = dict()
+    jeu_donnee = {}
 
     def __init__(self,Nb : int, meta_type ):
         self.Nb = Nb
@@ -14,6 +14,7 @@ class Generation_donnee:
        
         
     def generer_jeu_donnee(self):
+        res = len(Generation_donnee.jeu_donnee)
         for n in range(self.Nb):
             indivivu_n = {}
             for k in Meta_type.dict_meta_type[self.meta_type]:
@@ -55,5 +56,5 @@ class Generation_donnee:
                         indivivu_n[k] = mod
                 else :
                     indivivu_n[k] = "mq"
-            Generation_donnee.jeu_donnee.update({n : indivivu_n})
+            Generation_donnee.jeu_donnee.update({n + res : indivivu_n})
         return Generation_donnee.jeu_donnee          

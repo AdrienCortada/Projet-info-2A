@@ -34,6 +34,26 @@ class ModalityDao(metaclass=Singleton):
                 modality = ModalityFactory().get_modality_from_sql_query(res)
                 return modality
 
+    def find_modality(self, modality:Modality, limit: int=None):
+        mods = []
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "SELECT * from modality " +
+                    "WHERE nom_type = %(nom)s AND value = %(value)s "+
+                    "ORDER BY nom_type, value "+
+                    "LIMIT %(limit)s" # OFFSET %(offset)s"
+                    , {"nom" : modality.nom_type,
+                       "value" : modality.value,
+                       "limit" : limit
+                       }
+                    )
+                res = cursor.fetchall()
+                for row in res: 
+                    mod = ModalityFactory().get_modality_from_sql_query(row)
+                    mods.append(mod)
+        return mods
+
     def save_modality(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
@@ -44,18 +64,6 @@ class ModalityDao(metaclass=Singleton):
                        "value" : modality.value, 
                        "proba" : modality.proba_apparition }
                 )
-
-    def find_modality(self, modality:Modality):
-        with DBConnection().connection as connection:
-            with connection.cursor() as cursor :
-                cursor.execute(
-                    "select * from modality where nom_type = %(nom)s AND value = %(value)s "
-                    , {"nom" : modality.nom_type,
-                       "value" : modality.value}
-                    )
-                res = cursor.fetchone()
-                modality = ModalityFactory().get_modality_from_sql_query(res)
-                return modality
     
     #est-ce que c'est bien ça qu'on veut ? modif une modalité dans la base de donnée ? 
     def update_modality_by_id(self, id : int, new_type : str, new_value : str, new_proba_apparition : float):
@@ -93,24 +101,25 @@ class ModalityDao(metaclass=Singleton):
                 )
 
 if __name__ == "__main__":
-<<<<<<< Updated upstream
     #Test find_all_modality
     #modality = ModalityDao().find_all_modality()
-    #print(len(modality) == 5)
+    #print(len(modality) == 8)
 
     #Test find_modality_by_id
     #mod1 = ModalityDao().find_modality_by_id(3)
     #print(mod1.nom_type, mod1.proba_apparition, mod1.value)
 
     #Test save_modality
-    #mod2 = Modality(nom_type = 'prénom',
-    #                proba_apparition=0,
-    #                value = "Nathan")
+    mod2 = Modality(nom_type = 'prénom',
+                    proba_apparition=0,
+                    value = "Nathan")
     #ModalityDao().save_modality(mod2)
 
     #Test find_modality
-    #mod3 = ModalityDao().find_modality(mod2)
-    #print(mod3.nom_type, mod3.proba_apparition, mod3.value)
+    mod3 = ModalityDao().find_modality(mod2, limit=1)
+    print(mod3)
+    for mod in mod3:
+        print(mod.nom_type, mod.proba_apparition, mod.value)
 
     #Test update_modality
     ModalityDao().update_modality_by_id(id=5, new_type = 'prénom', new_value = 'Nathan', new_proba_apparition = 0) 
@@ -118,9 +127,4 @@ if __name__ == "__main__":
     #Test delete_modality
     #ModalityDao().delete_modality(mod2)
     
-    
-=======
-    #modality_dao = ModalityDao()
-    #mods = modality_dao.find_all_modality()
-    #print(5 == len(mods))
->>>>>>> Stashed changes
+

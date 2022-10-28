@@ -13,7 +13,8 @@ from business_object.impor.import_json import IMPORTJSON
 from business_object.export.export import Export
 from business_object.export.export_to_xml import export_to_xml
 from business_object.export.export_to_csv import export_to_csv
-
+from business_object.export.export_to_json import export_to_json
+from main import Dict_to_xml
 
 
 app = FastAPI()
@@ -70,17 +71,24 @@ async def import_json(chemin : str ):
 async def export(chemin : str, name : str):
     return None
 
+@app.get("/export_donnees_to_json/")
+async def export_json(chemin : str , name : str):
+    x = export_to_json(chemin, name)
+    dic = json.dumps(Generation_donnee.jeu_donnee)
+    return x.export(dic)
+
 @app.get("/export_donnees_to_xml/")
 async def export_xml(chemin : str , name : str):
     x = export_to_xml(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
-    return x.export1(dic)
+    return x.export(dic)
 
 @app.get("/export_donnees_to_csv/")
 async def export_csv(chemin : str , name : str):
     c = export_to_csv(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
-    return c.export1(dic)
+    return c.export(dic)
+
 
 
 

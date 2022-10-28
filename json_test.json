@@ -1,18 +1,46 @@
 {
     "sexe": {
-        "type": "SEXE",
+        "type": "M|F",
+        "proba d'apparition": ["same"],
         "remplissage": 100
     },
     "age": {
-        "type": "18|19|20",
+        "type": "uniform|borne1|borne2",
+        "proba d'apparition": [1,0,100],
         "remplissage": 100
     },
     "prenom": {
-        "type": "NAME",
+        "type": "Adrien|Abdoul|Laurène|Isaac|Nathan",
         "remplissage": 88.4
     },
     "nom": {
-        "type": "NAME|'dupont'",
+        "type": "Cortada|Toure|Villacampa|Sandja",
+        "proba d'apparition": [20,20,20,20],
         "remplissage": 85
+    },
+
+    "taille": {
+        "type": "normal|mean|variance",
+        "proba d'apparition": [1,177,5],
+        "remplissage": 100
+    },
+
+    "nb_chevaux": {
+        "type": "binomiale|individu|proba",
+        "proba d'apparition": [1,250,0.4],
+        "remplissage": 100
+    },
+
+    "marque": {
+        "type": "mercedes|tesla|citroein|peugeot|audi|ferrari|ford",
+        "proba d'apparition": ["same"],
+        "remplissage": 86
+    }
+    ,
+
+    "vitesse_max": {
+        "type": "exponential|lambda",
+        "proba d'apparition": [1,8],
+        "remplissage": 86
     }
 }

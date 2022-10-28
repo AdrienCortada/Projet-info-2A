@@ -4,6 +4,7 @@ from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.meta_type import Meta_type
 import random
 import numpy as np
+
 class Generation_donnee:
 
     jeu_donnee = {}
@@ -39,6 +40,37 @@ class Generation_donnee:
                         var = mod_list[index_var][1]
                         mod = np.random.normal(mean,var ** (1/2),1)[0]
                         indivivu_n[k] = round(mod,2)
+                    if "uniform" in mod_list2 and "borne1" in mod_list2 and "borne2" in mod_list2:
+                        index_borne1 = 0
+                        index_borne2 = 0
+                        for j in range(0, m):
+                            if mod_list[j][0] == "borne1":
+                                index_borne1 = j
+                            if mod_list[j][0] == "borne2":
+                                index_borne2 = j
+                        borne1 = mod_list[index_borne1][1]
+                        borne2 = mod_list[index_borne2][1]
+                        mod = np.random.uniform(borne1,borne2,1)[0]
+                        indivivu_n[k] = round(mod,2)
+                    if "exponential" in mod_list2 and "lambda" in mod_list2:
+                        index_lambda = 0
+                        for j in range(0, m):
+                            if mod_list[j][0] == "lambda":
+                                index_lambda = j
+                        ilambda = mod_list[index_lambda][1]
+                        mod = np.random.exponential(ilambda,1)[0]
+                        indivivu_n[k] = round(mod,2)
+                    if "binomiale" in mod_list2 and "individu" in mod_list2 and "proba" in mod_list2:
+                        index_individu = 0
+                        index_proba = 0
+                        for j in range(0, m):
+                            if mod_list[j][0] == "individu":
+                                index_individu= j
+                            if mod_list[j][0] == "proba":
+                                index_proba = j
+                        individu = mod_list[index_individu][1]
+                        proba = mod_list[index_proba][1]
+                        mod = np.random.binomial(individu,proba,1)[0]
                     else:
                         weight = 0
                         for i in range(0, m):

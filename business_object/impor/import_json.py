@@ -22,23 +22,47 @@ Par exemple, le fichier json peut se présenter comme suit\n
 {
     "sexe": {
         "type": "M|F",
-        "proba d'apparition" : [50,50],
+        "proba d'apparition": ["same"],
         "remplissage": 100
     },
     "age": {
-        "type": "18|19|20|21|22|23|24|25|26|27|28|29|30",
-        "proba d'apparition" : ["same"],
+        "type": "uniform|borne1|borne2",
+        "proba d'apparition": [1,0,100],
         "remplissage": 100
     },
     "prenom": {
-        "type": "Abdoul|Isaac|Nathan|Laurène|Adrien",
-        "proba d'apparition" : ["same"],
+        "type": "Adrien|Abdoul|Laurène|Isaac|Nathan",
         "remplissage": 88.4
     },
     "nom": {
-        "type": "Toure|Sandja|Villacampa|Cortada|Dupont",
-        "proba d'apparition" : ["same"],
+        "type": "Cortada|Toure|Villacampa|Sandja",
+        "proba d'apparition": [20,20,20,20],
         "remplissage": 85
+    },
+
+    "taille": {
+        "type": "normal|mean|variance",
+        "proba d'apparition": [1,177,5],
+        "remplissage": 100
+    },
+
+    "nb_chevaux": {
+        "type": "binomiale|individu|proba",
+        "proba d'apparition": [1,250,0.4],
+        "remplissage": 100
+    },
+
+    "marque": {
+        "type": "mercedes|tesla|citroein|peugeot|audi|ferrari|ford",
+        "proba d'apparition": ["same"],
+        "remplissage": 86
+    }
+    ,
+
+    "vitesse_max": {
+        "type": "exponential|lambda",
+        "proba d'apparition": [1,8],
+        "remplissage": 86
     }
 }
             """

@@ -49,9 +49,9 @@ Par exemple, le fichier json peut se présenter comme suit\n
     },
 
     "nb_chevaux": {
-        "type": "binomiale|individu|proba",
+        "type": "uniform|borne1|borne2",
         "remplissage": 100,
-        "proba d'apparition": [1,250,0.4]
+        "proba d'apparition": [1,80,200]
     },
 
     "marque": {
@@ -64,7 +64,7 @@ Par exemple, le fichier json peut se présenter comme suit\n
     "vitesse_max": {
         "type": "exponential|lambda",
         "remplissage": 86,
-        "proba d'apparition": [1,8]
+        "proba d'apparition": [1,15]
     }
 }
             """

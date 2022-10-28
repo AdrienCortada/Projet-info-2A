@@ -7,5 +7,5 @@ class Export(ABC):
         self.name = name
 
     @abstractmethod
-    def export1(self):
+    def export(self):
         pass

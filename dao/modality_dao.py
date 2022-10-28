@@ -100,6 +100,11 @@ class ModalityDao(metaclass=Singleton):
                        "value" : modality.value}
                 )
 
+    def delete_doublon(self):
+        pass
+    #TODO
+
+
 if __name__ == "__main__":
     #Test find_all_modality
     #modality = ModalityDao().find_all_modality()

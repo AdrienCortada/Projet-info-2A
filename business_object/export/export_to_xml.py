@@ -10,3 +10,7 @@ class export_to_xml(Export):
         data_json = pd.DataFrame.transpose(Export.json_obj)
         chemin_f = "{}\\{}".format(self.chemin,self.name)
         file = data_json.to_xml(chemin_f)
+    
+if __name__=="__main__":
+    res = Export("D:/Ensai 2e annees/Apprentissage_supervise/TP 3", "data.xml")
+    res.export("json_test.json")

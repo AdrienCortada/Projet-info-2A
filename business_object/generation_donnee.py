@@ -26,7 +26,7 @@ class Generation_donnee:
                             mod_list.append([Modality.dict_modality[i]["value"],Modality.dict_modality[i]["proba d'apparition"]])
                     mod_list2 = [row[0] for row in mod_list]
                     m = len(mod_list)
-                    if "normal" in mod_list2 and "mean" in mod_list2 and "variance" in mod_list2:
+                    if "normal" in mod_list2 and "mean" in mod_list2 and "variance" in mod_list:
                         index_mean = 0
                         index_var = 0
                         for j in range(0, m):
@@ -55,6 +55,5 @@ class Generation_donnee:
                         indivivu_n[k] = mod
                 else :
                     indivivu_n[k] = "mq"
-            Generation_donnee.jeu_donnee.update({n : indivivu_n})
-        data = json.dumps(Generation_donnee.jeu_donnee)
-        return data           
+                Generation_donnee.jeu_donnee.update({n : indivivu_n})
+        return Generation_donnee.jeu_donnee          

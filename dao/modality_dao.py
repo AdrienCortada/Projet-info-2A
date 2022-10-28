@@ -100,8 +100,8 @@ class ModalityDao(metaclass=Singleton):
                        "value" : modality.value}
                 )
 
-    def delete_doublon(self):
-        pass
+    #def delete_doublon(self):
+    #    pass
     #TODO
 
 

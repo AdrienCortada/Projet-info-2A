@@ -41,5 +41,4 @@ class Generation_donnee:
                 else :
                     indivivu_n[k] = "mq"
                 Generation_donnee.jeu_donnee.update({n : indivivu_n})
-        data = json.dumps(Generation_donnee.jeu_donnee)
-        return data           
+        return Generation_donnee.jeu_donnee          

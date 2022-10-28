@@ -4,6 +4,7 @@ DROP TABLE IF EXISTS type CASCADE ;
 DROP TABLE IF EXISTS modality CASCADE ;
 DROP TABLE IF EXISTS metatype CASCADE ;
 DROP TABLE IF EXISTS donnee CASCADE ;
+DROP SEQUENCE IF EXISTS id_modality_seq ;
 
 CREATE SEQUENCE id_modality_seq ; 
 
@@ -29,4 +30,7 @@ INSERT INTO modality(nom_type, value) VALUES
 ('sexe', 'homme'),
 ('prénom', 'Laurène'),
 ('prénom', 'Isaac'),
-('prénom', 'Adrien');
+('prénom', 'Adrien'),
+('prénom', 'Laurène'),
+('prénom', 'Laurène'),
+('prénom', 'Laurène');

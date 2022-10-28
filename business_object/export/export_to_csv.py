@@ -24,7 +24,7 @@ class export_to_csv(Export):
 
 
         """
-        data_json = pd.DataFrame.transpose(pd.read_json(json_obj))
+        data_json = pd.DataFrame.transpose(pd.read_json(json_dict))
         chemin_f = "{}/{}".format(self.chemin,self.name)
         file = data_json.to_csv(chemin_f)
         

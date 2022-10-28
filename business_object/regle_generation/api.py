@@ -8,7 +8,6 @@ import xml
 from business_object.regle_generation.typ import Type
 from business_object.regle_generation.modality import Modality
 from business_object.regle_generation.meta_type import Meta_type
-from business_object.impor.import_json import IMPORTJSON
 from business_object.generation_donnee import Generation_donnee
 from business_object.impor.import_json import IMPORTJSON
 from business_object.export.export import Export

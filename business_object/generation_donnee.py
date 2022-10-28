@@ -5,6 +5,7 @@ from business_object.regle_generation.meta_type import Meta_type
 import random
 import numpy as np
 
+
 class Generation_donnee:
 
     jeu_donnee = {}
@@ -60,18 +61,7 @@ class Generation_donnee:
                         ilambda = mod_list[index_lambda][1]
                         mod = np.random.exponential(ilambda,1)[0]
                         indivivu_n[k] = round(mod,2)
-                    if "binomiale" in mod_list2 and "individu" in mod_list2 and "proba" in mod_list2:
-                        index_individu = 0
-                        index_proba = 0
-                        for j in range(0, m):
-                            if mod_list[j][0] == "individu":
-                                index_individu= j
-                            if mod_list[j][0] == "proba":
-                                index_proba = j
-                        individu = mod_list[index_individu][1]
-                        proba = mod_list[index_proba][1]
-                        mod = np.random.binomial(individu,proba,1)[0]
-                    else:
+                    if "normal" not in mod_list2 and "uniform" not in mod_list2 and "exponential" not in mod_list2:
                         weight = 0
                         for i in range(0, m):
                             weight = mod_list[i][1]+weight
@@ -89,4 +79,4 @@ class Generation_donnee:
                 else :
                     indivivu_n[k] = "mq"
             Generation_donnee.jeu_donnee.update({n + res : indivivu_n})
-        return Generation_donnee.jeu_donnee          
+        return Generation_donnee.jeu_donnee    

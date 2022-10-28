@@ -51,7 +51,7 @@ Par exemple, le fichier json peut se présenter comme suit\n
     "nb_chevaux": {
         "type": "binomiale|individu|proba",
         "remplissage": 100,
-        "proba d'apparition": [1,177,5]
+        "proba d'apparition": [1,250,0.4]
     },
 
     "marque": {

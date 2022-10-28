@@ -65,26 +65,16 @@ async def export(chemin : str, name : str):
     return None
 
 @app.get("/export_donnees_to_xml/")
-async def export_to_xml(chemin : str , name : str):
-<<<<<<< Updated upstream
+async def export_xml(chemin : str , name : str):
     x = export_to_xml(chemin, name)
-    return x.export1()
+    dic = json.dumps(Generation_donnee.jeu_donnee)
+    return x.export1(dic)
 
 @app.get("/export_donnees_to_csv/")
 async def export_csv(chemin : str , name : str):
     c = export_to_csv(chemin, name)
-    return c.export1()
-=======
-    while True:
-     x = await export_to_xml(chemin, name)
-     return x.export1()
-
-@app.get("/export_donnees_to_csv/")
-async def export_to_csv(chemin : str , name : str):
-    while True:
-     c =  await export_to_csv(chemin, name)
-     return c.export1()
->>>>>>> Stashed changes
+    dic = json.dumps(Generation_donnee.jeu_donnee)
+    return c.export1(dic)
 
 
 if __name__ == "__main__":

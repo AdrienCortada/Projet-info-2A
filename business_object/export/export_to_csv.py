@@ -12,5 +12,21 @@ class export_to_csv(Export):
         file = data_json.to_csv(chemin_f)
         
 
-
-
+table = {
+    "sexe": {
+        "type": "SEXE",
+        "remplissage": 100
+    },
+    "age": {
+        "type": "18|19|20",
+        "remplissage": 100
+    },
+    "prenom": {
+        "type": "NAME",
+        "remplissage": 88.4
+    },
+    "nom": {
+        "type": "NAME|'dupont'",
+        "remplissage": 85
+    }
+}

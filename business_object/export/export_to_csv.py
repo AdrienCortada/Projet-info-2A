@@ -14,7 +14,7 @@ class export_to_csv(Export):
                Nom du fichier sur lequel le jeu de données va être sauvegardé
         '''
         super().__init__(chemin, name)
-    def export(self,json_obj:dict) -> None:
+    def export(self,json_dict:dict) -> None:
         """Exporte le jeu de données généré sous format csv
 
         Parameters

@@ -22,53 +22,56 @@ Par exemple, le fichier json peut se présenter comme suit\n
 {
     "sexe": {
         "type": "M|F",
-        "proba d'apparition": ["same"],
-        "remplissage": 100
+        "remplissage": 100,
+        "proba d'apparition": ["same"]
     },
     "age": {
         "type": "uniform|borne1|borne2",
-        "proba d'apparition": [1,0,100],
-        "remplissage": 100
+        "remplissage": 100,
+        "proba d'apparition": [1,0,100]
     },
     "prenom": {
         "type": "Adrien|Abdoul|Laurène|Isaac|Nathan",
-        "remplissage": 88.4
+        "remplissage": 88.4,
+        "proba d'apparition": ["same"]
+
     },
     "nom": {
         "type": "Cortada|Toure|Villacampa|Sandja",
-        "proba d'apparition": [20,20,20,20],
-        "remplissage": 85
+        "remplissage": 85,
+        "proba d'apparition": [20,20,20,20]
     },
 
     "taille": {
         "type": "normal|mean|variance",
-        "proba d'apparition": [1,177,5],
-        "remplissage": 100
+        "remplissage": 100,
+        "proba d'apparition": [1,177,5]
     },
 
     "nb_chevaux": {
         "type": "binomiale|individu|proba",
-        "proba d'apparition": [1,250,0.4],
-        "remplissage": 100
+        "remplissage": 100,
+        "proba d'apparition": [1,177,5]
     },
 
     "marque": {
         "type": "mercedes|tesla|citroein|peugeot|audi|ferrari|ford",
-        "proba d'apparition": ["same"],
-        "remplissage": 86
+        "remplissage": 86,
+        "proba d'apparition": ["same"]
     }
     ,
 
     "vitesse_max": {
         "type": "exponential|lambda",
-        "proba d'apparition": [1,8],
-        "remplissage": 86
+        "remplissage": 86,
+        "proba d'apparition": [1,8]
     }
 }
             """
             raise Exception(texte) # préciser la forme du fichier attendue en cas d'erreur
         number_row = -1
-        for k in metadonnees.index.values:
+        return metadonnees
+        '''for k in metadonnees.index.values:
             number_row = number_row + 1 
             t = Type(metadonnees.iloc[number_row][2], k)
             t.add_type()
@@ -83,7 +86,7 @@ Par exemple, le fichier json peut se présenter comme suit\n
                     m = Modality(k , metadonnees.iloc[number_row][1][i], modality[i])
                     m.add_modality()
 
-        return [Type.dict_type, Modality.dict_modality]
+        return [Type.dict_type, Modality.dict_modality]'''
 
 if __name__ == "__main__" :
     imp = IMPORTJSON("C:/Users/adrie/OneDrive - GENES/Documents/ENSAI 2A/Projet info 2/Projet-info-2A/json_test.json")

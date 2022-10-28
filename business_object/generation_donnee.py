@@ -26,7 +26,7 @@ class Generation_donnee:
                             mod_list.append([Modality.dict_modality[i]["value"],Modality.dict_modality[i]["proba d'apparition"]])
                     mod_list2 = [row[0] for row in mod_list]
                     m = len(mod_list)
-                    if "normal" in mod_list2 and "mean" in mod_list2 and "variance" in mod_list:
+                    if "normal" in mod_list2 and "mean" in mod_list2 and "variance" in mod_list2:
                         index_mean = 0
                         index_var = 0
                         for j in range(0, m):

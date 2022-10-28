@@ -18,5 +18,10 @@
         "type": "Toure|Sandja|Villacampa|Cortada|Dupont",
         "proba d'apparition" : ["same"],
         "remplissage": 85
+    },
+    "taille": {
+        "type": "normal|mean|variance",
+        "proba d'apparition" : [1,177,1],
+        "remplissage": 85
     }
 }

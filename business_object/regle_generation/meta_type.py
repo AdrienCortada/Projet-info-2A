@@ -1,14 +1,6 @@
 from business_object.regle_generation.typ import Type
 
 class Meta_type:
-    '''Classe qui permet de créer les meta type, de définir quels données on va vouloir générer
-    
-    Attributes
-    ----------
-    nom : str
-        le nom du meta type en question
-    list_type : list 
-        liste contenant le nom des types composant le meta type'''
 
     dict_meta_type = {}
 
@@ -17,22 +9,6 @@ class Meta_type:
         self.list_type = list_type
     
     def add_meta_type(self):
-        '''Fonction qui a pour but d'ajouter un metatype au dictionnaire contenant les metatypes
-        
-        Example
-        ----------
-        >>> mt = Meta_type("individu", ["nom","age"])
-        >>> t1 = Type(100, "age")
-        >>> t2 = Type(100, "nom")
-        >>> t2.add_type()
-        {'nom': {'remplissage': 100, 'id': 1}}
-        >>> t1.add_type()
-        {'nom': {'remplissage': 100, 'id': 1}, 'age': {'remplissage': 100, 'id': 2}}
-        >>> print(mt.add_meta_type())
-        {'individu': ['nom', 'age']}
-        >>> print(Meta_type.delete_meta_type("individu"))
-        {}
-        '''
         n = len(self.list_type)
         res = 0
         for k in range(0, n):
@@ -47,22 +23,7 @@ class Meta_type:
             
             
     def delete_meta_type(nom_meta_type):
-        '''Fonction qui a pour but d'enlever un metatype au dictionnaire contenant les metatypes
-
-        Parameters
-        ----------
-        nom_meta_type : str
-            nom du metatype que l'on veut supprimer
-        
-        Example
-        ----------
-        '''
-        if nom_meta_type in Meta_type.dict_meta_type : 
+        if nom in Meta_type.dict_meta_type : 
             del Meta_type.dict_meta_type[nom_meta_type]
-            return Meta_type.dict_meta_type
         else : 
             return "Please check youre spelling" 
-
-if __name__ == '__main__':
-    import doctest
-    doctest.testmod()

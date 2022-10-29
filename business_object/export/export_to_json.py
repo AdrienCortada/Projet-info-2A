@@ -2,7 +2,7 @@ import json
 from business_object.export.export import Export
 import json
 
-class export_to_json(Export):
+class Export_to_json(Export):
     def __init__(self,chemin:str,name:str) -> None:
         '''Constructeur
         Attributes

@@ -3,7 +3,7 @@ import json
 import csv 
 import pandas as pd 
 
-class export_to_csv(Export):
+class Export_to_csv(Export):
     def __init__(self,chemin:str,name:str) -> None:
         '''Constructeur
         Attributes

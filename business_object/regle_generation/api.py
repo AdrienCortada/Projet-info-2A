@@ -11,9 +11,9 @@ from business_object.regle_generation.meta_type import Meta_type
 from business_object.generation_donnee import Generation_donnee
 from business_object.impor.import_json import IMPORTJSON
 from business_object.export.export import Export
-from business_object.export.export_to_xml import export_to_xml
-from business_object.export.export_to_csv import export_to_csv
-from business_object.export.export_to_json import export_to_json
+from business_object.export.export_to_xml import Export_to_xml
+from business_object.export.export_to_csv import Export_to_csv
+from business_object.export.export_to_json import Export_to_json
 
 
 
@@ -73,19 +73,19 @@ async def export(chemin : str, name : str):
 
 @app.get("/export_donnees_to_json/")
 async def export_json(chemin : str , name : str):
-    x = export_to_json(chemin, name)
+    x = Export_to_json(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return x.export(dic)
 
 @app.get("/export_donnees_to_xml/")
 async def export_xml(chemin : str , name : str):
-    x = export_to_xml(chemin, name)
+    x = Export_to_xml(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return x.export(dic)
 
 @app.get("/export_donnees_to_csv/")
 async def export_csv(chemin : str , name : str):
-    c = export_to_csv(chemin, name)
+    c = Export_to_csv(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export(dic)
 

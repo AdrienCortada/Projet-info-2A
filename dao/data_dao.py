@@ -11,7 +11,7 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM Donnee"
+                    "SELECT * FROM donnee"
                 )
                 res = cursor.fetchall()
                 for row in res:
@@ -25,7 +25,7 @@ class DataDao :
                 for key in data.jeu_donnee.keys() : 
                     for i,tip in enumerate(data.meta_type.list_type) :
                         cursor.execute(
-                            "INSERT INTO Donnee(nom_meta, nom_type, order, value)"+ 
+                            "INSERT INTO donnee(nom_meta, nom_type, order, value)"+ 
                             "VALUES ( %(nom_meta)s, %(nom_type)s, %(order)s, %(value)s)"
                         , {"nom_meta" : data.meta_type.nom,
                             "nom_type":tip,
@@ -37,7 +37,7 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM Donnee WHERE id_donnee=%(id_donnee)s "
+                    "SELECT * FROM donnee WHERE id_donnee=%(id_donnee)s "
                     , {"id_donnee" : id_donnee})
                 res = cursor.fetchall()
                 for row in res:
@@ -50,7 +50,7 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM Donnee WHERE nom_meta=%(nom_meta)s "
+                    "SELECT * FROM donnee WHERE nom_meta=%(nom_meta)s "
                     , {"nom_meta" : nom_meta})
                 res = cursor.fetchall()
                 for row in res:

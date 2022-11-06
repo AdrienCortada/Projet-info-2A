@@ -13,7 +13,7 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * from Type"
+                    "SELECT * from type"
                 )
                 res = cursor.fetchall()
                 for row in res: 
@@ -36,7 +36,7 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "INSERT INTO Type(id_type, tx_remplissage, nom) VALUES "+
+                    "INSERT INTO type(id_type, tx_remplissage, nom) VALUES "+
                     "(%(tx_remplissage)s, %(nom)s)"
                     , {"tx_remplissage" : type.tx_remplissage, 
                        "nom" : type.nom}
@@ -46,7 +46,7 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM Type WHERE nom = %(nom_type)s AND tx_remplissage = %(tx_remplissage)s"
+                    "SELECT * FROM type WHERE nom = %(nom_type)s AND tx_remplissage = %(tx_remplissage)s"
                     , {"nom_type" : type.nom,
                         "tx_remplissage": type.tx_remplissage}
                         )
@@ -58,7 +58,7 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "UPDATE Type "+
+                    "UPDATE type "+
                     "SET tx_remplissage = %(tx_remplissage)s, nom = %(nom)s " +
                     " where id_type = %(id_type)s",
                     {"id_type" : id,"tx_remplissage": new_type.tx_remplissage, "nom" : new_type.nom}
@@ -68,7 +68,7 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "DELETE FROM Type "+
+                    "DELETE FROM type "+
                     " WHERE id_type IN ("+
                     "SELECT id_type FROM Type "+
                     "WHERE nom = %(nom)s AND tx_remplissage = %(tx_remplissage)s" +
@@ -81,7 +81,7 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "DELETE FROM Type "+
+                    "DELETE FROM type "+
                     " where id_type = %(id)s",
                     {"id":id_type}
                 )

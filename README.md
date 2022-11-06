@@ -3,6 +3,22 @@
 Lien vers le rapport :
 https://fr.overleaf.com/2923467794gxmkhbfwrvrt
 
+Remarques Laurène (06/11/2022)
+J'ai quelques questions :
+- dans les objets métier :
+--- pourquoi api.py dans le dossier regle_generation ?
+--- pourquoi generation_donnee.py HORS du dossier regle_generation ?
+--- pas de classe Donnee ? C'est Generation_donnee qui joue ce rôle ? 
+Je me perds un peu dans tous les noms qui changent ^^"
+
+- "fautes de frappes" ? 
+--- dossier impor sans t ? 
+--- fichier typ.py sans e ? 
+
+- Pour Isaac : dans la dao j'ai mis tous les noms des tables en minuscule, sans maj au début.
+
+
+
 Remarques Laurène (20/10)
 
 - J'ai ajouté un fichier requirement.txt comme dans les TP pour lister les modules utilisés

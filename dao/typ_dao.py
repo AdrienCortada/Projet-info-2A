@@ -25,18 +25,18 @@ class TypeDao:
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                   "SELECT * FROM modality WHERE id_modality = %(id)s LIMIT 1"
+                   "SELECT * FROM type WHERE id_type = %(id)s LIMIT 1"
                    , { "id" : id}
                 )
                 res = cursor.fetchone()
-                typ = ModalityFactory.get_type_from_sql_query(res)
+                typ = TypeFactory.get_type_from_sql_query(res)
                 return typ
 
     def save_type(self,type:Type):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "INSERT INTO type(id_type, tx_remplissage, nom) VALUES "+
+                    "INSERT INTO type(tx_remplissage, nom) VALUES "+
                     "(%(tx_remplissage)s, %(nom)s)"
                     , {"tx_remplissage" : type.tx_remplissage, 
                        "nom" : type.nom}
@@ -69,13 +69,26 @@ class TypeDao:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE FROM type "+
-                    " WHERE id_type IN ("+
-                    "SELECT id_type FROM Type "+
-                    "WHERE nom = %(nom)s AND tx_remplissage = %(tx_remplissage)s" +
+                    " WHERE id_type IN ( "+
+                    "SELECT id_type FROM type "+
+                    "WHERE nom = %(nom)s AND tx_remplissage = %(tx_remplissage)s " +
                     "LIMIT 1 )",
                     {"nom":type.nom, 
                     "tx_remplissage" : type.tx_remplissage}
                 )
+
+    def find_id_type(self, type:Type):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "SELECT id_type from type "+
+                    "WHERE nom = %(nom)s AND tx_remplissage = %(tx_remplissage)s ",
+                    {"nom":type.nom, 
+                    "tx_remplissage" : type.tx_remplissage}                    
+                )
+                res = cursor.fetchone()
+                #print(res)
+                return res['id_type']
 
     def delete_type_by_id(self,id_type:int):
         with DBConnection().connection as connection:
@@ -85,3 +98,42 @@ class TypeDao:
                     " where id_type = %(id)s",
                     {"id":id_type}
                 )
+
+
+if __name__ == "__main__":
+    ##Test find_all_type
+    #types = TypeDao().find_all_type()
+    #print(len(types) == 2)
+#
+    ##Test find_type_by_id
+    #type1 = TypeDao().find_type_by_id(2)
+    #print(type1.nom, type1.tx_remplissage)
+#
+    ##Test save_type
+    #type2 = Type(nom = 'âge',
+    #             tx_remplissage = 1)
+    #TypeDao().save_type(type2)
+#
+    ##Test find_type
+    #type3 = TypeDao().find_type(type1)
+    #print(type3)
+    #print(type3.nom, type3.tx_remplissage)
+#
+    ##Test update_type
+    #type4 = Type(0.8, "tranche d'âge")
+    #TypeDao().update_type_by_id(id=3, new_type= type4) 
+#
+    ###Test delete_type
+    #TypeDao().delete_type(type4)
+    #
+    ##Test find_id_type : 
+    #type5 = Type(1, "adresse")
+    #TypeDao().save_type(type5)
+    #res = TypeDao().find_id_type(type5)
+    #print(res)    
+    #
+    ##Test delete_type_by_id
+    #type6 = Type(0.5, "email")
+    #TypeDao().save_type(type6)
+    #res = TypeDao().find_id_type(type6)
+    #TypeDao().delete_type_by_id(id_type = res)

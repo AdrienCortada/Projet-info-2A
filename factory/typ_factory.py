@@ -11,5 +11,5 @@ class TypeFactory():
         ty = Type(
             tx_remplissage= res['tx_remplissage'],
             nom= res['nom'])
-        ty.id = int(res['id_type'])
+        #ty.id = int(res['id_type'])
         return ty

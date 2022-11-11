@@ -5,10 +5,13 @@ DROP TABLE IF EXISTS modality CASCADE ;
 DROP TABLE IF EXISTS metatype CASCADE ;
 DROP TABLE IF EXISTS donnee CASCADE ;
 DROP SEQUENCE IF EXISTS id_modality_seq ;
+DROP SEQUENCE IF EXISTS id_type_seq ;
 
 CREATE SEQUENCE id_modality_seq ; 
+CREATE SEQUENCE id_type_seq ;
 
-CREATE TABLE type(
+CREATE TABLE type (
+    id_type INT DEFAULT nextval('id_type_seq'),
     nom text PRIMARY KEY,
     tx_remplissage float
 );

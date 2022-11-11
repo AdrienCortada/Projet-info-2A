@@ -101,6 +101,7 @@ class TypeDao:
 
 
 if __name__ == "__main__":
+    print("Tests de la DAO concernant la classe Type")
     ##Test find_all_type
     #types = TypeDao().find_all_type()
     #print(len(types) == 2)

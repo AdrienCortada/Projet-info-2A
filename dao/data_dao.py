@@ -1,5 +1,6 @@
 from business_object.generation_donnee import Generation_donnee
 from business_object.regle_generation.meta_type import Meta_type
+from business_object.regle_generation.typ import Type
 from dao.db_connection import DBConnection
 from utils.singleton import Singleton
 from factory.data_factory import DataFactory
@@ -14,9 +15,8 @@ class DataDao :
                     "SELECT * FROM donnee"
                 )
                 res = cursor.fetchall()
-                for row in res:
-                    dat = DataFactory.get_data_from_sql_query(row)
-                    data.append(dat)
+                for row in res.keys:
+                    data.append(res[row])
         return data
     
     def save_data(self, data : Generation_donnee):
@@ -40,10 +40,9 @@ class DataDao :
                     "SELECT * FROM donnee WHERE id_donnee=%(id_donnee)s "
                     , {"id_donnee" : id_donnee})
                 res = cursor.fetchall()
-                for row in res:
-                    dat = DataFactory.get_data_from_sql_query(row)
-                    data.append(dat)
-        return user
+                for row in res.keys:
+                    data.append(res[row])
+        return data
 
     def find_data_by_meta(self, nom_meta : str):
         data=[]
@@ -53,9 +52,60 @@ class DataDao :
                     "SELECT * FROM donnee WHERE nom_meta=%(nom_meta)s "
                     , {"nom_meta" : nom_meta})
                 res = cursor.fetchall()
-                for row in res:
-                    dat = DataFactory.get_data_from_sql_query(row)
-                    data.append(dat)
-        return user
+                for row in res.keys:
+                    data.append(res[row])
+        return data
+
+    def update_data_by_id(self, id : int, new_data:list):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "UPDATE donnee "+
+                    "SET nom_meta = %(nom_meta)s, nom_type = %(nom_type)s, order = %(order)s, value = %(value)s " +
+                    "WHERE id_type = %(id_type)s",
+                    {"nom_meta" : new_data[0],
+                    "nom_type": new_data[1], 
+                    "order" : new_data[2], 
+                    "value" : new_data[3]}
+                )
+    
+    def delete_data(self, ligne : list):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM donnee "+
+                    " WHERE id_donnee IN ( "+
+                    "SELECT id_donnee FROM donnee "+
+                    "WHERE nom_meta = %(nom_meta)s AND nom_type = %(nom_type)s AND order = %(order)s AND value = %(value)s " +
+                    "LIMIT 1 )",
+                    {"nom_meta" : ligne[0],
+                    "nom_type": ligne[1], 
+                    "order" : ligne[2], 
+                    "value" : ligne[3]}
+                )
+
+    def delete_data_by_id(self, id : int):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM donnee "+
+                    " WHERE id_donnee = %(id)s",
+                    {"id" : id}
+                )
+    
+    def find_id_donnee(self, ligne:list):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "SELECT id_donnee FROM donnee "+
+                    "WHERE nom_meta = %(nom_meta)s AND nom_type = %(nom_type)s AND order = %(order)s AND value = %(value)s",
+                    {"nom_meta" : ligne[0],
+                    "nom_type": ligne[1], 
+                    "order" : ligne[2], 
+                    "value" : ligne[3]}                    
+                )
+                res = cursor.fetchall()
+                return res.values()
+
 
     

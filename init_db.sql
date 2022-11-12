@@ -6,9 +6,11 @@ DROP TABLE IF EXISTS metatype CASCADE ;
 DROP TABLE IF EXISTS donnee CASCADE ;
 DROP SEQUENCE IF EXISTS id_modality_seq ;
 DROP SEQUENCE IF EXISTS id_type_seq ;
+DROP SEQUENCE IF EXISTS id_metatype_seq ;
 
 CREATE SEQUENCE id_modality_seq ; 
 CREATE SEQUENCE id_type_seq ;
+CREATE SEQUENCE id_metatype_seq ;
 
 CREATE TABLE type (
     id_type INT DEFAULT nextval('id_type_seq'),
@@ -22,7 +24,6 @@ CREATE TABLE modality (
     value text,
     proba_apparition float
 );
-
 
 INSERT INTO type(nom, tx_remplissage) VALUES
 ('sexe', 1),
@@ -39,3 +40,13 @@ INSERT INTO modality(nom_type, value) VALUES
 ('prénom', 'Laurène'),
 ('prénom', 'Laurène'),
 ('prénom', 'Laurène');
+
+CREATE TABLE metatype (
+    id_metatype INT PRIMARY KEY DEFAULT nextval('id_metatype_seq'),
+    nom_metatype text,
+    nom_type text REFERENCES type(nom)
+);
+
+INSERT INTO metatype(nom_metatype, nom_type) VALUES
+('individu', 'prénom'),
+('individu', 'sexe');

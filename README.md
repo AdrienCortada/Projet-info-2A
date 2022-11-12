@@ -3,6 +3,13 @@
 Lien vers le rapport :
 https://fr.overleaf.com/2923467794gxmkhbfwrvrt
 
+PENSE BETE : 
+Extrait Notice du projet : "Un fichier README à la racine du projet présentant votre projet. Cette page sera rédigée
+en anglais et devra :
+- Présenter rapidement votre application (but) avec quelques exemples
+- Expliquer comment l’installer"
+
+
 Remarques Laurène (06/11/2022)
 J'ai quelques questions :
 - dans les objets métier :

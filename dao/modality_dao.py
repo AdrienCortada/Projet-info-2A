@@ -113,6 +113,7 @@ class ModalityDao(metaclass=Singleton):
 
 
 if __name__ == "__main__":
+    print("Tests de la classe ModalityDao en commentaires")
     #Test find_all_modality
     #modality = ModalityDao().find_all_modality()
     #print(len(modality) == 8)
@@ -122,9 +123,9 @@ if __name__ == "__main__":
     #print(mod1.nom_type, mod1.proba_apparition, mod1.value)
 
     #Test save_modality
-    mod2 = Modality(nom_type = 'prénom',
-                    proba_apparition=0,
-                    value = "Nathan")
+    #mod2 = Modality(nom_type = 'prénom',
+    #                proba_apparition=0,
+    #                value = "Nathan")
     #ModalityDao().save_modality(mod2)
 
     #Test find_modality

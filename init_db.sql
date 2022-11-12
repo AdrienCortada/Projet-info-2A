@@ -28,9 +28,11 @@ INSERT INTO type(nom, tx_remplissage) VALUES
 ('sexe', 1),
 ('prénom', 1);
 
+INSERT INTO modality(nom_type, proba_apparition, value) VALUES
+('sexe', 0.5, 'femme'),
+('sexe', 0.5, 'homme');
+
 INSERT INTO modality(nom_type, value) VALUES
-('sexe', 'femme'),
-('sexe', 'homme'),
 ('prénom', 'Laurène'),
 ('prénom', 'Isaac'),
 ('prénom', 'Adrien'),

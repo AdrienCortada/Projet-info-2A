@@ -1,9 +1,8 @@
-from business_object.generation_donnee import Generation_donnee
 from business_object.regle_generation.meta_type import Meta_type
 from business_object.regle_generation.typ import Type
 from dao.db_connection import DBConnection
 from utils.singleton import Singleton
-from factory.data_factory import DataFactory
+from factory.meta_factory import MetaFactory
 
 class MetaDao : 
     
@@ -15,8 +14,9 @@ class MetaDao :
                     "SELECT * FROM metatype"
                 )
                 res = cursor.fetchall()
-                for row in res.keys:
-                    metas.append(res[row])
+                for row in res:
+                    mt = MetaFactory.get_meta_from_sql_query(row)
+                    metas.append(mt)
         return metas
     
     def save_meta(self, meta : Meta_type):
@@ -37,21 +37,23 @@ class MetaDao :
                     "SELECT * FROM metatype WHERE id_meta=%(id_meta)s "
                     , {"id_meta" : id_meta})
                 res = cursor.fetchall()
-                for row in res.keys:
-                    meta_t.append(res[row])
+                for row in res:
+                    mt = MetaFactory.get_meta_from_sql_query(row)
+                    meta_t.append(mt)
         return meta_t
 
     def find_meta_by_nom(self, nom_meta : str):
-        data=[]
+        meta_t=[]
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "SELECT * FROM metatype WHERE nom_meta_type=%(nom_meta)s "
                     , {"nom_meta" : nom_meta})
                 res = cursor.fetchall()
-                for row in res.keys:
-                    meta_t.append(res[row])
-        return data
+                for row in res:
+                    mt = MetaFactory.get_meta_from_sql_query(row)
+                    meta_t.append(mt)
+        return meta_t
 
     def update_meta_by_id(self, id : int, new_meta : list):
         with DBConnection().connection as connection:
@@ -100,17 +102,19 @@ class MetaDao :
                     {"id" : id}
                 )
     
-    def find_id_meta(self, ligne:list):
+    def find_id_meta(self, nom_meta : str):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
+                ids =[]
                 cursor.execute(
-                    "SELECT id_meta_type FROM metatype "+
-                    "WHERE nom_meta_type = %(nom_meta_type)s AND nom_type = %(nom_type)s",
-                    {"nom_meta_type" : ligne[0],
-                    "nom_type": ligne[1]}                    
+                    "SELECT * FROM metatype "+
+                    "WHERE nom_meta_type = %(nom_meta_type)s ",
+                    {"nom_meta_type" : nom_meta}                    
                 )
                 res = cursor.fetchall()
-                return res.values()
+                for row in res:
+                    ids.append(row['id_meta_type'])
+        return ids
 
 
     

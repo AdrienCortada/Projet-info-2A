@@ -15,8 +15,9 @@ class DataDao :
                     "SELECT * FROM donnee"
                 )
                 res = cursor.fetchall()
-                for row in res.keys:
-                    data.append(res[row])
+                for row in res:
+                    dat = DataFactory.get_data_from_sql_query(row)
+                    data.append(dat)
         return data
     
     def save_data(self, data : Generation_donnee):
@@ -40,8 +41,9 @@ class DataDao :
                     "SELECT * FROM donnee WHERE id_donnee=%(id_donnee)s "
                     , {"id_donnee" : id_donnee})
                 res = cursor.fetchall()
-                for row in res.keys:
-                    data.append(res[row])
+                for row in res:
+                    dat = DataFactory.get_data_from_sql_query(row)
+                    data.append(dat)
         return data
 
     def find_data_by_meta(self, nom_meta : str):
@@ -52,8 +54,9 @@ class DataDao :
                     "SELECT * FROM donnee WHERE nom_meta=%(nom_meta)s "
                     , {"nom_meta" : nom_meta})
                 res = cursor.fetchall()
-                for row in res.keys:
-                    data.append(res[row])
+                for row in res:
+                    dat = DataFactory.get_data_from_sql_query(row)
+                    data.append(dat)
         return data
 
     def update_data_by_id(self, id : int, new_data:list):
@@ -97,7 +100,7 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT id_donnee FROM donnee "+
+                    "SELECT * FROM donnee "+
                     "WHERE nom_meta = %(nom_meta)s AND nom_type = %(nom_type)s AND order = %(order)s AND value = %(value)s",
                     {"nom_meta" : ligne[0],
                     "nom_type": ligne[1], 
@@ -105,7 +108,10 @@ class DataDao :
                     "value" : ligne[3]}                    
                 )
                 res = cursor.fetchall()
-                return res.values()
+                for row in res:
+                    dat = DataFactory.get_data_from_sql_query(row)
+                    data.append(dat['id_donnee'])
+        return data
 
 
     

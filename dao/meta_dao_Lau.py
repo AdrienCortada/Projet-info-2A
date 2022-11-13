@@ -16,17 +16,16 @@ class MetaDao :
                     "SELECT * FROM metatype"
                 )
                 res = cursor.fetchall()
-                print(res)
+                print('sortie python avec le cursor.fetchall() : ', res)
                 for row in res:
                     if row['nom_metatype'] not in metas:
                         metas.append(row['nom_metatype'])
-        print(metas)
+        print('liste des nom_métatypes : ', metas)
         for nom_meta in metas:
-            print(nom_meta)
             meta = MetaFactory().get_metatype_from_sql_query(res, nom_meta)
             print(meta.nom, meta.list_type)
             liste_metas.append(meta)
-        print(liste_metas)
+        print('liste des objets métier :', liste_metas)
         return liste_metas
     
     #def save_meta(self, meta : Meta_type):

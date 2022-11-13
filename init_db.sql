@@ -2,16 +2,16 @@
 
 DROP TABLE IF EXISTS type CASCADE ;
 DROP TABLE IF EXISTS modality CASCADE ;
-DROP TABLE IF EXISTS metatype CASCADE ;
+DROP TABLE IF EXISTS meta_type CASCADE ;
 DROP TABLE IF EXISTS donnee CASCADE ;
 DROP SEQUENCE IF EXISTS id_modality_seq ;
 DROP SEQUENCE IF EXISTS id_type_seq ;
-DROP SEQUENCE IF EXISTS id_metatype_seq ;
+DROP SEQUENCE IF EXISTS id_meta_type_seq ;
 
 
 CREATE SEQUENCE id_modality_seq ; 
 CREATE SEQUENCE id_type_seq ;
-CREATE SEQUENCE id_metatype_seq ;
+CREATE SEQUENCE id_meta_type_seq ;
 
 CREATE TABLE type (
     id_type INT DEFAULT nextval('id_type_seq'),
@@ -48,13 +48,13 @@ INSERT INTO modality(nom_type, value) VALUES
 ('nom commune', 'Toulouse'),
 ('nom commune', 'Rennes');
 
-CREATE TABLE metatype (
-    id_metatype INT PRIMARY KEY DEFAULT nextval('id_metatype_seq'),
-    nom_metatype text,
+CREATE TABLE meta_type (
+    id_meta_type INT PRIMARY KEY DEFAULT nextval('id_meta_type_seq'),
+    nom_meta_type text,
 	nom_type text REFERENCES type(nom)
 );
 
-INSERT INTO metatype(nom_metatype, nom_type) VALUES
+INSERT INTO meta_type(nom_meta_type, nom_type) VALUES
 ('individu', 'prénom'),
 ('individu', 'sexe'),
 ('commune', 'code postal'),

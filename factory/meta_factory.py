@@ -7,10 +7,10 @@ class MetaFactory():
         de donnees brutes en Modality
     """
     @staticmethod
-    def get_metatype_from_sql_query(res, nom_meta):
+    def get_meta_type_from_sql_query(res, nom_meta):
         types = []
         for row in res : 
-            if row['nom_metatype'] == nom_meta:
+            if row['nom_meta_type'] == nom_meta:
                 types.append(row['nom_type'])   
         meta = Meta_type(
             nom = nom_meta,

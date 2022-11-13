@@ -4,11 +4,15 @@ from business_object.regle_generation.meta_type import Meta_type
 class MetaFactory():
     """
         classe ayant pour role de gérer la conversion
-        de donnees brutes en Meta_type
+        de donnees brutes en Modality
     """
     @staticmethod
-    def get_meta_from_sql_query(res):
-        mt = Meta_type(
-            nom= res['nom_meta_type'],
-            list_type= [res['nom_type']])
-        return mt
+    def get_metatype_from_sql_query(res, nom_meta):
+        types = []
+        for row in res : 
+            if row['nom_metatype'] == nom_meta:
+                types.append(row['nom_type'])   
+        meta = Meta_type(
+            nom = nom_meta,
+            list_type = types)
+        return meta

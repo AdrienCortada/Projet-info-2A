@@ -8,6 +8,7 @@ DROP SEQUENCE IF EXISTS id_modality_seq ;
 DROP SEQUENCE IF EXISTS id_type_seq ;
 DROP SEQUENCE IF EXISTS id_metatype_seq ;
 
+
 CREATE SEQUENCE id_modality_seq ; 
 CREATE SEQUENCE id_type_seq ;
 CREATE SEQUENCE id_metatype_seq ;
@@ -27,7 +28,9 @@ CREATE TABLE modality (
 
 INSERT INTO type(nom, tx_remplissage) VALUES
 ('sexe', 1),
-('prénom', 1);
+('prénom', 1),
+('code postal', 1),
+('nom commune', 1);
 
 INSERT INTO modality(nom_type, proba_apparition, value) VALUES
 ('sexe', 0.5, 'femme'),
@@ -39,14 +42,20 @@ INSERT INTO modality(nom_type, value) VALUES
 ('prénom', 'Adrien'),
 ('prénom', 'Laurène'),
 ('prénom', 'Laurène'),
-('prénom', 'Laurène');
+('prénom', 'Laurène'),
+('code postal', '31000'),
+('code postal', '35000'),
+('nom commune', 'Toulouse'),
+('nom commune', 'Rennes');
 
 CREATE TABLE metatype (
     id_metatype INT PRIMARY KEY DEFAULT nextval('id_metatype_seq'),
     nom_metatype text,
-    nom_type text REFERENCES type(nom)
+	nom_type text REFERENCES type(nom)
 );
 
 INSERT INTO metatype(nom_metatype, nom_type) VALUES
 ('individu', 'prénom'),
-('individu', 'sexe');
+('individu', 'sexe'),
+('commune', 'code postal'),
+('commune', 'nom commune');

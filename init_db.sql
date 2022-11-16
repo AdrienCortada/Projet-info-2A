@@ -7,11 +7,13 @@ DROP TABLE IF EXISTS donnee CASCADE ;
 DROP SEQUENCE IF EXISTS id_modality_seq ;
 DROP SEQUENCE IF EXISTS id_type_seq ;
 DROP SEQUENCE IF EXISTS id_meta_type_seq ;
+DROP SEQUENCE IF EXISTS id_donnee_seq ;
 
 
 CREATE SEQUENCE id_modality_seq ; 
 CREATE SEQUENCE id_type_seq ;
 CREATE SEQUENCE id_meta_type_seq ;
+CREATE SEQUENCE id_donnee_seq ;
 
 CREATE TABLE type (
     id_type INT DEFAULT nextval('id_type_seq'),
@@ -24,6 +26,20 @@ CREATE TABLE modality (
     nom_type text REFERENCES type(nom),
     value text,
     proba_apparition float
+);
+
+CREATE TABLE meta_type (
+    id_meta_type INT PRIMARY KEY DEFAULT nextval('id_meta_type_seq'),
+    nom_meta_type text,
+	nom_type text REFERENCES type(nom)
+);
+
+CREATE TABLE donnee (
+	id_donnee INT PRIMARY KEY DEFAULT nextval('id_donnee_seq'),
+	--id_type INT REFERENCES type(id_type) DEFAULT NULL,
+	id_meta_type INT REFERENCES meta_type(id_meta_type),
+	value_donnee text,
+	order_donnee int	
 );
 
 INSERT INTO type(nom, tx_remplissage) VALUES
@@ -48,14 +64,18 @@ INSERT INTO modality(nom_type, value) VALUES
 ('nom commune', 'Toulouse'),
 ('nom commune', 'Rennes');
 
-CREATE TABLE meta_type (
-    id_meta_type INT PRIMARY KEY DEFAULT nextval('id_meta_type_seq'),
-    nom_meta_type text,
-	nom_type text REFERENCES type(nom)
-);
-
 INSERT INTO meta_type(nom_meta_type, nom_type) VALUES
 ('individu', 'prénom'),
 ('individu', 'sexe'),
 ('commune', 'code postal'),
 ('commune', 'nom commune');
+
+INSERT INTO donnee(id_meta_type, value_donnee, order_donnee) VALUES
+(1, 'Laurène', 1),
+(2, 'femme', 2),
+(1, 'Nathan', 1),
+(2, 'homme', 2),
+(3, '35000', 1),
+(4, 'Rennes', 2),
+(3, '31000', 1),
+(4, 'Toulouse', 2);

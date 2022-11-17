@@ -8,6 +8,16 @@ import numpy as np
 
 class Generation_donnee:
 
+    '''Classe qui a pour but de générer des données à partir des dictionnaires des types, modalités et metas types
+
+    Attributes
+    ----------
+    Nb : int
+        Le nombre d'observation que l'on souhaite générer
+    meta_type :
+        Avec quel meta type on souhaite générer les données
+    '''
+
     jeu_donnee = {}
 
     def __init__(self,Nb : int, meta_type ):
@@ -16,6 +26,8 @@ class Generation_donnee:
        
         
     def generer_jeu_donnee(self):
+        '''Fonction qui a pour but de générer les données
+        '''
         res = len(Generation_donnee.jeu_donnee)
         for n in range(self.Nb):
             indivivu_n = {}

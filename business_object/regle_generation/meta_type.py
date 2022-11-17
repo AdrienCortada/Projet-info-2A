@@ -1,7 +1,7 @@
 from business_object.regle_generation.typ import Type
 
 class Meta_type:
-    '''Classe qui permet de créer les meta type, de définir quels données on va vouloir générer
+    '''Classe qui permet de créer les metas types, de définir quels données on va vouloir générer
     
     Attributes
     ----------

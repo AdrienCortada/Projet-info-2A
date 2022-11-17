@@ -18,7 +18,22 @@ la valeur de type contient les différentes modalités de la variable séparées
 Puis pour chaque modalité est associée une proba d'apparition. La pobra d'apparition est une liste (la première proba d'apparition correspond à la première modalité). \n
 Si la liste des probas d'apparition commence par "same" alors toutes les proba d'apparition de toutes les modalités seront les mêmes.\n
 La première clé de chaque variable doit être le 'type' et doit être une chaine de caractères\n
+
+Pour faire en sorte qu'un type génère une variable continue et non avec des modalités il faut :
+-créer le type en question
+-rentrer comme modalité le type de loi que l'on veut générer (uniform, exponential ou normal), la proba d'apparition associée importe peu
+-rentrer comme modalité du même type les paramêtre de la loi et pour la valeur souhaité de ces paramêtres celles-ci sont rentrés dans le champs proba d'apparition correspondant.
+Par exemple si on veut générer une loi uniforme entre 0 et 10, on nome une première modalité uniform, puis une seconde borne1 (cela correspond à la borne inférieure), on remplit
+dans le champs proba d'apparition associé 0, puis on nome une 3ème modalité borne2 et on remplit le champ de proba d'apparition associé avec la valeur 10.
+
+Les paramètres à renseigner pour une loi uniform sont borne1 et borne2.
+Les paramètres à renseigner pour une loi normal sont mean et variance.
+Le paramètre à renseigner pour une loi exponential est lambda.
+
 Par exemple, le fichier json peut se présenter comme suit\n
+
+
+
 {
     "sexe": {
         "type": "M|F",

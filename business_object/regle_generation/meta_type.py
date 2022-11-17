@@ -30,8 +30,6 @@ class Meta_type:
         {'nom': {'remplissage': 100, 'id': 1}, 'age': {'remplissage': 100, 'id': 2}}
         >>> print(mt.add_meta_type())
         {'individu': ['nom', 'age']}
-        >>> print(Meta_type.delete_meta_type("individu"))
-        {}
         '''
         n = len(self.list_type)
         res = 0
@@ -47,6 +45,16 @@ class Meta_type:
             
             
     def delete_meta_type(nom_meta_type):
+        '''Fonction qui a pour but de retirer un meta type du dictionnaire des meta type
+        
+        Example
+        ----------
+        >>> mt = Meta_type("individu", ["nom","age"])
+        >>> print(mt.add_meta_type())
+        {'individu': ['nom', 'age']}
+        >>> print(Meta_type.delete_meta_type("individu"))
+        {}
+        '''
         if nom_meta_type in Meta_type.dict_meta_type : 
             del Meta_type.dict_meta_type[nom_meta_type]
             return Meta_type.dict_meta_type

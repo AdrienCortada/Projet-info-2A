@@ -14,13 +14,21 @@ from business_object.export.export import Export
 from business_object.export.export_to_xml import Export_to_xml
 from business_object.export.export_to_csv import Export_to_csv
 from business_object.export.export_to_json import Export_to_json
+from factory.data_factory import DataFactory
+from factory.meta_factory import MetaFactory
+from factory.modality_factory import ModalityFactory
+from factory.typ_factory import TypeFactory
+from dao.data_dao import DataDao
+from dao.db_connection import DBConnection
+from dao.meta_dao import MetaDao
+from dao.modality_dao import ModalityDao
+from dao.typ_dao import TypeDao
 
 
 
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}]
 
-tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}, {"name" : "Dao"}]
-
-app = FastAPI(openapi_url="/http://127.0.0.1:8000/docs",openapi_tags=tags_metadata)
+app = FastAPI(openapi_tags=tags_metadata)
 
 @app.get("/get_dict_type", tags = ["Type"])
 async def get_type():
@@ -94,18 +102,72 @@ async def export_csv(chemin : str , name : str):
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export(dic)
 
-@app.put("/sauvegarder_en_base_de_donnees/", tags = ["Dao"])
+@app.put("/sauvegarder_en_base_de_donnees/")
 async def save_data_dao():
     donnee = DataDao()
     meta = MetaDao()
     typ = TypeDao()
     modalite = ModalityDao()
-    #meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
+   # meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
     for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
         typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
-    for mod in Modality.dict_modality.keys() :
-        modalite.save_modality(Modality(Modality.dict_modality[mod]["id_modality"]["type"], Modality.dict_modality[mod]["id_modality"]["proba d'apparition"], Modality.dict_modality[mod]["id_modality"]["value"]))
+    for mod in Modality.dict_modality :
+        modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
     donnee.save_data(Generation_donnee.jeu_donnee)
+
+@app.get("/find_all_modality/")
+async def find_modalities():
+    modalite = ModalityDao()
+    modalite.find_all_modality()
+
+@app.get("/find_modality_by_id/")
+async def find_mod_id(id : int):
+    modalite = ModalityDao()
+    modalite.find_modality_by_id(id)
+
+@app.get("/find_modality_with_modality/")
+async def find_mod_mod(nom_mod, proba, value, limit : int = None):
+    modalite = Modality(nom_mod, proba, value)
+    modalite.find_modality(Modality(nom_mod, proba, value), limit = limit)
+
+@app.get("/find_all_type/")
+async def find_types():
+    typ = TypeDao()
+    typ.find_all_type()
+
+@app.get("/find_type_by_id/")
+async def find_typ_id(id : int):
+    typ = TypeDao()
+    typ.find_type_by_id(id)
+
+@app.get("/find_type_with_type/")
+async def find_typ_typ(tx, nom):
+    typ = TypeDao()
+    typ.find_type(Type(tx_remplissage= tx, nom= nom))
+
+@app.get("/find_id_type/")
+async def find_id_typ(tx, nom):
+    typ = TypeDao() 
+    typ.find_id_type(Type(tx,nom))
+
+@app.update("/update_type_by_id/")
+async def update_typ(id, new_tx_remplissage, new_nom):
+    typ = TypeDao()
+    typ.update_type_by_id(id, Type(new_tx_remplissage, new_nom))
+
+@app.delete("/delete_type_by_id/")
+async def delete_typ(id) :
+    typ = TypeDao()
+    typ.delete_type_by_id(id)
+
+@app.delete("/delete_type_by_type/")
+async def delete_typ_typ(tx, nom) :
+    typ = TypeDao()
+    typ.delete_type(Type(tx, nom))
+
+
+
+
 
     
 

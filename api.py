@@ -16,86 +16,78 @@ from business_object.export.export_to_csv import Export_to_csv
 from business_object.export.export_to_json import Export_to_json
 
 
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}]
 
-app = FastAPI()
 
-@app.get("/get_dict_type")
+app = FastAPI(openapi_tags=tags_metadata)
+
+@app.get("/get_dict_type", tags = ["Type"])
 async def get_type():
     return Type.dict_type
 
-@app.put("/add_type/")
+@app.put("/add_type/", tags = ["Type"])
 async def add_type(nom : str, tx_remplissage : float):
     t = Type(tx_remplissage, nom)
     return t.add_type()
 
-@app.delete("/delete_type/")
+@app.delete("/delete_type/", tags = ["Type"])
 async def delete_type(nom : str):
     return Type.delete_type(nom)
 
-@app.get("/get_dict_modality")
+@app.get("/get_dict_modality", tags = ["Modality"])
 async def get_modality():
     return Modality.dict_modality
 
-@app.put("/add_modality/")
+@app.put("/add_modality/", tags = ["Modality"])
 async def add_modality(nom_type : str, proba_apparition : float, value):
     m = Modality(nom_type, proba_apparition, value)
     return m.add_modality()
 
-@app.delete("/delete_modality")
+@app.delete("/delete_modality", tags = ["Modality"])
 async def delete_modality(nom_type : str, value):
     return Modality.delete_modality(nom_type, value)
 
-@app.put("/import_json/")
+@app.put("/import_json/", tags = ["Import"])
 async def import_json(chemin : "str"):
     imp = IMPORTJSON(chemin)
     return imp.import_dict()
 
-@app.get("/get_dict_meta_type")
+@app.get("/get_dict_meta_type", tags = ["Meta-Type"])
 async def get_meta_type():
     return Meta_type.dict_meta_type
 
-@app.put("/add_meta_type/")
+@app.put("/add_meta_type/", tags = ["Meta-Type"])
 async def add_meta_type(nom : str, list_type : list):
     mt = Meta_type(nom, list_type)
     return mt.add_meta_type()
 
-@app.delete("/delete_meta_type/")
+@app.delete("/delete_meta_type/", tags = ["Meta-Type"])
 async def delete_meta_type(nom_meta_type : str):
     return Meta_type.delete_meta_type(nom_meta_type)
 
-@app.put("/import_json/")
-async def import_json(chemin : str):
-    imp = IMPORTJSON(chemin)
-    return imp.import_dict()
 
-@app.put("/generation_de_donnee/")
+@app.put("/generation_de_donnee/", tags = ["Génération"])
 async def generation_donnee(Nb : int, meta_type ):
     gd = Generation_donnee(Nb, meta_type)
     return gd.generer_jeu_donnee()
 
-@app.put("/import_json/")
-async def import_json(chemin : str ):
-    imp = IMPORTJSON(chemin)
-    return imp.import_dict()
-    
-
-@app.get("/export/")
+@app.get("/export/", tags = ["Export"])
 async def export(chemin : str, name : str):
     return None
 
-@app.get("/export_donnees_to_json/")
+@app.get("/export_donnees_to_json/", tags = ["Export"])
 async def export_json(chemin : str , name : str):
     x = Export_to_json(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return x.export(dic)
 
-@app.get("/export_donnees_to_xml/")
+@app.get("/export_donnees_to_xml/", tags = ["Export"])
 async def export_xml(chemin : str , name : str):
     x = Export_to_xml(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return x.export(dic)
 
-@app.get("/export_donnees_to_csv/")
+@app.get("/export_donnees_to_csv/", tags = ["Export"])
 async def export_csv(chemin : str , name : str):
     c = Export_to_csv(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)

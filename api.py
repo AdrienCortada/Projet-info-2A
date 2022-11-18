@@ -26,7 +26,7 @@ from dao.typ_dao import TypeDao
 
 
 
-tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}]
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}, {"name" : "Dao"}]
 
 
 app = FastAPI(openapi_tags=tags_metadata)
@@ -103,7 +103,7 @@ async def export_csv(chemin : str , name : str):
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export(dic)
 
-@app.put("/sauvegarder_en_base_de_donnees/")
+@app.put("/sauvegarder_en_base_de_donnees/", tags = ["Dao"])
 async def save_data_dao():
     donnee = DataDao()
     meta = MetaDao()

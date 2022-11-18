@@ -14,6 +14,16 @@ from business_object.export.export import Export
 from business_object.export.export_to_xml import Export_to_xml
 from business_object.export.export_to_csv import Export_to_csv
 from business_object.export.export_to_json import Export_to_json
+from factory.data_factory import DataFactory
+from factory.meta_factory import MetaFactory
+from factory.modality_factory import ModalityFactory
+from factory.typ_factory import TypeFactory
+from dao.data_dao import DataDao
+from dao.db_connection import DBConnection
+from dao.meta_dao import MetaDao
+from dao.modality_dao import ModalityDao
+from dao.typ_dao import TypeDao
+
 
 
 
@@ -88,6 +98,21 @@ async def export_csv(chemin : str , name : str):
     c = Export_to_csv(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export(dic)
+
+@app.put("/sauvegarder_en_base_de_donnees/")
+async def save_data_dao():
+    donnee = DataDao()
+    meta = MetaDao()
+    typ = TypeDao()
+    modalite = ModalityDao()
+    meta.save_meta(Meta_type(Meta_type.meta_type1[-1], Meta_type.dict_meta_type[Meta_type.meta_type1[-1]]))
+    for elt in Meta_type.dict_meta_type[Meta_type.meta_type1[-1]] : 
+        typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
+    for mod in Modality.dict_modality :
+        modalite.save_modality(Modality(mod["id_modality"]["type"], mod["id_modality"]["proba d'apparition"], mod["id_modality"]["value"]))
+    donnee.save_data(Generation_donnee.jeu_donnee)
+
+    
 
 
 

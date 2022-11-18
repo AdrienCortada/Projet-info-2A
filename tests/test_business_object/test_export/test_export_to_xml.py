@@ -33,7 +33,7 @@ class TestExport_to_xml(TestCase):
     }
 }
     # Vérifier si le fichier existe ou non
-        if os.path.isfile("D:/Projet_Informatique_2A/table_xml"):
+        if os.path.isfile("D:/Projet_Informatique_2A/test_xml.xml"):
             print("fichier trouvé")
             tablexml = Export_to_xml("D:/Projet_Informatique_2A/Projet-info-2A" , "table_xml1")
             xmlfile = pd.read_xml("Projet_Informatique_2A/Projet-info-2A/table_xml.")

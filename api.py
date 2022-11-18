@@ -14,21 +14,13 @@ from business_object.export.export import Export
 from business_object.export.export_to_xml import Export_to_xml
 from business_object.export.export_to_csv import Export_to_csv
 from business_object.export.export_to_json import Export_to_json
-from factory.data_factory import DataFactory
-from factory.meta_factory import MetaFactory
-from factory.modality_factory import ModalityFactory
-from factory.typ_factory import TypeFactory
-from dao.data_dao import DataDao
-from dao.db_connection import DBConnection
-from dao.meta_dao import MetaDao
-from dao.modality_dao import ModalityDao
-from dao.typ_dao import TypeDao
+
 
 
 
 tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}, {"name" : "Dao"}]
 
-app = FastAPI(openapi_tags=tags_metadata)
+app = FastAPI(openapi_url="/http://127.0.0.1:8000/docs",openapi_tags=tags_metadata)
 
 @app.get("/get_dict_type", tags = ["Type"])
 async def get_type():

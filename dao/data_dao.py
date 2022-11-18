@@ -20,11 +20,11 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def save_data(self, data : Generation_donnee):
+    def save_data(self, data : dict):  ### data = Generation_donnee.jeu_donnee
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
-                for key in data.jeu_donnee.keys() : 
-                    for i,tip in enumerate(data.meta_type.list_type) :
+                for key in data.keys() : 
+                    for i,tip in enumerate(data[key].keys()) :
                         cursor.execute(
                             "INSERT INTO donnee(nom_meta, nom_type, order, value)"+ 
                             "VALUES ( %(nom_meta)s, %(nom_type)s, %(order)s, %(value)s)"
@@ -34,17 +34,13 @@ class DataDao :
                             "value" : data.jeu_donnee[key][tip]})
 
     def find_data_by_id(self, id_donnee):
-        data=[]
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "SELECT * FROM donnee WHERE id_donnee=%(id_donnee)s "
                     , {"id_donnee" : id_donnee})
-                res = cursor.fetchall()
-                for row in res:
-                    dat = DataFactory.get_data_from_sql_query(row)
-                    data.append(dat)
-        return data
+                res = cursor.fetchone()
+        return res
 
     def find_data_by_meta(self, nom_meta : str):
         data=[]
@@ -59,14 +55,14 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def find_row_data(self, i_row : int):
+    def find_row_data(self, i_row : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
         row = []
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "SELECT * FROM donnee WHERE (id_donnee - %(row)s)%\%(nb)s = 0"
                     , {"row" : i_row,
-                        "nb" : len(Generation_donnee.jeu_donnee)})
+                        "nb" : nb})
                 res = cursor.fetchall()
                 for row in res:
                     dat = DataFactory.get_data_from_sql_query(row)

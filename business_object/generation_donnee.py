@@ -19,6 +19,7 @@ class Generation_donnee:
     '''
 
     jeu_donnee = {}
+    meta_type1 = []
 
     def __init__(self,Nb : int, meta_type ):
         self.Nb = Nb
@@ -91,4 +92,5 @@ class Generation_donnee:
                 else :
                     indivivu_n[k] = "mq"
             Generation_donnee.jeu_donnee.update({n + res : indivivu_n})
+            Generation_donnee.meta_type1.append(self.meta_type)
         return Generation_donnee.jeu_donnee    

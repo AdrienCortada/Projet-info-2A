@@ -108,11 +108,11 @@ async def save_data_dao():
     meta = MetaDao()
     typ = TypeDao()
     modalite = ModalityDao()
-    meta.save_meta(Meta_type(Genaration_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
-    for elt in Meta_type.dict_meta_type[Meta_type.meta_type1[-1]] : 
+    #meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
+    for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
         typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
-    for mod in Modality.dict_modality :
-        modalite.save_modality(Modality(mod["id_modality"]["type"], mod["id_modality"]["proba d'apparition"], mod["id_modality"]["value"]))
+    for mod in Modality.dict_modality.keys() :
+        modalite.save_modality(Modality(Modality.dict_modality[mod]["id_modality"]["type"], Modality.dict_modality[mod]["id_modality"]["proba d'apparition"], Modality.dict_modality[mod]["id_modality"]["value"]))
     donnee.save_data(Generation_donnee.jeu_donnee)
 
     

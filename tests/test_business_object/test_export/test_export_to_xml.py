@@ -7,7 +7,7 @@ import json
 import unittest
 import pandas as pd 
 
-from business_object.export.export_to_csv import Export_to_csv
+from business_object.export.export_to_xml import Export_to_xml
 
 class TestExport_to_xml(TestCase):
     
@@ -33,10 +33,10 @@ class TestExport_to_xml(TestCase):
     }
 }
     # Vérifier si le fichier existe ou non
-        if os.path.isfile("D:/Projet_Informatique_2A/test_xml.xml"):
+        if os.path.isfile("D:/Projet_Informatique_2A/Projet-info-2A/output.xml"):
             print("fichier trouvé")
             tablexml = Export_to_xml("D:/Projet_Informatique_2A/Projet-info-2A" , "table_xml1")
-            xmlfile = pd.read_xml("Projet_Informatique_2A/Projet-info-2A/table_xml.")
+            xmlfile = pd.read_xml("D:/Projet_Informatique_2A/Projet-info-2A/output.xml")
             table_xml1 = tablexml.export(json.dumps(table))
             table_xml = pd.read_xml("D:/Projet_Informatique_2A/Projet-info-2A/table_xml1")
             print(table_xml==xmlfile)

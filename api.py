@@ -108,7 +108,7 @@ async def save_data_dao():
     meta = MetaDao()
     typ = TypeDao()
     modalite = ModalityDao()
-    meta.save_meta(Meta_type(Genaration_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
+    meta.save_meta(Meta_type(Genaration_donnee.meta_type1, Meta_type.dict_meta_type[Generation_donnee.meta_type1]))
     for elt in Meta_type.dict_meta_type[Meta_type.meta_type1[-1]] : 
         typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
     for mod in Modality.dict_modality :

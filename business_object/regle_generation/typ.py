@@ -25,6 +25,8 @@ class Type:
         >>> t = Type(100, "age")
         >>> print(t.add_type())
         {'age': {'remplissage': 100, 'id': 1}}'''
+        if self.nom in Type.dict_type:
+            raise Exception("Please select an other name for this type it already exist")
         if self.tx_remplissage <= 100 and self.tx_remplissage >= 0:
             n = len(Type.dict_type) 
             if n == 0:
@@ -39,7 +41,7 @@ class Type:
             Type.dict_type.update(d)
             return Type.dict_type
         else : 
-            return "Please select a value between 0 and 100 for tx_remplissage "
+            raise Exception("Please select a value between 0 and 100 for tx_remplissage ")
 
     def delete_type(nom : str):
         '''Fonction qui a pour but d'enlever un type au dictionnaire contenant l'ensemble des types définis dict_type
@@ -49,21 +51,12 @@ class Type:
         nom : str
             nom du type que l'on shouaite enlever du dictionnaire
         
-        Example
-        ----------
-        >>> t = Type(100, "age")
-        >>> print(t.add_type())
-        {'age': {'remplissage': 100, 'id': 2}}
-        >>> print(Type.delete_type("age"))
-        {}
-        >>> print(Type.delete_type("prenom"))
-        The type you selected hasn't been added yet please check your spelling
         '''
         if nom in Type.dict_type:
             del Type.dict_type[nom]
             return Type.dict_type
         else:
-            return "The type you selected hasn't been added yet please check your spelling"
+            raise Exception("The type you selected hasn't been added yet please check your spelling") 
 
 if __name__ == '__main__':
     import doctest

@@ -31,6 +31,8 @@ class Meta_type:
         >>> print(mt.add_meta_type())
         {'individu': ['nom', 'age']}
         '''
+        if self.nom in Meta_type.dict_meta_type:
+            raise Exception("Please Select an other name for this meta type it has to be unique")
         n = len(self.list_type)
         res = 0
         for k in range(0, n):
@@ -41,25 +43,16 @@ class Meta_type:
             Meta_type.dict_meta_type.update(dic)
             return Meta_type.dict_meta_type
         else : 
-            return "All type selected are not define please check the spelling"
+            raise Exception("All type selected are not define please check the spelling") 
             
             
     def delete_meta_type(nom_meta_type):
-        '''Fonction qui a pour but de retirer un meta type du dictionnaire des meta type
         
-        Example
-        ----------
-        >>> mt = Meta_type("individu", ["nom","age"])
-        >>> print(mt.add_meta_type())
-        {'individu': ['nom', 'age']}
-        >>> print(Meta_type.delete_meta_type("individu"))
-        {}
-        '''
         if nom_meta_type in Meta_type.dict_meta_type : 
             del Meta_type.dict_meta_type[nom_meta_type]
             return Meta_type.dict_meta_type
         else : 
-            return "Please check youre spelling" 
+            raise Exception("Please check youre spelling this meta type do not exist") 
 
 if __name__ == '__main__':
     import doctest

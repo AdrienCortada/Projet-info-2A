@@ -29,6 +29,10 @@ from dao.typ_dao import TypeDao
 
 app = FastAPI()
 
+@app.get("/get_dict_type")
+async def get_type():
+    return Type.dict_type
+
 @app.put("/add_type/")
 async def add_type(nom : str, tx_remplissage : float):
     t = Type(tx_remplissage, nom)
@@ -37,6 +41,10 @@ async def add_type(nom : str, tx_remplissage : float):
 @app.delete("/delete_type/")
 async def delete_type(nom : str):
     return Type.delete_type(nom)
+
+@app.get("/get_dict_modality")
+async def get_modality():
+    return Modality.dict_modality
 
 @app.put("/add_modality/")
 async def add_modality(nom_type : str, proba_apparition : float, value):
@@ -51,6 +59,10 @@ async def delete_modality(nom_type : str, value):
 async def import_json(chemin : "str"):
     imp = IMPORTJSON(chemin)
     return imp.import_dict()
+
+@app.get("/get_dict_meta_type")
+async def get_meta_type():
+    return Meta_type.dict_meta_type
 
 @app.put("/add_meta_type/")
 async def add_meta_type(nom : str, list_type : list):

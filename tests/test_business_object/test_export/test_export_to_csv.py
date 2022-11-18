@@ -3,8 +3,10 @@ from unittest.mock import patch
 import csv
 import os.path
 import json
+import unittest
+import pandas as pd 
 
-from business_object.export.export_to_csv import export_to_csv
+from business_object.export.export_to_csv import Export_to_csv
 
 class TestExport_to_csv(TestCase):
     
@@ -31,16 +33,18 @@ class TestExport_to_csv(TestCase):
 }
     # Vérifier si le fichier existe ou non
         if os.path.isfile("D:/Projet_Informatique_2A/table_csv.csv"):
-            print("Fichier trouvé")
-            tablecsv = export_to_csv("D:\Projet_Informatique_2A\Projet-info-2A" , "table_csv.csv")
-            csvfile = csv.reader("D:/Projet_Informatique_2A/Projet-info-2A/table_csv.csv")
+            print("fichier trouvé")
+            tablecsv = Export_to_csv("D:/Projet_Informatique_2A/Projet-info-2A" , "table_csv1.csv")
+            csvfile = pd.read_csv("D:/Projet_Informatique_2A/Projet-info-2A/table_csv.csv")
             table_csv1 = tablecsv.export(json.dumps(table))
-            table_csv = csv.reader(table_csv1)
-            self.assertEqual(csvfile,table_csv )
+            table_csv = pd.read_csv("D:/Projet_Informatique_2A/Projet-info-2A/table_csv1.csv")
+            print(table_csv==csvfile)
         else:
             print("Fichier non trouvé")
         
-TestExport_to_csv().test_export_to_csv()
+if __name__=="__main__":
+    unittest.main()
+    
         
         
         

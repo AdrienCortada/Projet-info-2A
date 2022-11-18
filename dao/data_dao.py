@@ -101,14 +101,14 @@ class DataDao :
                     "id": id}
                 )
     
-    def delete_row_data(self, ligne : list):
+    def delete_row_data(self, nb : int, ligne : list):  ## nb doit être égal à len(Generation_donnee.jeu_donnee)
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE FROM donnee "+
                     "WHERE (id_donnee - %(row)s)%\%(nb)s = 0",
                     {"row" : i_row,
-                    "nb" : len(Generation_donnee.jeu_donnee)}
+                    "nb" : nb}
                 )
 
     def delete_data_by_id(self, id : int):

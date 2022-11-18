@@ -27,8 +27,6 @@ class Modality:
         Example
         -----------
         >>> m = Modality("age", 100, 22)
-        >>> print(m.add_modality())
-        The modality has no type associated please check your spelling
         >>> t = Type(100, "age")
         >>> t.add_type()
         {'age': {'remplissage': 100, 'id': 1}}
@@ -41,7 +39,7 @@ class Modality:
             Modality.dict_modality.update(d)
             return Modality.dict_modality 
         else : 
-            return "The modality has no type associated please check your spelling"
+            raise Exception("The modality has no type associated please check your spelling") 
         
 
     def delete_modality(nom_type : str, value):
@@ -54,17 +52,13 @@ class Modality:
         value 
             la valeur de la modalité que l'on veut retirer
         
-        Example
-        -----------
-        >>> print(Modality.delete_modality("age", 22))
-        {1: {'type': 'age', 'value': 22, "proba d'apparition": 0}}
         '''
         for k in Modality.dict_modality :
             if Modality.dict_modality[k]["value"] == value and Modality.dict_modality[k]["type"] == nom_type:
                 Modality.dict_modality[k]["proba d'apparition"] = 0
                 return Modality.dict_modality
             else : 
-                return "please check your spelling"
+                raise Exception("please check your spelling") 
 
 if __name__ == '__main__':
     import doctest

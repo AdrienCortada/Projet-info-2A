@@ -3,11 +3,6 @@ from business_object.regle_generation.modality import Modality
 
 if __name__ == "__main__":
     m = Modality("age", 100, 22)
-    m1 = m.add_modality()
-    if m1 == "The modality has no type associated please check your spelling":
-        print("True")
-    else:
-        print("False")
     t = Type(100, "age")
     t.add_type()
     m2 = m.add_modality()

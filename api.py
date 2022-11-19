@@ -150,10 +150,10 @@ async def find_id_typ(tx, nom):
     typ = TypeDao() 
     typ.find_id_type(Type(tx,nom))
 
-@app.update("/update_type_by_id/")
-async def update_typ(id, new_tx_remplissage, new_nom):
-    typ = TypeDao()
-    typ.update_type_by_id(id, Type(new_tx_remplissage, new_nom))
+#@app.update("/update_type_by_id/")
+#async def update_typ(id, new_tx_remplissage, new_nom):
+#    typ = TypeDao()
+#    typ.update_type_by_id(id, Type(new_tx_remplissage, new_nom))
 
 @app.delete("/delete_type_by_id/")
 async def delete_typ(id) :
@@ -164,6 +164,11 @@ async def delete_typ(id) :
 async def delete_typ_typ(tx, nom) :
     typ = TypeDao()
     typ.delete_type(Type(tx, nom))
+
+@app.delete("/delete_modality_by_type/")
+async def delete_mod_typ(nom_type) :
+    mod = ModalityDao()
+    mod.delete_modality_by_type(nom_type)
 
 
 

@@ -4,7 +4,7 @@ from business_object.regle_generation.meta_type import Meta_type
 class MetaFactory():
     """
         classe ayant pour role de gérer la conversion
-        de donnees brutes en Modality
+        de donnees brutes en Metatype
     """
     @staticmethod
     def get_meta_type_from_sql_query(res, nom_meta):

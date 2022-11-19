@@ -20,7 +20,7 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def save_data(self, data : dict):  ### data = Generation_donnee.jeu_donnee
+    def save_data(self, nom_m : int, data : dict):  ### data = Generation_donnee.jeu_donnee
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 for key in data.keys() : 
@@ -28,8 +28,7 @@ class DataDao :
                         cursor.execute(
                             "INSERT INTO donnee(nom_meta_type, nom_type, order_donnee, value_donnee)"+ 
                             "VALUES ( %(nom_meta)s, %(nom_type)s, %(order)s, %(value)s)"
-                        , {"nom_meta" : data.meta_type.nom,  #ça ne marchera pas, meta_type n'est pas un attribut de la classe mais d'un objet de la classe
-                           #sinon on met le méta_type en paramètre de la méthode
+                        , {"nom_meta" : nom_m,
                             "nom_type":tip,
                             "order" : i+1,
                             "value" : data[key][tip]})

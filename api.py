@@ -108,12 +108,12 @@ async def save_data_dao():
     meta = MetaDao()
     typ = TypeDao()
     modalite = ModalityDao()
-   # meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
+    meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
     for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
         typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
     for mod in Modality.dict_modality :
         modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
-    donnee.save_data(Generation_donnee.jeu_donnee) #info sur le meta_type manquante
+    donnee.save_data(Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
 
 @app.get("/find_all_modality/")
 async def find_modalities():
@@ -129,6 +129,11 @@ async def find_mod_id(id : int):
 async def find_mod_mod(nom_mod, proba, value, limit : int = None):
     modalite = Modality(nom_mod, proba, value)
     modalite.find_modality(Modality(nom_mod, proba, value), limit = limit)
+
+@app.delete("/delete_modality_by_type/")
+async def delete_mod_typ(nom_type) :
+    mod = ModalityDao()
+    mod.delete_modality_by_type(nom_type)
 
 @app.get("/find_all_type/")
 async def find_types():
@@ -150,10 +155,10 @@ async def find_id_typ(tx, nom):
     typ = TypeDao() 
     typ.find_id_type(Type(tx,nom))
 
-#@app.update("/update_type_by_id/")
-#async def update_typ(id, new_tx_remplissage, new_nom):
-#    typ = TypeDao()
-#    typ.update_type_by_id(id, Type(new_tx_remplissage, new_nom))
+@app.put("/update_type_by_id/")
+async def update_typ(id, new_tx_remplissage, new_nom):
+   typ = TypeDao()
+   typ.update_type_by_id(id, Type(new_tx_remplissage, new_nom))
 
 @app.delete("/delete_type_by_id/")
 async def delete_typ(id) :
@@ -165,10 +170,25 @@ async def delete_typ_typ(tx, nom) :
     typ = TypeDao()
     typ.delete_type(Type(tx, nom))
 
-@app.delete("/delete_modality_by_type/")
-async def delete_mod_typ(nom_type) :
-    mod = ModalityDao()
-    mod.delete_modality_by_type(nom_type)
+@app.get("/find_all_meta/")
+async def find_metas():
+    met = MetaDao()
+    met.find_all_meta()
+
+@app.get("/find_ids_meta/")
+async def find_ids_met(nom_m):
+    met = MetaDao()
+    met.find_ids_meta(nom_m)
+
+@app.get("/find_meta_by_name/")
+async def find_meta_name(nom_meta):
+    met = MetaDao()
+    met.find_meta_by_name(nom_meta)
+
+@app.delete("/delete_meta_by_name/")
+async def delete_meta_name(nom_meta):
+    met = MetaDao()
+    met.delete_meta_by_name(nom_meta)
 
 @app.get("/find_all_data/")
 async def find_datas():
@@ -201,10 +221,10 @@ async def find_col_dat(nom_meta, nom_col):
     except :
         raise Exception("Veuillez entrer un nom de colonne existant pour le métatype considéré")
 
-#@app.update("/update_data_by_id/")
-#async def update_data(id, nom_meta, nom_type, ordre, valeur):
-#    dat = DataDao()
-#    dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
+@app.put("/update_data_by_id/")
+async def update_data(id, nom_meta, nom_type, ordre, valeur):
+    dat = DataDao()
+    dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
 
 @app.delete("/delete_row_data/")
 async def delete_row(i_row) :

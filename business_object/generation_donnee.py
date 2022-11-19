@@ -21,7 +21,7 @@ class Generation_donnee:
     jeu_donnee = {}
     meta_type1 = []
 
-    def __init__(self,Nb : int, meta_type ):
+    def __init__(self,Nb : int, meta_type :str):
         self.Nb = Nb
         self.meta_type = meta_type
        

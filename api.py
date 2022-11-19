@@ -170,6 +170,56 @@ async def delete_mod_typ(nom_type) :
     mod = ModalityDao()
     mod.delete_modality_by_type(nom_type)
 
+@app.get("/find_all_data/")
+async def find_datas():
+    dat = DataDao()
+    dat.find_all_data()
+
+@app.get("/find_data_by_id/")
+async def find_dat_id(id : int):
+    dat = DataDao()
+    dat.find_data_by_id(id)
+
+@app.get("/find_data_with_meta/")
+async def find_dat_meta(nom_meta):
+    dat = DataDao()
+    dat.find_data_by_meta(nom_meta)
+
+@app.get("/find_row_data/")
+async def find_row_dat(n_row):
+    if n_row <=  len(Generation_donnee.jeu_donnee) :
+        dat = DataDao()
+        dat.find_row_data(n_row, len(Generation_donnee.jeu_donnee))
+    else :
+        raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
+
+@app.get("/find_col_data/")
+async def find_col_dat(nom_meta, nom_col):
+    try :
+        dat = DataDao()
+        dat.find_col_data(nom_meta, nom_col)
+    except :
+        raise Exception("Veuillez entrer un nom de colonne existant pour le métatype considéré")
+
+@app.update("/update_data_by_id/")
+async def update_data(id, nom_meta, nom_type, ordre, valeur):
+    dat = DataDao()
+    dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
+
+@app.delete("/delete_row_data/")
+async def delete_row(i_row) :
+    dat = DataDao()
+    dat.delete_row_data(len(Generation_donnee.jeu_donnee), i_row)
+
+@app.delete("/delete_data_by_id/")
+async def delete_dat_id(id) :
+    dat = DataDao()
+    dat.delete_data_by_id(id)
+
+@app.delete("/find_id_donnee/")
+async def find_id_dat(nom_meta, nom_type, ordre, valeur) :
+    dat = DataDao()
+    dat.find_id_donnee([nom_meta, nom_type, ordre, valeur])
 
 
 

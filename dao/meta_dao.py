@@ -62,7 +62,16 @@ class MetaDao :
                     "(%(nom_meta_type)s, %(nom_type)s)",
                     {"nom_meta_type" : nom_meta_type,
                      "nom_type" : nom_type}
-                )        
+                )    
+
+    def delete_meta_by_name(self, nom_meta_type : str):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM meta_type "+
+                    "WHERE nom_meta_type = %(nom_meta_type)s",
+                    {"nom_meta_type" : nom_meta_type}
+                )    
 
     #QUE VEUT-ON POUVOIR FAIRE EXACTEMENT ???
         
@@ -142,10 +151,12 @@ class MetaDao :
     #
 #
 
+
+
 if __name__ == '__main__':
     print('Tests de la classe MetaDao')
-    #MetaDao().find_all_meta()
-    #print(len(meta_type) == 2)
+    #metas = MetaDao().find_all_meta()
+    #print(len(metas) == 2)
 
     #Test de "save_meta"
     #meta1 = Meta_type(
@@ -158,6 +169,9 @@ if __name__ == '__main__':
     #print(ids)
 
     #Test de add_type_to_meta
-    MetaDao().add_type_to_meta(nom_meta_type = 'meta_test',
-                               nom_type = 'nom commune')
+    #MetaDao().add_type_to_meta(nom_meta_type = 'meta_test',
+    #                           nom_type = 'nom commune')
+
+    #Test de delete_meta_by_name
+    MetaDao().delete_meta_by_name('meta_test')
     

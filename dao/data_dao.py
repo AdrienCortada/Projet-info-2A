@@ -28,10 +28,11 @@ class DataDao :
                         cursor.execute(
                             "INSERT INTO donnee(nom_meta_type, nom_type, order_donnee, value_donnee)"+ 
                             "VALUES ( %(nom_meta)s, %(nom_type)s, %(order)s, %(value)s)"
-                        , {"nom_meta" : data.meta_type.nom,
+                        , {"nom_meta" : data.meta_type.nom,  #ça ne marchera pas, meta_type n'est pas un attribut de la classe mais d'un objet de la classe
+                           #sinon on met le méta_type en paramètre de la méthode
                             "nom_type":tip,
                             "order" : i+1,
-                            "value" : data.jeu_donnee[key][tip]})
+                            "value" : data[key][tip]})
 
     def find_data_by_id(self, id_donnee):
         with DBConnection().connection as connection:

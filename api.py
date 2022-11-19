@@ -113,7 +113,7 @@ async def save_data_dao():
         typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
     for mod in Modality.dict_modality :
         modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
-    donnee.save_data(Generation_donnee.jeu_donnee)
+    donnee.save_data(Generation_donnee.jeu_donnee) #info sur le meta_type manquante
 
 @app.get("/find_all_modality/")
 async def find_modalities():
@@ -201,10 +201,10 @@ async def find_col_dat(nom_meta, nom_col):
     except :
         raise Exception("Veuillez entrer un nom de colonne existant pour le métatype considéré")
 
-@app.update("/update_data_by_id/")
-async def update_data(id, nom_meta, nom_type, ordre, valeur):
-    dat = DataDao()
-    dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
+#@app.update("/update_data_by_id/")
+#async def update_data(id, nom_meta, nom_type, ordre, valeur):
+#    dat = DataDao()
+#    dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
 
 @app.delete("/delete_row_data/")
 async def delete_row(i_row) :

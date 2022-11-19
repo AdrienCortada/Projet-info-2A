@@ -55,7 +55,7 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def find_row_data(self, i_row : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
+    def find_row_data(self, i_row : int, nb : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
         row = []
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
@@ -97,7 +97,7 @@ class DataDao :
                     "id": id}
                 )
     
-    def delete_row_data(self, nb : int, ligne : list):  ## nb doit être égal à len(Generation_donnee.jeu_donnee)
+    def delete_row_data(self, nb : int, i_row : int):  ## nb doit être égal à len(Generation_donnee.jeu_donnee)
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(

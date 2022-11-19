@@ -90,7 +90,7 @@ class ModalityDao(metaclass=Singleton):
     #                 "id":modality.id_modality}
     #            )
             
-    def delete_modality(self,modality:Modality):
+    def delete_modality_by_mod(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
@@ -98,6 +98,15 @@ class ModalityDao(metaclass=Singleton):
                     "WHERE nom_type = %(nom)s AND value = %(value)s "
                     , {"nom" : modality.nom_type,
                        "value" : modality.value}
+                )
+
+    def delete_modality_by_type(self, nom_type):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM modality "+
+                    "WHERE nom_type = %(nom)s  "
+                    , {"nom" : nom_type}
                 )
 
     def delete_doublons(self):
@@ -137,9 +146,11 @@ if __name__ == "__main__":
     #Test update_modality
     #ModalityDao().update_modality_by_id(id=5, new_type = 'prénom', new_value = 'Nathan', new_proba_apparition = 0) 
 
-    #Test delete_modality
-    #ModalityDao().delete_modality(mod2)
+    #Test delete_modality_by_mod
+    #ModalityDao().delete_modality_by_mod(mod2)
     
     #Test delete_doublons
     #ModalityDao().delete_doublons()
 
+    #Test delete_modality_by_type
+    ModalityDao().delete_modality_by_type("nom")

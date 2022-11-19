@@ -16,14 +16,14 @@ CREATE SEQUENCE id_meta_type_seq ;
 CREATE SEQUENCE id_donnee_seq ;
 
 CREATE TABLE type (
-    id_type INT DEFAULT nextval('id_type_seq'),
-    nom text PRIMARY KEY,
+    id_type INT PRIMARY KEY DEFAULT nextval('id_type_seq'),
+    nom text,
     tx_remplissage float
 );
 
 CREATE TABLE modality (
 	id_modality INT PRIMARY KEY DEFAULT nextval('id_modality_seq'),
-    nom_type text REFERENCES type(nom),
+    nom_type text,
     value text,
     proba_apparition float
 );
@@ -31,14 +31,11 @@ CREATE TABLE modality (
 CREATE TABLE meta_type (
     id_meta_type INT PRIMARY KEY DEFAULT nextval('id_meta_type_seq'),
     nom_meta_type text,
-	nom_type text REFERENCES type(nom)
+	nom_type text
 );
 
---en fait y a -t-il besoin de créer les nom_meta_type et nom_type comme références ?!
 CREATE TABLE donnee (
 	id_donnee INT PRIMARY KEY DEFAULT nextval('id_donnee_seq'),
-	--id_type INT REFERENCES type(id_type) DEFAULT NULL,
-	--id_meta_type INT REFERENCES meta_type(id_meta_type),
 	nom_meta_type text, 
 	nom_type text,
 	value_donnee text,

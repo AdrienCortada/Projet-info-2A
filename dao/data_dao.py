@@ -26,7 +26,7 @@ class DataDao :
                 for key in data.keys() : 
                     for i,tip in enumerate(data[key].keys()) :
                         cursor.execute(
-                            "INSERT INTO donnee(nom_meta, nom_type, order, value)"+ 
+                            "INSERT INTO donnee(nom_meta_type, nom_type, order_donnee, value_donnee)"+ 
                             "VALUES ( %(nom_meta)s, %(nom_type)s, %(order)s, %(value)s)"
                         , {"nom_meta" : data.meta_type.nom,
                             "nom_type":tip,
@@ -47,7 +47,7 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM donnee WHERE nom_meta=%(nom_meta)s "
+                    "SELECT * FROM donnee WHERE nom_meta_type=%(nom_meta)s "
                     , {"nom_meta" : nom_meta})
                 res = cursor.fetchall()
                 for row in res:
@@ -74,7 +74,7 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM donnee WHERE nom_meta=%(nom_meta)s AND nom_type = %(nom_type)s "
+                    "SELECT * FROM donnee WHERE nom_meta_type=%(nom_meta)s AND nom_type = %(nom_type)s "
                     , {"nom_meta" : nom_meta,
                         "nom_type" : nom_type})
                 res = cursor.fetchall()
@@ -88,7 +88,7 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute(
                     "UPDATE donnee "+
-                    "SET nom_meta = %(nom_meta)s, nom_type = %(nom_type)s, order = %(order)s, value = %(value)s " +
+                    "SET nom_meta_type = %(nom_meta)s, nom_type = %(nom_type)s, order_donnee = %(order)s, value_donnee = %(value)s " +
                     "WHERE id_donnee = %(id)s",
                     {"nom_meta" : new_data[0],
                     "nom_type": new_data[1], 
@@ -121,7 +121,7 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute(
                     "SELECT * FROM donnee "+
-                    "WHERE nom_meta = %(nom_meta)s AND nom_type = %(nom_type)s AND order = %(order)s AND value = %(value)s",
+                    "WHERE nom_meta_type = %(nom_meta)s AND nom_type = %(nom_type)s AND order_donnee = %(order)s AND value_donnee = %(value)s",
                     {"nom_meta" : ligne[0],
                     "nom_type": ligne[1], 
                     "order" : ligne[2], 

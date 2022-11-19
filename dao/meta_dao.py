@@ -75,23 +75,23 @@ class MetaDao :
 if __name__ == '__main__':
     print('Tests de la classe MetaDao')
 
-    #Test de find_all_meta
+    ##Test de find_all_meta
     #metas = MetaDao().find_all_meta()
     #print(len(metas) == 2)
 
-    #Test de "save_meta"
+    ##Test de "save_meta"
     #meta1 = Meta_type(
     #    nom = 'meta_test',
     #    list_type = ['prénom', 'code postal'])
     #MetaDao().save_meta(meta1)
 
-    #Test de find_ids_meta
+    ##Test de find_ids_meta
     #ids = MetaDao().find_ids_meta(nom_meta = 'meta_test')
     #print(ids)
 
-    #Test de delete_meta_by_name
+    ##Test de delete_meta_by_name
     #MetaDao().delete_meta_by_name('meta_test')
 
-    #test de find_meta_by_name
+    ##Test de find_meta_by_name
     #meta = MetaDao().find_meta_by_name('commune')
     #print(meta.nom, meta.list_type)

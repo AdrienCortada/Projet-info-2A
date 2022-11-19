@@ -123,34 +123,34 @@ class ModalityDao(metaclass=Singleton):
 
 if __name__ == "__main__":
     print("Tests de la classe ModalityDao en commentaires")
-    #Test find_all_modality
+    ##Test find_all_modality
     #modality = ModalityDao().find_all_modality()
     #print(len(modality) == 8)
 
-    #Test find_modality_by_id
+    ##Test find_modality_by_id
     #mod1 = ModalityDao().find_modality_by_id(3)
     #print(mod1.nom_type, mod1.proba_apparition, mod1.value)
 
-    #Test save_modality
+    ##Test save_modality
     #mod2 = Modality(nom_type = 'prénom',
     #                proba_apparition=0,
     #                value = "Nathan")
     #ModalityDao().save_modality(mod2)
 
-    #Test find_modality
+    ##Test find_modality
     #mod3 = ModalityDao().find_modality(mod2, limit=1)
     #print(mod3)
     #for mod in mod3:
     #    print(mod.nom_type, mod.proba_apparition, mod.value)
 
-    #Test update_modality
+    ##Test update_modality
     #ModalityDao().update_modality_by_id(id=5, new_type = 'prénom', new_value = 'Nathan', new_proba_apparition = 0) 
 
-    #Test delete_modality_by_mod
+    ##Test delete_modality_by_mod
     #ModalityDao().delete_modality_by_mod(mod2)
     
-    #Test delete_doublons
+    ##Test delete_doublons
     #ModalityDao().delete_doublons()
 
-    #Test delete_modality_by_type
-    ModalityDao().delete_modality_by_type("nom")
+    ##Test delete_modality_by_type
+    #ModalityDao().delete_modality_by_type("nom")

@@ -65,7 +65,7 @@ class DataDao :
                 cursor.execute(
                     "SELECT id_donnee, nom_meta_type, nom_type, order_donnee, value_donnee"+
                     "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s"+
-                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp "
+                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp "+
                     "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s"
                     , {"i_row" : i_row,
                         "n_col" : nb_col,
@@ -110,7 +110,7 @@ class DataDao :
                 cursor.execute(
                     "DELETE "+
                     "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s"+
-                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp "
+                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp"+
                     "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s"
                     , {"i_row" : i_row,
                         "n_col" : nb_col,

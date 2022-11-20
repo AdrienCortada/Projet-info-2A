@@ -26,8 +26,8 @@ from dao.typ_dao import TypeDao
 
 
 
-tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}, 
-                 {"name" : "Sauvegarde en Base de Donnée"}, {"name": "Modality DAO"}, {"name": "Type DAO"}, {"name": "Metatype DAO"}, {"name": "Donnees DAO"}]
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération et sauvegarde"},{"name" : "Export"}, 
+                 {"name": "Modality DAO"}, {"name": "Type DAO"}, {"name": "Metatype DAO"}, {"name": "Donnees DAO"}]
 
 app = FastAPI(openapi_tags=tags_metadata)
 
@@ -76,15 +76,29 @@ async def delete_meta_type(nom_meta_type : str):
     return Meta_type.delete_meta_type(nom_meta_type)
 
 
-@app.put("/generation_de_donnee/", tags = ["Génération"])
+@app.put("/generation_de_donnee/", tags = ["Génération et sauvegarde"])
 async def generation_donnee(Nb : int, meta_type ):
     gd = Generation_donnee(Nb, meta_type)
     return gd.generer_jeu_donnee()
 
-@app.get("/get_dict_jeu_donnee/", tags = ["Génération"])
+@app.get("/get_dict_jeu_donnee/", tags = ["Génération et sauvegarde"])
 async def get_all_data():
     dat = Generation_donnee.jeu_donnee
     return dat
+
+@app.put("/sauvegarder_en_base_de_donnees/", tags = ["Génération et sauvegarde"])
+async def save_data_dao():
+    donnee = DataDao()
+    meta = MetaDao()
+    typ = TypeDao()
+    modalite = ModalityDao()
+    meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
+    for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
+        typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
+    for mod in Modality.dict_modality :
+        modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
+    modalite.delete_doublons()
+    donnee.save_data(Generation_donnee.tailles[-1], Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
 
 @app.get("/export/", tags = ["Export"])
 async def export(chemin : str, name : str):
@@ -107,20 +121,6 @@ async def export_csv(chemin : str , name : str):
     c = Export_to_csv(chemin, name)
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export(dic)
-
-@app.put("/sauvegarder_en_base_de_donnees/", tags = ["Sauvegarde en Base de Donnée"])
-async def save_data_dao():
-    donnee = DataDao()
-    meta = MetaDao()
-    typ = TypeDao()
-    modalite = ModalityDao()
-    meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
-    for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
-        typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
-    for mod in Modality.dict_modality :
-        modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
-    modalite.delete_doublons()
-    donnee.save_data(Generation_donnee.tailles[-1], Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
 
 @app.get("/find_all_modality/", tags = ["Modality DAO"])
 async def find_modalities():

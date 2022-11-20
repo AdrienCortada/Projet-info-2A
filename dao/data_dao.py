@@ -56,7 +56,7 @@ class DataDao :
         return data
     
     def find_row_data(self, i_row : int, nb : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
-        row = []
+        data = []
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
@@ -66,8 +66,8 @@ class DataDao :
                 res = cursor.fetchall()
                 for row in res:
                     dat = DataFactory.get_data_from_sql_query(row)
-                    row.append(dat)
-        return row
+                    data.append(dat)
+        return data
     
     def find_col_data(self, nom_meta : str, nom_type : str):
         data=[]

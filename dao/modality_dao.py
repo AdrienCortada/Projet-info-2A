@@ -118,6 +118,12 @@ class ModalityDao(metaclass=Singleton):
                     "and m.value = m2.value "
                 )
 
+    def delete_all_modality(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute("DELETE FROM modality ; "+
+                               "ALTER SEQUENCE id_modality_seq RESTART WITH 1")
+
 
 if __name__ == "__main__":
     print("Tests de la classe ModalityDao en commentaires")

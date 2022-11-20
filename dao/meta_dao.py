@@ -69,7 +69,11 @@ class MetaDao :
                 mt = MetaFactory.get_meta_type_from_sql_query(res, nom_meta)
         return mt
 
-
+    def delete_all_meta_type(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute("DELETE FROM meta_type ; "+
+                               "ALTER SEQUENCE id_meta_type_seq RESTART WITH 1")
 
 
 if __name__ == '__main__':

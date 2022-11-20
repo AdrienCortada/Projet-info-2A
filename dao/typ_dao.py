@@ -98,6 +98,12 @@ class TypeDao:
                     {"id":id_type}
                 )
 
+    def delete_all_type(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute("DELETE FROM type ; "+
+                               "ALTER SEQUENCE id_type_seq RESTART WITH 1")
+
 
 if __name__ == "__main__":
     print("Tests de la DAO concernant la classe Type")

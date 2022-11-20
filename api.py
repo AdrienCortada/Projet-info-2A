@@ -26,7 +26,8 @@ from dao.typ_dao import TypeDao
 
 
 
-tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération et sauvegarde"},{"name" : "Export"}, 
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name" : "Meta-Type"},{"name" : "Génération et sauvegarde"},
+                 {"name" : "Export"}, {"name": "Import"}, 
                  {"name": "Modality DAO"}, {"name": "Type DAO"}, {"name": "Metatype DAO"}, {"name": "Donnees DAO"}]
 
 app = FastAPI(openapi_tags=tags_metadata)
@@ -164,6 +165,11 @@ async def delete_mod_mod(nom_type, proba_apparition, value) :
     mod = ModalityDao()
     mod.delete_modality_by_mod(mod1)
 
+@app.delete("/delete_all_modality/", tags = ["Modality DAO"])
+async def delete_all_mod():
+    mod = ModalityDao()
+    mod.delete_all_modality()
+
 @app.get("/find_all_type/",  tags = ["Type DAO"])
 async def find_types():
     typ = TypeDao()
@@ -211,6 +217,11 @@ async def delete_typ_typ(nom, tx_remplissage,) :
     typ = TypeDao()
     typ.delete_type(Type(tx_remplissage, nom))
 
+@app.delete("/delete_all_type/", tags = ["Type DAO"])
+async def delete_all_mod():
+    typ = TypeDao()
+    typ.delete_all_type()
+
 @app.get("/find_all_meta/", tags = ["Metatype DAO"])
 async def find_metas():
     met = MetaDao()
@@ -236,6 +247,11 @@ async def find_meta_name(nom_meta):
 async def delete_meta_name(nom_meta):
     met = MetaDao()
     met.delete_meta_by_name(nom_meta)
+
+@app.delete("/delete_all_meta_type/", tags = ["Metatype DAO"])
+async def delete_all_mod():
+    met = MetaDao()
+    met.delete_all_meta_type()
 
 @app.get("/find_all_data/",  tags = ["Donnees DAO"])
 async def find_datas():

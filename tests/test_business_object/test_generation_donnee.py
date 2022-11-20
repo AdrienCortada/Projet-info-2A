@@ -29,13 +29,16 @@ if __name__ == "__main__":
     m3.add_modality()
     mt2 = Meta_type("ind", ["prénom", "adresse"])
     mt2.add_meta_type()
-    generer2 = Generation_donnee(10, "ind")
+    generer2 = Generation_donnee(10, "ind").generer_jeu_donnee()
     
-    #print(Type.dict_type)
-    #print(Meta_type.dict_meta_type)
-
     data = Generation_donnee.jeu_donnee
     liste = Generation_donnee.meta_type1
+    if len(data) == 20:
+        print("True")
+    else:
+        print("False")
+    if len(liste) == 20:
+        print("True")
+    else:
+        print("False")
     print(data)
-    print(liste)
-    #generer2 n'a pas été pris en compte ??? (pourtant t3 et m3 ont bien été ajoutés aux dictionnaires de chaque classe)

@@ -136,7 +136,8 @@ class DataDao :
     def delete_all_data(self):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
-                cursor.execute("DELETE FROM donnee ")
+                cursor.execute("DELETE FROM donnee ; "+
+                               "ALTER SEQUENCE id_donnee_seq RESTART WITH 1")
 
 
 

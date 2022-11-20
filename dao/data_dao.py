@@ -20,10 +20,10 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def save_data(self, nom_m : int, data : dict):  ### data = Generation_donnee.jeu_donnee
+    def save_data(self, nb_inv : int, nom_m : int, data : dict):  ### data = Generation_donnee.jeu_donnee
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
-                for key in data.keys() : 
+                for key in data.keys()[-nb_inv::] : 
                     for i,tip in enumerate(data[key].keys()) :
                         cursor.execute(
                             "INSERT INTO donnee(nom_meta_type, nom_type, order_donnee, value_donnee)"+ 

@@ -118,99 +118,99 @@ async def save_data_dao():
         typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
     for mod in Modality.dict_modality :
         modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
-    donnee.save_data(Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
+    donnee.save_data(Generation_donnee.tailles[-1], Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
 
-@app.get("/find_all_modality/", tags = ["DAO"])
+@app.get("/find_all_modality/", tags = ["Modality DAO"])
 async def find_modalities():
     modalite = ModalityDao()
     modalite.find_all_modality()
 
-@app.get("/find_modality_by_id/", tags = ["DAO"])
+@app.get("/find_modality_by_id/", tags = ["Modality DAO"])
 async def find_mod_id(id : int):
     modalite = ModalityDao()
     modalite.find_modality_by_id(id)
 
-@app.get("/find_modality_with_modality/",  tags = ["DAO"])
+@app.get("/find_modality_with_modality/",  tags = ["Modality DAO"])
 async def find_mod_mod(nom_mod, proba, value, limit : int = None):
     modalite = Modality(nom_mod, proba, value)
     modalite.find_modality(Modality(nom_mod, proba, value), limit = limit)
 
-@app.delete("/delete_modality_by_type/",  tags = ["DAO"])
+@app.delete("/delete_modality_by_type/",  tags = ["Modality DAO"])
 async def delete_mod_typ(nom_type) :
     mod = ModalityDao()
     mod.delete_modality_by_type(nom_type)
 
-@app.get("/find_all_type/",  tags = ["DAO"])
+@app.get("/find_all_type/",  tags = ["Type DAO"])
 async def find_types():
     typ = TypeDao()
     typ.find_all_type()
 
-@app.get("/find_type_by_id/", tags = ["DAO"])
+@app.get("/find_type_by_id/", tags = ["Type DAO"])
 async def find_typ_id(id : int):
     typ = TypeDao()
     typ.find_type_by_id(id)
 
-@app.get("/find_type_with_type/",  tags = ["DAO"])
+@app.get("/find_type_with_type/",  tags = ["Type DAO"])
 async def find_typ_typ(tx, nom):
     typ = TypeDao()
     typ.find_type(Type(tx_remplissage= tx, nom= nom))
 
-@app.get("/find_id_type/",  tags = ["DAO"])
+@app.get("/find_id_type/",  tags = ["Type DAO"])
 async def find_id_typ(tx, nom):
     typ = TypeDao() 
     typ.find_id_type(Type(tx,nom))
 
-@app.put("/update_type_by_id/", tags = ["DAO"])
+@app.put("/update_type_by_id/", tags = ["Type DAO"])
 async def update_typ(id, new_tx_remplissage, new_nom):
    typ = TypeDao()
    typ.update_type_by_id(id, Type(new_tx_remplissage, new_nom))
 
-@app.delete("/delete_type_by_id/", tags = ["DAO"])
+@app.delete("/delete_type_by_id/", tags = ["Type DAO"])
 async def delete_typ(id) :
     typ = TypeDao()
     typ.delete_type_by_id(id)
 
-@app.delete("/delete_type_by_type/",  tags = ["DAO"])
+@app.delete("/delete_type_by_type/",  tags = ["Type DAO"])
 async def delete_typ_typ(tx, nom) :
     typ = TypeDao()
     typ.delete_type(Type(tx, nom))
 
-@app.get("/find_all_meta/", tags = ["DAO"])
+@app.get("/find_all_meta/", tags = ["Metatype DAO"])
 async def find_metas():
     met = MetaDao()
     met.find_all_meta()
 
-@app.get("/find_ids_meta/",  tags = ["DAO"])
+@app.get("/find_ids_meta/",  tags = ["Metatype DAO"])
 async def find_ids_met(nom_m):
     met = MetaDao()
     met.find_ids_meta(nom_m)
 
-@app.get("/find_meta_by_name/",  tags = ["DAO"])
+@app.get("/find_meta_by_name/",  tags = ["Metatype DAO"])
 async def find_meta_name(nom_meta):
     met = MetaDao()
     met.find_meta_by_name(nom_meta)
 
-@app.delete("/delete_meta_by_name/", tags = ["DAO"])
+@app.delete("/delete_meta_by_name/", tags = ["Metatype DAO"])
 async def delete_meta_name(nom_meta):
     met = MetaDao()
     met.delete_meta_by_name(nom_meta)
 
-@app.get("/find_all_data/",  tags = ["DAO"])
+@app.get("/find_all_data/",  tags = ["Metatype DAO"])
 async def find_datas():
     dat = DataDao()
     dat.find_all_data()
 
-@app.get("/find_data_by_id/",  tags = ["DAO"])
+@app.get("/find_data_by_id/",  tags = ["Metatype DAO"])
 async def find_dat_id(id : int):
     dat = DataDao()
     dat.find_data_by_id(id)
 
-@app.get("/find_data_with_meta/", tags = ["DAO"])
+@app.get("/find_data_with_meta/", tags = ["Metatype DAO"])
 async def find_dat_meta(nom_meta):
     dat = DataDao()
     dat.find_data_by_meta(nom_meta)
 
-@app.get("/find_row_data/",  tags = ["DAO"])
+@app.get("/find_row_data/",  tags = ["Donnees DAO"])
 async def find_row_dat(n_row):
     if n_row <=  len(Generation_donnee.jeu_donnee) :
         dat = DataDao()
@@ -218,7 +218,7 @@ async def find_row_dat(n_row):
     else :
         raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
 
-@app.get("/find_col_data/", tags = ["DAO"])
+@app.get("/find_col_data/", tags = ["Donnees DAO"])
 async def find_col_dat(nom_meta, nom_col):
     try :
         dat = DataDao()
@@ -226,27 +226,27 @@ async def find_col_dat(nom_meta, nom_col):
     except :
         raise Exception("Veuillez entrer un nom de colonne existant pour le métatype considéré")
 
-@app.put("/update_data_by_id/", tags = ["DAO"])
+@app.put("/update_data_by_id/", tags = ["Donnees DAO"])
 async def update_data(id, nom_meta, nom_type, ordre, valeur):
     dat = DataDao()
     dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
 
-@app.delete("/delete_row_data/", tags = ["DAO"])
+@app.delete("/delete_row_data/", tags = ["Donnees DAO"])
 async def delete_row(i_row) :
     dat = DataDao()
     dat.delete_row_data(len(Generation_donnee.jeu_donnee), i_row)
 
-@app.delete("/delete_data_by_id/",  tags = ["DAO"])
+@app.delete("/delete_data_by_id/",  tags = ["Donnees DAO"])
 async def delete_dat_id(id) :
     dat = DataDao()
     dat.delete_data_by_id(id)
 
-@app.delete("/find_id_donnee/", tags = ["DAO"])
+@app.delete("/find_id_donnee/", tags = ["Donnees DAO"])
 async def find_id_dat(nom_meta, nom_type, ordre, valeur) :
     dat = DataDao()
     dat.find_id_donnee([nom_meta, nom_type, ordre, valeur])
 
-@app.delete("/delete_all_data/",  tags = ["DAO"])
+@app.delete("/delete_all_data/",  tags = ["Donnees DAO"])
 async def delete_all_data():
     dat = DataDao()
     dat.delete_all_data()

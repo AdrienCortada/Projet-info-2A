@@ -5,9 +5,9 @@ from factory.typ_factory import TypeFactory
 
 class TypeDao:
     """
-        classe ayant pour role de gérer les comportements
-        relatifs à la récupération de données en bdd
-    """    
+        Classe permettant de manipuler la table type stockée en base de données.
+        Méthodes find, save, update et delete avec différents paramètres
+    """
     def find_all_type(self):
         typs=[]
         with DBConnection().connection as connection:

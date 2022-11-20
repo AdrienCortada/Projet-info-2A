@@ -6,7 +6,10 @@ from utils.singleton import Singleton
 from factory.meta_factory import MetaFactory
 
 class MetaDao : 
-    
+    """
+        Classe permettant de manipuler la table meta_type stockée en base de données.
+        Méthodes find, save, update et delete avec différents paramètres
+    """
     def find_all_meta(self):
         metas=[]
         liste_metas = []

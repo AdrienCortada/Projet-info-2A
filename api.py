@@ -259,7 +259,7 @@ async def find_dat_meta(nom_meta):
 async def find_row_dat(n_row):
     if n_row <=  Generation_donnee.tailles[-1] :
         dat = DataDao()
-        return dat.find_row_data(n_row, len(Generation_donnee.jeu_donnee))
+        return dat.find_row_data(n_row, Generation_donnee.tailles[-1])
     else :
         raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
 

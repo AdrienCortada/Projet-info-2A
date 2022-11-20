@@ -58,14 +58,17 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def find_row_data(self, nom_meta, i_row : int, nb : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
+    def find_row_data(self, nom_meta : str, i_row : int, nb_col : int): 
         data = []
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM donnee WHERE MOD(id_donnee - %(row)s, %(nb)s) = 0 AND nom_meta_type=%(nom_meta)s"
-                    , {"row" : i_row,
-                        "nb" : nb,
+                    "SELECT id_donnee, nom_meta_type, nom_type, order_donnee, value_donnee"+
+                    "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s"+
+                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s)) AS tamp "
+                    "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s"
+                    , {"i_row" : i_row,
+                        "n_col" : nb_col,
                         "nom_meta" : nom_meta})
                 res = cursor.fetchall()
                 for row in res:
@@ -101,15 +104,17 @@ class DataDao :
                     "id": id}
                 )
     
-    def delete_row_data(self, nb : int, i_row : int):  ## nb doit être égal à len(Generation_donnee.jeu_donnee)
+    def delete_row_data(self, nom_meta:str, nb_col : int, i_row : int):  
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "DELETE FROM donnee "+
-                    "WHERE MOD(id_donnee - %(row)s, %(nb)s) = 0",
-                    {"row" : i_row,
-                    "nb" : nb}
-                )
+                    "DELETE "+
+                    "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s"+
+                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s)) AS tamp "
+                    "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s"
+                    , {"i_row" : i_row,
+                        "n_col" : nb_col,
+                        "nom_meta" : nom_meta})
 
     def delete_data_by_id(self, id : int):
         with DBConnection().connection as connection:

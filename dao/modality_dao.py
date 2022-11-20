@@ -6,10 +6,9 @@ from utils.singleton import Singleton
 
 class ModalityDao(metaclass=Singleton):
     """
-        classe ayant pour role de gérer les comportements
-        relatifs a la récupération de données en bdd
+        Classe permettant de manipuler la table modality stockée en base de données.
+        Méthodes find, save, update et delete avec différents paramètres
     """
-
     def find_all_modality(self):
         mods=[]
         with DBConnection().connection as connection:
@@ -117,6 +116,12 @@ class ModalityDao(metaclass=Singleton):
                     "and m.nom_type = m2.nom_type "+
                     "and m.value = m2.value "
                 )
+
+    def delete_all_modality(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute("DELETE FROM modality ; "+
+                               "ALTER SEQUENCE id_modality_seq RESTART WITH 1")
 
 
 if __name__ == "__main__":

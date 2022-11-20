@@ -5,9 +5,9 @@ from factory.typ_factory import TypeFactory
 
 class TypeDao:
     """
-        classe ayant pour role de gérer les comportements
-        relatifs à la récupération de données en bdd
-    """    
+        Classe permettant de manipuler la table type stockée en base de données.
+        Méthodes find, save, update et delete avec différents paramètres
+    """
     def find_all_type(self):
         typs=[]
         with DBConnection().connection as connection:
@@ -97,6 +97,12 @@ class TypeDao:
                     " where id_type = %(id)s",
                     {"id":id_type}
                 )
+
+    def delete_all_type(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute("DELETE FROM type ; "+
+                               "ALTER SEQUENCE id_type_seq RESTART WITH 1")
 
 
 if __name__ == "__main__":

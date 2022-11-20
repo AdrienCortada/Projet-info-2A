@@ -6,7 +6,10 @@ from utils.singleton import Singleton
 from factory.data_factory import DataFactory
 
 class DataDao : 
-    
+    """
+        Classe permettant de manipuler la table donnee stockée en base de données.
+        Méthodes find, save, update et delete avec différents paramètres
+    """    
     def find_all_data(self):
         data=[]
         with DBConnection().connection as connection:

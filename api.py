@@ -241,6 +241,11 @@ async def find_id_dat(nom_meta, nom_type, ordre, valeur) :
     dat = DataDao()
     dat.find_id_donnee([nom_meta, nom_type, ordre, valeur])
 
+@app.delete("/delete_all_data/")
+async def delete_all_data():
+    dat = DataDao()
+    dat.delete_all_data()
+
 
 
 

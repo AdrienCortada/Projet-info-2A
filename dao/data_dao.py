@@ -133,5 +133,11 @@ class DataDao :
                     data.append(dat['id_donnee'])
         return data
 
+    def delete_all_data(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute("DELETE FROM donnee ")
+
+
 
     

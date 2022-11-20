@@ -58,14 +58,15 @@ class DataDao :
                     data.append(dat)
         return data
     
-    def find_row_data(self, i_row : int, nb : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
+    def find_row_data(self, nom_meta, i_row : int, nb : int): ## nb doit être égal à len(Generation_donnee.jeu_donnee)
         data = []
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM donnee WHERE MOD(id_donnee - %(row)s, %(nb)s) = 0"
+                    "SELECT * FROM donnee WHERE MOD(id_donnee - %(row)s, %(nb)s) = 0 AND nom_meta_type=%(nom_meta)s"
                     , {"row" : i_row,
-                        "nb" : nb})
+                        "nb" : nb,
+                        "nom_meta" : nom_meta})
                 res = cursor.fetchall()
                 for row in res:
                     dat = DataFactory.get_data_from_sql_query(row)

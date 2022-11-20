@@ -64,8 +64,7 @@ class ModalityDao(metaclass=Singleton):
                        "value" : modality.value, 
                        "proba" : modality.proba_apparition }
                 )
-    
-    #est-ce que c'est bien ça qu'on veut ? modif une modalité dans la base de donnée ? 
+     
     def update_modality_by_id(self, id : int, new_type : str, new_value : str, new_proba_apparition : float):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor:
@@ -78,26 +77,25 @@ class ModalityDao(metaclass=Singleton):
                      "proba" : new_proba_apparition,
                      "id" : id}
                 )
-    #def update_modality(self,modality:Modality):
-    #    with DBConnection().connection as connection:
-    #        with connection.cursor() as cursor :
-    #            cursor.execute(
-    #                "UPDATE modality "+
-    #                "SET nom_type = %(type)s , value = %(value)s, proba_apparition = %(proba)s " +
-    #                " where id = %(id)s",
-    #                {"type" : modality.nom_type,
-    #                 "value": modality.value,
-    #                 "id":modality.id_modality}
-    #            )
-            
+
+    def delete_modality_by_id(self, id):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM modality "+
+                    "WHERE id_modality = %(id)s "
+                    , {"id" : id}
+                )
+
     def delete_modality_by_mod(self,modality:Modality):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE FROM modality "+
-                    "WHERE nom_type = %(nom)s AND value = %(value)s "
+                    "WHERE nom_type = %(nom)s AND value = %(value)s AND proba_apparition = %(proba)s "
                     , {"nom" : modality.nom_type,
-                       "value" : modality.value}
+                       "value" : modality.value,
+                       "proba" : modality.proba_apparition}
                 )
 
     def delete_modality_by_type(self, nom_type):

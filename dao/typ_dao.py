@@ -87,7 +87,6 @@ class TypeDao:
                     "tx_remplissage" : type.tx_remplissage}                    
                 )
                 res = cursor.fetchone()
-                #print(res)
                 return res['id_type']
 
     def delete_type_by_id(self,id_type:int):

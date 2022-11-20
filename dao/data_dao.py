@@ -60,7 +60,8 @@ class DataDao :
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM donnee WHERE (id_donnee - %(row)s)%\%(nb)s = 0"
+                    "SELECT * FROM donnee WHERE (id_donnee - %(row)s)%"+
+                    "%(nb)s = 0"
                     , {"row" : i_row,
                         "nb" : nb})
                 res = cursor.fetchall()
@@ -102,7 +103,8 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE FROM donnee "+
-                    "WHERE (id_donnee - %(row)s)%\%(nb)s = 0",
+                    "WHERE (id_donnee - %(row)s)%"+
+                    "%(nb)s = 0",
                     {"row" : i_row,
                     "nb" : nb}
                 )

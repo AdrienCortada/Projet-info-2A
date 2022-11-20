@@ -195,24 +195,24 @@ async def delete_meta_name(nom_meta):
     met = MetaDao()
     met.delete_meta_by_name(nom_meta)
 
-@app.get("/find_all_data/",  tags = ["Metatype DAO"])
+@app.get("/find_all_data/",  tags = ["Donnees DAO"])
 async def find_datas():
     dat = DataDao()
     dat.find_all_data()
 
-@app.get("/find_data_by_id/",  tags = ["Metatype DAO"])
+@app.get("/find_data_by_id/",  tags = ["Donnees DAO"])
 async def find_dat_id(id : int):
     dat = DataDao()
     dat.find_data_by_id(id)
 
-@app.get("/find_data_with_meta/", tags = ["Metatype DAO"])
+@app.get("/find_data_with_meta/", tags = ["Donnees DAO"])
 async def find_dat_meta(nom_meta):
     dat = DataDao()
     dat.find_data_by_meta(nom_meta)
 
 @app.get("/find_row_data/",  tags = ["Donnees DAO"])
 async def find_row_dat(n_row):
-    if n_row <=  len(Generation_donnee.jeu_donnee) :
+    if n_row <=  Generation_donnee.tailles[-1] :
         dat = DataDao()
         dat.find_row_data(n_row, len(Generation_donnee.jeu_donnee))
     else :
@@ -233,8 +233,11 @@ async def update_data(id, nom_meta, nom_type, ordre, valeur):
 
 @app.delete("/delete_row_data/", tags = ["Donnees DAO"])
 async def delete_row(i_row) :
-    dat = DataDao()
-    dat.delete_row_data(len(Generation_donnee.jeu_donnee), i_row)
+    if n_row <=  Generation_donnee.tailles[-1] :
+        dat = DataDao()
+        dat.delete_row_data(Generation_donnee.tailles[-1], i_row)
+    else :
+        raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
 
 @app.delete("/delete_data_by_id/",  tags = ["Donnees DAO"])
 async def delete_dat_id(id) :

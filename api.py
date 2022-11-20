@@ -26,8 +26,9 @@ from dao.typ_dao import TypeDao
 
 
 
-tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name" : "Meta-Type"},{"name" : "Génération et sauvegarde"},
-                 {"name" : "Export"}, {"name": "Import"}, 
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},
+                 {"name" : "Meta-Type"},{"name" : "Génération et sauvegarde"},
+                 {"name" : "Export"},  
                  {"name": "Modality DAO"}, {"name": "Type DAO"}, {"name": "Metatype DAO"}, {"name": "Donnees DAO"}]
 
 app = FastAPI(openapi_tags=tags_metadata)

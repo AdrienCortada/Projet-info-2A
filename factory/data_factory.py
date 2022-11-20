@@ -9,8 +9,8 @@ class DataFactory():
     @staticmethod
     def get_data_from_sql_query(res):
         dat = {'id_donnee' : res['id_donnee'], 
-                'nom_meta' : res['nom_meta'], 
+                'nom_meta_type' : res['nom_meta_type'], 
                 'nom_type' : res['nom_type'], 
-                'order' : res['order'], 
-                'value' : res['value']}
+                'order_donnee' : res['order_donnee'], 
+                'value_donnee' : res['value_donnee']}
         return dat

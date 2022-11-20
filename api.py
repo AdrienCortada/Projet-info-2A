@@ -26,7 +26,8 @@ from dao.typ_dao import TypeDao
 
 
 
-tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération"},{"name" : "Export"}, {"name" : "DAO"}]
+tags_metadata = [{"name" : "Type"},{"name" : "Modality"},{"name": "Import"},{"name" : "Meta-Type"},{"name" : "Génération et sauvegarde"},{"name" : "Export"}, 
+                 {"name": "Modality DAO"}, {"name": "Type DAO"}, {"name": "Metatype DAO"}, {"name": "Donnees DAO"}]
 
 app = FastAPI(openapi_tags=tags_metadata)
 
@@ -75,15 +76,29 @@ async def delete_meta_type(nom_meta_type : str):
     return Meta_type.delete_meta_type(nom_meta_type)
 
 
-@app.put("/generation_de_donnee/", tags = ["Génération"])
+@app.put("/generation_de_donnee/", tags = ["Génération et sauvegarde"])
 async def generation_donnee(Nb : int, meta_type ):
     gd = Generation_donnee(Nb, meta_type)
     return gd.generer_jeu_donnee()
 
-@app.get("/afficher_les_donnees/", tags = ["Génération"])
+@app.get("/get_dict_jeu_donnee/", tags = ["Génération et sauvegarde"])
 async def get_all_data():
     dat = Generation_donnee.jeu_donnee
     return dat
+
+@app.put("/sauvegarder_en_base_de_donnees/", tags = ["Génération et sauvegarde"])
+async def save_data_dao():
+    donnee = DataDao()
+    meta = MetaDao()
+    typ = TypeDao()
+    modalite = ModalityDao()
+    meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
+    for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
+        typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
+    for mod in Modality.dict_modality :
+        modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
+    modalite.delete_doublons()
+    donnee.save_data(Generation_donnee.tailles[-1], Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
 
 @app.get("/export/", tags = ["Export"])
 async def export(chemin : str, name : str):
@@ -107,58 +122,76 @@ async def export_csv(chemin : str , name : str):
     dic = json.dumps(Generation_donnee.jeu_donnee)
     return c.export(dic)
 
-@app.put("/sauvegarder_en_base_de_donnees/", tags = ["DAO"])
-async def save_data_dao():
-    donnee = DataDao()
-    meta = MetaDao()
-    typ = TypeDao()
-    modalite = ModalityDao()
-    meta.save_meta(Meta_type(Generation_donnee.meta_type1[-1], Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]]))
-    for elt in Meta_type.dict_meta_type[Generation_donnee.meta_type1[-1]] : 
-        typ.save_type(Type(Type.dict_type[elt]["remplissage"], elt))
-    for mod in Modality.dict_modality :
-        modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
-    donnee.save_data(Generation_donnee.tailles[-1], Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
-
 @app.get("/find_all_modality/", tags = ["Modality DAO"])
 async def find_modalities():
     modalite = ModalityDao()
-    modalite.find_all_modality()
+    return modalite.find_all_modality()
 
 @app.get("/find_modality_by_id/", tags = ["Modality DAO"])
 async def find_mod_id(id : int):
-    modalite = ModalityDao()
-    modalite.find_modality_by_id(id)
+    try :
+        modalite = ModalityDao()
+        return modalite.find_modality_by_id(id)
+    except:
+        raise Exception("Aucune modalité ne correspond à cet id")
 
 @app.get("/find_modality_with_modality/",  tags = ["Modality DAO"])
 async def find_mod_mod(nom_mod, proba, value, limit : int = None):
     modalite = Modality(nom_mod, proba, value)
-    modalite.find_modality(Modality(nom_mod, proba, value), limit = limit)
+    return modalite.find_modality(Modality(nom_mod, proba, value), limit = limit)
+
+@app.put("/update_modality_by_id/", tags = ["Modality DAO"])
+async def update_modality_by_id(id, new_type, new_value, new_proba_apparition):
+    try :
+        mod = ModalityDao()
+        mod.update_modality_by_id(id, new_type, new_value, new_proba_apparition)
+    except:
+        raise Exception("Aucune modalité ne correspond")
+    
+@app.delete("/delete_modality_by_id/",  tags = ["Modality DAO"])
+async def delete_mod_id(id) :
+    mod = ModalityDao()
+    mod.delete_modality_by_id(id)
 
 @app.delete("/delete_modality_by_type/",  tags = ["Modality DAO"])
 async def delete_mod_typ(nom_type) :
     mod = ModalityDao()
     mod.delete_modality_by_type(nom_type)
 
+@app.delete("/delete_modality_by_mod/",  tags = ["Modality DAO"])
+async def delete_mod_mod(nom_type, proba_apparition, value) :
+    mod1 = Modality(nom_type, proba_apparition, value)
+    mod = ModalityDao()
+    mod.delete_modality_by_mod(mod1)
+
 @app.get("/find_all_type/",  tags = ["Type DAO"])
 async def find_types():
     typ = TypeDao()
-    typ.find_all_type()
+    return typ.find_all_type()
 
 @app.get("/find_type_by_id/", tags = ["Type DAO"])
 async def find_typ_id(id : int):
-    typ = TypeDao()
-    typ.find_type_by_id(id)
-
+    try:
+        typ = TypeDao()
+        return typ.find_type_by_id(id)
+    except:
+        raise Exception("Aucun type ne correspond à cet id")
+    
 @app.get("/find_type_with_type/",  tags = ["Type DAO"])
 async def find_typ_typ(tx, nom):
-    typ = TypeDao()
-    typ.find_type(Type(tx_remplissage= tx, nom= nom))
-
+    try:
+        typ = TypeDao()
+        return typ.find_type(Type(tx_remplissage= tx, nom= nom))
+    except:
+        raise Exception("Aucun type ne correspond")
+    
 @app.get("/find_id_type/",  tags = ["Type DAO"])
 async def find_id_typ(tx, nom):
-    typ = TypeDao() 
-    typ.find_id_type(Type(tx,nom))
+    try :
+        typ = TypeDao() 
+        return typ.find_id_type(Type(tx,nom))
+    except:
+        raise Exception("Aucun type ne correspond")
 
 @app.put("/update_type_by_id/", tags = ["Type DAO"])
 async def update_typ(id, new_tx_remplissage, new_nom):
@@ -167,28 +200,37 @@ async def update_typ(id, new_tx_remplissage, new_nom):
 
 @app.delete("/delete_type_by_id/", tags = ["Type DAO"])
 async def delete_typ(id) :
-    typ = TypeDao()
-    typ.delete_type_by_id(id)
+    try :
+        typ = TypeDao()
+        typ.delete_type_by_id(id)
+    except:
+        raise Exception("Aucun type ne correspond à cet id")
 
 @app.delete("/delete_type_by_type/",  tags = ["Type DAO"])
-async def delete_typ_typ(tx, nom) :
+async def delete_typ_typ(nom, tx_remplissage,) :
     typ = TypeDao()
-    typ.delete_type(Type(tx, nom))
+    typ.delete_type(Type(tx_remplissage, nom))
 
 @app.get("/find_all_meta/", tags = ["Metatype DAO"])
 async def find_metas():
     met = MetaDao()
-    met.find_all_meta()
+    return met.find_all_meta()
 
 @app.get("/find_ids_meta/",  tags = ["Metatype DAO"])
 async def find_ids_met(nom_m):
-    met = MetaDao()
-    met.find_ids_meta(nom_m)
+    try :
+        met = MetaDao()
+        return met.find_ids_meta(nom_m)
+    except:
+        raise Exception("Aucun méta_type ne correspond à cet id")
 
 @app.get("/find_meta_by_name/",  tags = ["Metatype DAO"])
 async def find_meta_name(nom_meta):
-    met = MetaDao()
-    met.find_meta_by_name(nom_meta)
+    try :
+        met = MetaDao()
+        return met.find_meta_by_name(nom_meta)
+    except:
+        raise Exception("Aucun meta_type ne correspond")
 
 @app.delete("/delete_meta_by_name/", tags = ["Metatype DAO"])
 async def delete_meta_name(nom_meta):
@@ -198,23 +240,26 @@ async def delete_meta_name(nom_meta):
 @app.get("/find_all_data/",  tags = ["Donnees DAO"])
 async def find_datas():
     dat = DataDao()
-    dat.find_all_data()
+    return dat.find_all_data()
 
 @app.get("/find_data_by_id/",  tags = ["Donnees DAO"])
 async def find_dat_id(id : int):
-    dat = DataDao()
-    dat.find_data_by_id(id)
+    try :
+        dat = DataDao()
+        return dat.find_data_by_id(id)
+    except:
+        raise Exception("Aucune donnée ne correspond à cet id")
 
 @app.get("/find_data_with_meta/", tags = ["Donnees DAO"])
 async def find_dat_meta(nom_meta):
     dat = DataDao()
-    dat.find_data_by_meta(nom_meta)
+    return dat.find_data_by_meta(nom_meta)
 
 @app.get("/find_row_data/",  tags = ["Donnees DAO"])
 async def find_row_dat(n_row):
     if n_row <=  Generation_donnee.tailles[-1] :
         dat = DataDao()
-        dat.find_row_data(n_row, len(Generation_donnee.jeu_donnee))
+        return dat.find_row_data(n_row, len(Generation_donnee.jeu_donnee))
     else :
         raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
 
@@ -222,14 +267,17 @@ async def find_row_dat(n_row):
 async def find_col_dat(nom_meta, nom_col):
     try :
         dat = DataDao()
-        dat.find_col_data(nom_meta, nom_col)
+        return dat.find_col_data(nom_meta, nom_col)
     except :
         raise Exception("Veuillez entrer un nom de colonne existant pour le métatype considéré")
 
 @app.put("/update_data_by_id/", tags = ["Donnees DAO"])
 async def update_data(id, nom_meta, nom_type, ordre, valeur):
-    dat = DataDao()
-    dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
+    try : 
+        dat = DataDao()
+        dat.update_data_by_id(id, [nom_meta, nom_type, ordre, valeur])
+    except:
+        raise Exception("Aucune donnée ne correspond à cet id")
 
 @app.delete("/delete_row_data/", tags = ["Donnees DAO"])
 async def delete_row(i_row) :

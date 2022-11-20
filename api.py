@@ -273,11 +273,11 @@ async def find_dat_meta(nom_meta):
     return dat.find_data_by_meta(nom_meta)
 
 @app.get("/find_row_data/",  tags = ["Donnees DAO"])
-async def find_row_dat(nb_row):
+async def find_row_dat(nom_meta, nb_row):
     n_row = int(nb_row)
     if n_row <=  Generation_donnee.tailles[-1] :
         dat = DataDao()
-        return dat.find_row_data(n_row, Generation_donnee.tailles[-1])
+        return dat.find_row_data(nom_meta, n_row, Generation_donnee.tailles[-1])
     else :
         raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
 

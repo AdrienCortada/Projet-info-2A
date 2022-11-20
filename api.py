@@ -88,6 +88,13 @@ async def get_all_data():
     dat = Generation_donnee.jeu_donnee
     return dat
 
+@app.delete("/reinitialiser_base_de_donnees", tags = ["Génération et sauvegarde"])
+async def delete_all_tables():
+    ModalityDao().delete_all_modality()
+    TypeDao().delete_all_type()
+    MetaDao().delete_all_meta_type()
+    DataDao().delete_all_data()
+
 @app.put("/sauvegarder_en_base_de_donnees/", tags = ["Génération et sauvegarde"])
 async def save_data_dao():
     donnee = DataDao()

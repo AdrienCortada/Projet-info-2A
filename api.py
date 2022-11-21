@@ -306,9 +306,10 @@ async def update_data(id, nom_meta, nom_type, ordre, valeur):
 
 @app.delete("/delete_row_data/", tags = ["Donnees DAO"])
 async def delete_row(nom_meta, i_row) :
+    n_row = int(i_row)
     if n_row <=  Generation_donnee.tailles[Generation_donnee.meta_type1.index(nom_meta)] :
         dat = DataDao()
-        dat.delete_row_data(nom_meta, len(Meta_type.dict_meta_type[nom_meta]), i_row)
+        dat.delete_row_data(nom_meta, len(Meta_type.dict_meta_type[nom_meta]), n_row)
     else :
         raise Exception("Veuillez entrer un numéro de ligne inférieur à nombre total de lignes généré")
 

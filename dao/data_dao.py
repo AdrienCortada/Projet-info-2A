@@ -64,7 +64,7 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute(
                     "SELECT id_donnee, nom_meta_type, nom_type, order_donnee, value_donnee "+
-                    "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s "+
+                    "FROM ( (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s ) as tamp1 "+
                     "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp "+
                     "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s"
                     , {"i_row" : i_row,
@@ -109,8 +109,8 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE "+
-                    "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s"+
-                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp"+
+                    "FROM (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s "+
+                    "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp "+
                     "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s"
                     , {"i_row" : i_row,
                         "n_col" : nb_col,
@@ -147,6 +147,12 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute("DELETE FROM donnee ; "+
                                "ALTER SEQUENCE id_donnee_seq RESTART WITH 1")
+
+if __name__ == "__main__" :
+    dat = DataDao().find_row_data(nom_meta = "indiv",
+                            i_row = 5,
+                            nb_col = 2)
+    print(dat)
 
 
 

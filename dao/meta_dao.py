@@ -78,6 +78,18 @@ class MetaDao :
                 cursor.execute("DELETE FROM meta_type ; "+
                                "ALTER SEQUENCE id_meta_type_seq RESTART WITH 1")
 
+    def delete_doublons(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM meta_type as m "+
+                    "USING meta_type as m2 "+
+                    "WHERE m.id_meta_type > m2.id_meta_type "+
+                    "and m.nom_meta_type = m2.nom_meta_type "+
+                    "and m.nom_type = m2.nom_type "
+                )
+
+
 
 if __name__ == '__main__':
     print('Tests de la classe MetaDao en commentaires')

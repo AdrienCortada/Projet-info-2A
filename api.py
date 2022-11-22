@@ -107,6 +107,8 @@ async def save_data_dao():
     for mod in Modality.dict_modality :
         modalite.save_modality(Modality(Modality.dict_modality[mod]["type"], Modality.dict_modality[mod]["proba d'apparition"], Modality.dict_modality[mod]["value"]))
     modalite.delete_doublons()
+    typ.delete_doublons()
+    meta.delete_doublons()
     donnee.save_data(Generation_donnee.tailles[-1], Generation_donnee.meta_type1[-1], Generation_donnee.jeu_donnee)
 
 @app.get("/export/", tags = ["Export"])

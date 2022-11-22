@@ -104,6 +104,17 @@ class TypeDao:
                 cursor.execute("DELETE FROM type ; "+
                                "ALTER SEQUENCE id_type_seq RESTART WITH 1")
 
+    def delete_doublons(self):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "DELETE FROM type as m "+
+                    "USING type as m2 "+
+                    "WHERE m.id_type > m2.id_type "+
+                    "and m.nom = m2.nom "+
+                    "and m.tx_remplissage = m2.tx_remplissage "
+                )
+
 
 if __name__ == "__main__":
     print("Tests de la DAO concernant la classe Type en commentaires")

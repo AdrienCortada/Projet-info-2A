@@ -1,6 +1,6 @@
 import os
 
-import dotenv #ou from dotenv import dotenv_values 
+import dotenv
 import psycopg2
 from psycopg2.extras import RealDictCursor
 from utils.singleton import Singleton
@@ -11,9 +11,7 @@ class DBConnection(metaclass=Singleton):
     Classe technique permettant d'assurer une connecion unique à la base de données.
     """
     def __init__(self):
-        dotenv.load_dotenv(override=True) #à modifier pour avoir un accès local ?
-        #dotenv_values(".env.local") #à vérifier ?
-        # Ouvre la connection
+        dotenv.load_dotenv(override=True) 
         self.__connection =psycopg2.connect(
             host=os.environ["HOST"],
             port=os.environ["PORT"],

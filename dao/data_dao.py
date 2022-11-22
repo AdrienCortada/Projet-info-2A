@@ -109,7 +109,7 @@ class DataDao :
             with connection.cursor() as cursor :
                 cursor.execute(
                     "DELETE FROM donnee WHERE id_donnee IN ("+
-                    "SELECT id_donnee"+
+                    "SELECT id_donnee "+
                     "FROM ( (SELECT MIN(id_donnee) as min FROM donnee WHERE nom_meta_type = %(nom_meta)s ) as tamp1 "+
                     "CROSS JOIN (SELECT * FROM donnee WHERE nom_meta_type = %(nom_meta)s) AS tamp2 ) AS tamp "+
                     "WHERE id_donnee >= min+%(n_col)s*(%(i_row)s-1) AND id_donnee<min+%(n_col)s*%(i_row)s)"

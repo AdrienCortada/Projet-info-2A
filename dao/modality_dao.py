@@ -41,7 +41,7 @@ class ModalityDao(metaclass=Singleton):
                     "SELECT * from modality " +
                     "WHERE nom_type = %(nom)s AND value = %(value)s "+
                     "ORDER BY nom_type, value "+
-                    "LIMIT %(limit)s" # OFFSET %(offset)s"
+                    "LIMIT %(limit)s"
                     , {"nom" : modality.nom_type,
                        "value" : modality.value,
                        "limit" : limit

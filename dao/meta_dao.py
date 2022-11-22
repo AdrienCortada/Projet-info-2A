@@ -80,7 +80,7 @@ class MetaDao :
 
 
 if __name__ == '__main__':
-    print('Tests de la classe MetaDao')
+    print('Tests de la classe MetaDao en commentaires')
 
     ##Test de find_all_meta
     #metas = MetaDao().find_all_meta()

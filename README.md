@@ -1,5 +1,31 @@
 # Projet-info-2A
 
+ A FINIR
+
+ Pour tous : note indiv à mettre en annexe
+
+ Abdoul : 
+ - partie tests 
+ - pistes d'améliorations
+ 
+ Nathan : 
+ - diagramme de package
+ - exports
+
+ Adrien :
+ - partie 3 (moins les tests et la dao)
+ - README : en anglais cf plus bas
+
+ Isaac: 
+ - guide d'utilisation (partie 3)
+ - diagramme d'activité
+
+ Laurène: 
+ - ajout intro dans sommaire
+ - dao (partie 2)
+ - conclusion
+
+
 Lien vers le rapport :
 https://fr.overleaf.com/2923467794gxmkhbfwrvrt
 

@@ -90,6 +90,23 @@ class DataDao :
                     data.append(dat)
         return data
 
+    def find_id_donnee(self, ligne:list):
+        with DBConnection().connection as connection:
+            with connection.cursor() as cursor :
+                cursor.execute(
+                    "SELECT * FROM donnee "+
+                    "WHERE nom_meta_type = %(nom_meta)s AND nom_type = %(nom_type)s AND order_donnee = %(order)s AND value_donnee = %(value)s",
+                    {"nom_meta" : ligne[0],
+                    "nom_type": ligne[1], 
+                    "order" : ligne[2], 
+                    "value" : ligne[3]}                    
+                )
+                res = cursor.fetchall()
+                for row in res:
+                    dat = DataFactory.get_data_from_sql_query(row)
+                    data.append(dat['id_donnee'])
+        return data
+
     def update_data_by_id(self, id : int, new_data:list):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
@@ -125,23 +142,15 @@ class DataDao :
                     " WHERE id_donnee = %(id)s",
                     {"id" : id}
                 )
-    
-    def find_id_donnee(self, ligne:list):
+
+    def delete_data_by_meta(self, nom_meta : str):
         with DBConnection().connection as connection:
             with connection.cursor() as cursor :
                 cursor.execute(
-                    "SELECT * FROM donnee "+
-                    "WHERE nom_meta_type = %(nom_meta)s AND nom_type = %(nom_type)s AND order_donnee = %(order)s AND value_donnee = %(value)s",
-                    {"nom_meta" : ligne[0],
-                    "nom_type": ligne[1], 
-                    "order" : ligne[2], 
-                    "value" : ligne[3]}                    
+                    "DELETE FROM donnee "+
+                    " WHERE nom_meta_type = %(nom_meta)s",
+                    {"nom_meta" : nom_meta}
                 )
-                res = cursor.fetchall()
-                for row in res:
-                    dat = DataFactory.get_data_from_sql_query(row)
-                    data.append(dat['id_donnee'])
-        return data
 
     def delete_all_data(self):
         with DBConnection().connection as connection:

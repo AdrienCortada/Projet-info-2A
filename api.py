@@ -297,6 +297,11 @@ async def find_col_dat(nom_meta, nom_col):
         return dat.find_col_data(nom_meta, nom_col)
     except :
         raise Exception("Veuillez entrer un nom de colonne existant pour le métatype considéré")
+    
+@app.get("/find_id_donnee/", tags = ["Donnees DAO"])
+async def find_id_dat(nom_meta, nom_type, ordre, valeur) :
+    dat = DataDao()
+    dat.find_id_donnee([nom_meta, nom_type, ordre, valeur])
 
 @app.put("/update_data_by_id/", tags = ["Donnees DAO"])
 async def update_data(id, nom_meta, nom_type, ordre, valeur):
@@ -320,10 +325,13 @@ async def delete_dat_id(id) :
     dat = DataDao()
     dat.delete_data_by_id(id)
 
-@app.delete("/find_id_donnee/", tags = ["Donnees DAO"])
-async def find_id_dat(nom_meta, nom_type, ordre, valeur) :
-    dat = DataDao()
-    dat.find_id_donnee([nom_meta, nom_type, ordre, valeur])
+@app.delete("/delete_data_by_meta/", tags = ["Donnees DAO"])
+async def delete_dat_meta(nom_meta):
+    try:
+        dat = DataDao()
+        dat.delete_data_by_meta(nom_meta)
+    except:
+        raise Exception("Le méta-type n'est pas présent dans la table")
 
 @app.delete("/delete_all_data/",  tags = ["Donnees DAO"])
 async def delete_all_data():

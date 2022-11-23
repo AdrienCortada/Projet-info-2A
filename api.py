@@ -146,7 +146,7 @@ async def find_mod_id(id : int):
     except:
         raise Exception("Aucune modalité ne correspond à cet id")
 
-@app.get("/find_modality_with_modality/",  tags = ["Modality DAO"])
+@app.get("/find_modality_by_modality/",  tags = ["Modality DAO"])
 async def find_mod_mod(nom_mod, proba, value, limit : int = None):
     modalite = Modality(nom_mod, proba, value)
     return modalite.find_modality(Modality(nom_mod, proba, value), limit = limit)
@@ -193,7 +193,7 @@ async def find_typ_id(id : int):
     except:
         raise Exception("Aucun type ne correspond à cet id")
     
-@app.get("/find_type_with_type/",  tags = ["Type DAO"])
+@app.get("/find_type_by_type/",  tags = ["Type DAO"])
 async def find_typ_typ(tx, nom):
     try:
         typ = TypeDao()
@@ -276,7 +276,7 @@ async def find_dat_id(id : int):
     except:
         raise Exception("Aucune donnée ne correspond à cet id")
 
-@app.get("/find_data_with_meta/", tags = ["Donnees DAO"])
+@app.get("/find_data_by_meta/", tags = ["Donnees DAO"])
 async def find_dat_meta(nom_meta):
     dat = DataDao()
     return dat.find_data_by_meta(nom_meta)

@@ -18,11 +18,14 @@ if __name__ == "__main__":
     mt = Meta_type("individu", ["prénom","age"])
     mt.add_meta_type()
     générer = Generation_donnee(10, "individu")
-    if générer.generer_jeu_donnee() == {0: {'prénom': 'Rémi', 'age': 22}, 1: {'prénom': 'Rémi', 'age': 22}, 2: {'prénom': 'Rémi', 'age': 22}, 3: {'prénom': 'Rémi', 'age': 22}, 4: {'prénom': 'Rémi', 'age': 22}, 5: {'prénom': 'Rémi', 'age': 22}, 6: {'prénom': 'Rémi', 'age': 22}, 7: {'prénom': 'Rémi', 'age': 22}, 8: {'prénom': 'Rémi', 'age': 22}, 9: {'prénom': 'Rémi', 'age': 22}}:
+    if générer.generer_jeu_donnee() == {0: {'prénom': 'Rémi', 'age': 22}, 1: {'prénom': 'Rémi', 'age': 22}, 
+                                        2: {'prénom': 'Rémi', 'age': 22}, 3: {'prénom': 'Rémi', 'age': 22}, 
+                                        4: {'prénom': 'Rémi', 'age': 22}, 5: {'prénom': 'Rémi', 'age': 22}, 
+                                        6: {'prénom': 'Rémi', 'age': 22}, 7: {'prénom': 'Rémi', 'age': 22},
+                                        8: {'prénom': 'Rémi', 'age': 22}, 9: {'prénom': 'Rémi', 'age': 22}}:
         print("True")
     else :
         print("False")
-
     t3 = Type(100, 'adresse')
     t3.add_type()
     m3 = Modality('adresse', 100, 'SDF')
@@ -30,7 +33,6 @@ if __name__ == "__main__":
     mt2 = Meta_type("ind", ["prénom", "adresse"])
     mt2.add_meta_type()
     generer2 = Generation_donnee(10, "ind").generer_jeu_donnee()
-    
     data = Generation_donnee.jeu_donnee
     liste = Generation_donnee.meta_type1
     if len(data) == 20:

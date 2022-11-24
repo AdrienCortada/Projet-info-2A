@@ -12,7 +12,6 @@ from business_object.export.export_to_xml import Export_to_xml
 class TestExport_to_xml(TestCase):
     
     
-
     def test_export_to_xml(self):
         table = {
     "sexe": {

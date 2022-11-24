@@ -5,9 +5,7 @@ import os.path
 import json
 import unittest
 import pandas as pd 
-
 from business_object.export.export_to_csv import Export_to_csv
-
 class TestExport_to_csv(TestCase):
     
     
@@ -41,7 +39,6 @@ class TestExport_to_csv(TestCase):
             print(table_csv==csvfile)
         else:
             print("Fichier non trouvé")
-        
 if __name__=="__main__":
     unittest.main()
     

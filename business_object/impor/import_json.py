@@ -102,6 +102,3 @@ Par exemple, le fichier json peut se présenter comme suit\n
 
         return [Type.dict_type, Modality.dict_modality]
 
-if __name__ == "__main__" :
-    imp = IMPORTJSON("C:/Users/adrie/OneDrive - GENES/Documents/ENSAI 2A/Projet info 2/Projet-info-2A/json_test.json")
-    print(imp.import_dict())
